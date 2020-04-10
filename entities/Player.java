@@ -1,29 +1,55 @@
 package entities;
 
-public class Player {
-  private String          nickname;
-  private int                 exp; // player current experience
-  private boolean           state; // Dead or alive?
-  private boolean     inAdventure;
-  private RaceType       raceType;
-  private Abilities     abilities;
-  private WeaponType   weaponType;
-  private ArmorType     armorType;
+// Making use of Static Factory method pattern
+// Will see how it plays out tho...
 
-  public Player(
-      String nickname,
-      RaceType raceType,
-      Abilities abilities,
-      WeaponType weaponType,
-      ArmorType armorType) {
+public class Player {
+  private String       nickname;
+  private int               exp; // player current experience
+  private boolean         state; // Dead or alive?
+  private boolean   inAdventure;
+  private RaceType     raceType;
+  private Abilities   abilities;
+  private WeaponType weaponType;
+  private ArmorType   armorType;
+
+  // Constructor for creating New Player
+  private Player(String nickname, RaceType raceType, WeaponType weaponType, ArmorType armorType) {
+    this.nickname     =        nickname;
+    this.exp          =               0;
+    this.state        =            true;
+    this.inAdventure  =           false;
+    this.raceType     =        raceType;
+    this.abilities    = new Abilities();
+    this.weaponType   =      weaponType;
+    this.armorType    =       armorType;
+  }
+
+  // Constructor to load existing Player from file
+  private Player(
+      String nickname, int exp, RaceType raceType,
+      Abilities abilities, WeaponType weaponType, ArmorType armorType) {
     this.nickname    =   nickname;
-    this.exp         =          0;
+    this.exp         =        exp;
     this.state       =       true;
-    this.inAdventure =       true;
+    this.inAdventure =      false;
     this.raceType    =   raceType;
     this.abilities   =  abilities;
     this.weaponType  = weaponType;
     this.armorType   =  armorType;
+  }
+
+
+  public static Player createNewPlayer(
+      String nickname, int exp, RaceType raceType,
+      WeaponType weaponType, ArmorType armorType) {
+    return new Player(nickname, raceType, weaponType, armorType);
+  }
+
+  public static Player loadExistingPlayer(
+      String nickname, int exp, RaceType raceType,
+      Abilities abilities, WeaponType weaponType, ArmorType armorType) {
+    return new Player(nickname, exp, raceType, abilities, weaponType, armorType);
   }
 
   // Overrides
