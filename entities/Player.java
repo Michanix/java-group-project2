@@ -56,9 +56,8 @@ public class Player {
   @Override
   public String toString() {
     return "Player{"
-        + "name='"
+        + "name="
         + nickname
-        + '\''
         + ", experience="
         + exp
         + ", state="
@@ -67,7 +66,7 @@ public class Player {
         + inAdventure
         + ", raceType="
         + raceType
-        + ", abilities="
+        + ", "
         + abilities
         + ", weaponType="
         + weaponType

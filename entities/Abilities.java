@@ -18,6 +18,18 @@ public class Abilities {
     this.constitution = generateRndAbilityVal();
     this.intelligence = generateRndAbilityVal();
   }
+
+  public Abilities(
+          int wisdom, int strength, int charisma,
+          int dexterity, int constitution, int intelligence) {
+    this.wisdom       =       wisdom;
+    this.strength     =     strength;
+    this.charisma     =     charisma;
+    this.dexterity    =    dexterity;
+    this.constitution = constitution;
+    this.intelligence = intelligence;
+  }
+
   // "Roll four 6-sided dice and record the total of the highest three dice"
   private int generateRndAbilityVal() {
     int d20 = 20;
@@ -33,8 +45,7 @@ public class Abilities {
   // Overrides
   @Override
   public String toString() {
-    return "Abilities{"
-        + "wisdom="
+    return "wisdom="
         + wisdom
         + ", strength="
         + strength
@@ -45,8 +56,7 @@ public class Abilities {
         + ", constitution="
         + constitution
         + ", intelligence="
-        + intelligence
-        + '}';
+        + intelligence;
   }
 
   // gets and sets
