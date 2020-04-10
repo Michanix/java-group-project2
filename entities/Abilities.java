@@ -33,14 +33,20 @@ public class Abilities {
   // Overrides
   @Override
   public String toString() {
-    return String.format(
-        "[1] Strength: %d\n"
-            + "[2] Dexterity: %d\n"
-            + "[3] Constitution: %d\n"
-            + "[4] Intelligence: %d\n"
-            + "[5] Wisdom: %d\n"
-            + "[6] Charisma: %d",
-        strength, dexterity, constitution, intelligence, wisdom, charisma);
+    return "Abilities{"
+        + "wisdom="
+        + wisdom
+        + ", strength="
+        + strength
+        + ", charisma="
+        + charisma
+        + ", dexterity="
+        + dexterity
+        + ", constitution="
+        + constitution
+        + ", intelligence="
+        + intelligence
+        + '}';
   }
 
   // gets and sets
