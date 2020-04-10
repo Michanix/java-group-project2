@@ -39,7 +39,7 @@ public class ReadFromFile {
           // ~2ms to parse a line so its okay
           String[] tmp = line.split(",");
           Pattern rgx = Pattern.compile("(?>=(\\w*.\\w*))");
-          for (String t: tmp) {
+          for (String t : tmp) {
             Matcher matcher = rgx.matcher(t);
             if (matcher.find()) {
               playerParams.add(matcher.group(1));
