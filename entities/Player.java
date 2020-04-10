@@ -55,7 +55,7 @@ public class Player {
   // Overrides
   @Override
   public String toString() {
-    return "Summoner{"
+    return "Player{"
         + "name='"
         + nickname
         + '\''
@@ -63,15 +63,15 @@ public class Player {
         + exp
         + ", state="
         + state
-        + ", onTheRoad="
+        + ", inAdventure="
         + inAdventure
-        + ", race="
+        + ", raceType="
         + raceType
         + ", abilities="
         + abilities
-        + ", weapon="
+        + ", weaponType="
         + weaponType
-        + ", armor="
+        + ", armorType="
         + armorType
         + '}';
   }
