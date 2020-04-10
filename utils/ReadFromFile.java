@@ -1,29 +1,26 @@
 package utils;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadFromFile {
-  public List<String> readFileToList(String path) throws Exception {
+  public List<String> readFileToList(String path) {
     // Takes in text file with some data and returns it as ArrayList<>()
     // Assumed that data on seperate line
-    BufferedReader in = null;
     List<String> listOFText = new ArrayList<>();
-    try {
-      in = new BufferedReader(new FileReader(path));
+    try (BufferedReader input = new BufferedReader(new FileReader(path))) {
       String line;
-      while ((line = in.readLine()) != null) {
+      while ((line = input.readLine()) != null) {
         listOFText.add(line);
       }
-    } catch (IOException e) {
-      e.printStackTrace();
-    } finally {
-      if (in != null) {
-        in.close();
-      }
+    } catch (FileNotFoundException er) {
+      System.err.println("File not found. " + er);
+    } catch (IOException er) {
+      er.printStackTrace();
     }
     return listOFText;
   }
