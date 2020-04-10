@@ -14,6 +14,10 @@ public class ReadFromFile {
     List<String> listOFText = new ArrayList<>();
     try {
       in = new BufferedReader(new FileReader(path));
+      String line;
+      while ((line = in.readLine()) != null) {
+        listOFText.add(line);
+      }
     } catch (IOException e) {
       e.printStackTrace();
     } finally {
