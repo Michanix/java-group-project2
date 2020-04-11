@@ -10,7 +10,7 @@ public class Abilities {
   private int constitution;
   private int intelligence;
 
-  public Abilities() {
+  private Abilities() {
     this.wisdom       = generateRndAbilityVal();
     this.strength     = generateRndAbilityVal();
     this.charisma     = generateRndAbilityVal();
@@ -19,7 +19,7 @@ public class Abilities {
     this.intelligence = generateRndAbilityVal();
   }
 
-  public Abilities(
+  private Abilities(
           int wisdom, int strength, int charisma,
           int dexterity, int constitution, int intelligence) {
     this.wisdom       =       wisdom;
@@ -28,6 +28,18 @@ public class Abilities {
     this.dexterity    =    dexterity;
     this.constitution = constitution;
     this.intelligence = intelligence;
+  }
+
+  // Static methods for constructors
+  public static Abilities initAbilities() {
+    return new Abilities();
+  }
+
+  public static Abilities loadExisting(
+          int wisdom, int strength, int charisma,
+          int dexterity, int constitution, int intelligence) {
+    return new Abilities(wisdom, strength, charisma,
+            dexterity, constitution, intelligence);
   }
 
   // "Roll four 6-sided dice and record the total of the highest three dice"

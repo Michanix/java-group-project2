@@ -20,7 +20,7 @@ public class Player {
     this.state        =            true;
     this.inAdventure  =           false;
     this.raceType     =        raceType;
-    this.abilities    = new Abilities();
+    this.abilities    =      Abilities.initAbilities();
     this.weaponType   =      weaponType;
     this.armorType    =       armorType;
   }
