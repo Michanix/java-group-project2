@@ -1,7 +1,5 @@
 package entities.monster;
 
-import entities.monster.Monster;
-
 public class Troll extends Monster {
 
   public Troll(
@@ -15,4 +13,9 @@ public class Troll extends Monster {
 
   @Override
   public void specialAttack() { System.out.println("Troll special attack!");}
+
+  @Override
+  public String toString() {
+    return super.toString();
+  }
 }

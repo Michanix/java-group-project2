@@ -26,7 +26,9 @@ public abstract class Monster {
   @Override
   public String toString() {
     return "Monster{"
-        + "hp="
+        + "type="
+        + getClass().getSimpleName()
+        + ", hp="
         + hp
         + ", phyDmg="
         + phyDmg
