@@ -6,6 +6,7 @@ package entities;
 public class Player {
   private String       nickname;
   private int               exp; // player current experience
+  private double             hp; // Health
   private boolean         state; // Dead or alive?
   private boolean   inAdventure;
   private RaceType     raceType;
@@ -17,6 +18,7 @@ public class Player {
   private Player(String nickname, RaceType raceType, WeaponType weaponType, ArmorType armorType) {
     this.nickname     =        nickname;
     this.exp          =               0;
+    this.hp           =             100;
     this.state        =            true;
     this.inAdventure  =           false;
     this.raceType     =        raceType;
@@ -31,6 +33,7 @@ public class Player {
       Abilities abilities, WeaponType weaponType, ArmorType armorType) {
     this.nickname    =   nickname;
     this.exp         =        exp;
+    this.hp          =        100;
     this.state       =       true;
     this.inAdventure =      false;
     this.raceType    =   raceType;
