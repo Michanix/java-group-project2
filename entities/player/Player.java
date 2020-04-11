@@ -1,4 +1,4 @@
-package entities;
+package entities.player;
 
 // Making use of Static Factory method pattern
 // Will see how it plays out tho...

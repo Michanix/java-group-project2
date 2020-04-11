@@ -1,4 +1,4 @@
-package entities;
+package entities.player;
 
 public enum RaceType {
   ELF("Elf") {

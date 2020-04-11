@@ -1,4 +1,4 @@
-package entities;
+package entities.player;
 
 public enum DiceType {
   D4("D4") {

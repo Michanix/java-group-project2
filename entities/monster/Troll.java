@@ -1,4 +1,6 @@
-package entities;
+package entities.monster;
+
+import entities.monster.Monster;
 
 public class Troll extends Monster {
 

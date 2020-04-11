@@ -1,5 +1,6 @@
 package entities;
 
+import entities.player.*;
 import utils.ReadFromFile;
 import utils.WriteToFile;
 
@@ -31,7 +32,7 @@ public class Test {
             playerParams.get(0),
             Integer.parseInt(playerParams.get(1)),
             RaceType.valueOf(playerParams.get(4).toUpperCase()),
-            new Abilities(
+            Abilities.loadExisting(
                     Integer.parseInt(playerParams.get(5)),
                     Integer.parseInt(playerParams.get(6)),
                     Integer.parseInt(playerParams.get(7)),

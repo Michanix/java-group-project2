@@ -1,4 +1,4 @@
-package entities;
+package entities.monster;
 
 public abstract class Monster {
   private final int         hp; // health

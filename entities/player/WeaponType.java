@@ -1,4 +1,4 @@
-package entities;
+package entities.player;
 
 public enum WeaponType {
   BAREHANDS("Bare hands"),
