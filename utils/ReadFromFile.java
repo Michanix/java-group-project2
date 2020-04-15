@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ReadFromFile {
-  public List<String> readTextToList(String path) {
+  public static List<String> readTextToList(String path) {
     // Takes in text file with some data and returns it as ArrayList<>()
     // Assumed that data on seperate line
     List<String> listOFText = new ArrayList<>();
@@ -28,7 +28,7 @@ public class ReadFromFile {
   }
 
   // Loading player from file based on nickname
-  public List<String> readPlayerParamsFromFile(String nickname) {
+  public static List<String> readPlayerParamsFromFile(String nickname) {
     String path = "players/players.txt";
     List<String> playerParams = new ArrayList<>();
     try (BufferedReader input = new BufferedReader(new FileReader(path))) {
