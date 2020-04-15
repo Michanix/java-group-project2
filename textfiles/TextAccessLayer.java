@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class TextAccessLayer implements TextDAO {
 
-  private Map<String, Path> levelTexts;
+  private final Map<String, Path> levelTexts;
 
   public TextAccessLayer() {
     this.levelTexts = fetchAllTexts("src/textfiles/firstlevel/texts");
