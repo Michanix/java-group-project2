@@ -14,7 +14,7 @@ public class WriteToFile {
   public void writePlayerToFile(Player player) {
     try (PrintWriter output = new PrintWriter(new FileWriter("players/players.txt", true))) {
       output.println(player.toString());
-
+      System.out.println("Player " + player.getNickname() + " was created.");
     } catch (FileNotFoundException e) {
       System.err.println("File not found." + e);
     } catch (IOException e) {
