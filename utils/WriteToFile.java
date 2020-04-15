@@ -1,11 +1,14 @@
 package utils;
 
-import entities.Player;
+import entities.player.Player;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+// TODO: make path compatible with others platforms
+// TODO: Substitute PrintWriter with BufferedWriter for performance(according to internet).
 
 public class WriteToFile {
   public void writePlayerToFile(Player player) {
