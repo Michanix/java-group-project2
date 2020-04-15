@@ -6,9 +6,6 @@ import javafx.scene.text.Text;
 import utils.ReadFromFile;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +19,7 @@ public class TextAccessLayer implements TextDAO {
   }
 
   private Map<String, Text> getLevelTexts() {
+
     Map<String, Text> result = new HashMap<>();
     // platform independent path to avoid problems like in the first group project, lol
     File folder = new File(separatorsToSystem("src/textfiles/firstlevel/texts"));
