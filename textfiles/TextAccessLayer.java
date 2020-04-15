@@ -1,5 +1,8 @@
 package textfiles;
 
+
+// TODO: less complexity....
+
 import javafx.scene.text.Text;
 import utils.ReadFromFile;
 
