@@ -8,43 +8,28 @@ import java.util.Map;
 
 public class TextAccessLayer implements TextDAO {
 
-  public static void main(String[] args) {
-    Map<String, Path> test = fetchAllTexts();
-    for (Map.Entry<String, Path> pair : test.entrySet()) {
-      System.out.println("Name= " + pair.getKey() + " Path= " + pair.getValue());
-    }
+  private Map<String, Path> levelTexts;
+
+  public TextAccessLayer() {
+    this.levelTexts = fetchAllTexts("src/textfiles/firstlevel/texts");
   }
 
-  private Map<String, Path> levelTexts = new HashMap<>();
-
-  public TextAccessLayer() {}
-
-  private static Map<String, Path> fetchAllTexts() {
+  private static Map<String, Path> fetchAllTexts(String path) {
     Map<String, Path> result = new HashMap<>();
-    // platform independent path to avoid problems like in first group project, lol
-    String path =
-        "src"
-            + File.separator
-            + "textfiles"
-            + File.separator
-            + "firstlevel"
-            + File.separator
-            + "texts";
-    File folder = new File(path);
+    // platform independent path to avoid problems like in the first group project, lol
+    File folder = new File(separatorsToSystem(path));
     File[] listOfFiles = folder.listFiles();
     if (listOfFiles != null) {
       for (File listOfFile : listOfFiles) {
-        if (listOfFile.isFile()) {
-          try {
-            String[] name = listOfFile.getName().split("\\.");
-            result.put(name[0], Path.of(separatorsToSystem(listOfFile.getCanonicalPath())));
-          } catch (IOException ex) {
-            ex.printStackTrace();
-          }
+        try {
+          String[] name = listOfFile.getName().split("\\.");
+          result.put(name[0], Path.of(separatorsToSystem(listOfFile.getCanonicalPath())));
+        } catch (IOException ex) {
+          ex.printStackTrace();
         }
       }
     } else {
-      System.out.println("yikes");
+      throw new NullPointerException();
     }
     return result;
   }
@@ -63,11 +48,11 @@ public class TextAccessLayer implements TextDAO {
 
   @Override
   public Map<String, Path> getAllTexts() {
-    return null;
+    return levelTexts;
   }
 
   @Override
-  public String getText(String textName) {
-    return null;
+  public Path getText(String textName) {
+    return levelTexts.get(textName);
   }
 }
