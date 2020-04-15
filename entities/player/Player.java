@@ -16,15 +16,15 @@ public class Player {
 
   // Constructor for creating New Player
   private Player(String nickname, RaceType raceType, WeaponType weaponType, ArmorType armorType) {
-    this.nickname     =        nickname;
-    this.exp          =               0;
-    this.hp           =             100;
-    this.state        =            true;
-    this.inAdventure  =           false;
-    this.raceType     =        raceType;
-    this.abilities    =      Abilities.initAbilities();
-    this.weaponType   =      weaponType;
-    this.armorType    =       armorType;
+    this.nickname     =   nickname;
+    this.exp          =          0;
+    this.hp           =        100;
+    this.state        =       true;
+    this.inAdventure  =      false;
+    this.raceType     =   raceType;
+    this.abilities    = Abilities.initAbilities();
+    this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
+    this.armorType    =  armorType;
   }
 
   // Constructor to load existing Player from file
