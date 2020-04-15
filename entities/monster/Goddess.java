@@ -2,8 +2,9 @@ package entities.monster;
 
 public class Goddess extends Monster {
 
-  public Goddess(int hp, double phyDmg, double magDmg,
-                 double phyDef, double magDef, int expPer) {
+  public Goddess(
+          int hp, double phyDmg, double magDmg,
+          double phyDef, double magDef, int expPer) {
     super(hp, phyDmg, magDmg, phyDef, magDef, expPer);
   }
 

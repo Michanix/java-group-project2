@@ -8,9 +8,10 @@ public abstract class Monster {
   private final double  magDef; // Same but magical
   private final int     expPer; // experience per killed monster
 
-  public Monster(int hp, double phyDmg, double magDmg,
-                 double phyDef, double magDef, int expPer) {
-    this.hp =         hp;
+  public Monster(
+          int hp, double phyDmg, double magDmg,
+          double phyDef, double magDef, int expPer) {
+    this.hp     =     hp;
     this.phyDmg = phyDmg;
     this.magDmg = magDmg;
     this.phyDef = phyDef;
