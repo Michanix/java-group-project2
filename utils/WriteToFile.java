@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 // TODO: Substitute PrintWriter with BufferedWriter for performance(according to internet).
 
 public class WriteToFile {
-  public void writePlayerToFile(Player player) {
+  public static void writePlayerToFile(Player player) {
     try (PrintWriter output = new PrintWriter(new FileWriter("players/players.txt", true))) {
       output.println(player.toString());
       System.out.println("Player " + player.getNickname() + " was created.");
