@@ -8,7 +8,7 @@ public enum RaceType {
     }
 
     @Override
-    public String description() {
+    public String getDescription() {
       return "description";
     }
   },
@@ -19,7 +19,7 @@ public enum RaceType {
     }
 
     @Override
-    public String description() {
+    public String getDescription() {
       return "description";
     }
   },
@@ -30,7 +30,7 @@ public enum RaceType {
     }
 
     @Override
-    public String description() {
+    public String getDescription() {
       return "description";
     }
   },
@@ -41,7 +41,7 @@ public enum RaceType {
     }
 
     @Override
-    public String description() {
+    public String getDescription() {
       return "description";
     }
   },
@@ -52,7 +52,7 @@ public enum RaceType {
     }
 
     @Override
-    public String description() {
+    public String getDescription() {
       return "description";
     }
   },
@@ -63,7 +63,7 @@ public enum RaceType {
     }
 
     @Override
-    public String description() {
+    public String getDescription() {
       return "description";
     }
   };
@@ -76,7 +76,7 @@ public enum RaceType {
 
   public abstract void specialCast();
 
-  public abstract String description();
+  public abstract String getDescription();
 
   @Override
   public String toString() {
