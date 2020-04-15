@@ -1,6 +1,5 @@
 package textfiles;
 
-
 // TODO: less complexity....
 
 import javafx.scene.text.Text;
@@ -23,43 +22,19 @@ public class TextAccessLayer implements TextDAO {
   }
 
   private Map<String, Text> getLevelTexts() {
-    /*
-    Function to return Map of texts as <Name of the text, Javafx Text node>
-     */
     Map<String, Text> result = new HashMap<>();
-    List<Path> pathsToTexts = fetchTextsPaths();
-
-    // Iterating through list of paths
-    // and from each path grabbing text and creating StringBuilder Object which is later used
-    // to create JavaFx Text node
-    for (Path path : pathsToTexts) {
-      List<String> textList = ReadFromFile.readTextToList(String.valueOf(path));
-      StringBuilder str = new StringBuilder();
-      for (String s : textList) {
-        str.append(s).append("\n");
-      }
-      String[] name = path.getFileName().toString().split("\\.");
-      result.put(name[0], new Text(String.valueOf(str)));
-    }
-    return result;
-  }
-
-  private List<Path> fetchTextsPaths() {
-    /*
-    Helper function to fetch all the txt file from directory
-    as create list of their paths
-     */
-    List<Path> result = new ArrayList<>();
     // platform independent path to avoid problems like in the first group project, lol
     File folder = new File(separatorsToSystem("src/textfiles/firstlevel/texts"));
     File[] listOfFiles = folder.listFiles();
     if (listOfFiles != null) {
       for (File listOfFile : listOfFiles) {
-        try {
-          result.add(Path.of(separatorsToSystem(listOfFile.getCanonicalPath())));
-        } catch (IOException ex) {
-          ex.printStackTrace();
+        List<String> textList = ReadFromFile.readTextToList(String.valueOf(listOfFile));
+        StringBuilder str = new StringBuilder();
+        for (String s : textList) {
+          str.append(s).append("\n");
         }
+        String[] name = listOfFile.getName().split("\\.");
+        result.put(name[0], new Text(String.valueOf(str)));
       }
     } else {
       throw new NullPointerException();
