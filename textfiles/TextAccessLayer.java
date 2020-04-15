@@ -19,20 +19,24 @@ public class TextAccessLayer implements TextDAO {
   }
 
   private Map<String, Text> getLevelTexts() {
-
     Map<String, Text> result = new HashMap<>();
     // platform independent path to avoid problems like in the first group project, lol
     File folder = new File(separatorsToSystem("src/textfiles/firstlevel/texts"));
     File[] listOfFiles = folder.listFiles();
+    StringBuilder str = new StringBuilder();
+
     if (listOfFiles != null) {
       for (File listOfFile : listOfFiles) {
+        // getting content of the file as List
         List<String> textList = ReadFromFile.readTextToList(String.valueOf(listOfFile));
-        StringBuilder str = new StringBuilder();
-        for (String s : textList) {
+        // String to be used for Text node
+        for (String s: textList) {
           str.append(s).append("\n");
         }
         String[] name = listOfFile.getName().split("\\.");
-        result.put(name[0], new Text(String.valueOf(str)));
+        result.put(name[0], new Text(str.toString()));
+        // Instead of creating new StringBuilder each time
+        str.setLength(0);
       }
     } else {
       throw new NullPointerException();
