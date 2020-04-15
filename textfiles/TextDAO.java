@@ -1,4 +1,4 @@
-package textfiles.firstlevel;
+package textfiles;
 
 // Making use of Data Access Object pattern, sort of...
 
