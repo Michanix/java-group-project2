@@ -4,19 +4,27 @@ public enum ArmorType {
   HEAVYARMOR("Heavy armor") {
     @Override
     public String getDescription() {
-      return null;
+      return "Heavy armor is good at protecting against\n"
+          + "Physical attacks due to its high Physical\n"
+          + "defensive power, but makes you more vulnerable\n"
+          + "to magical attacks.";
     }
   },
   LIGHTARMOR("Light armor") {
     @Override
     public String getDescription() {
-      return null;
+      return "Light armor has a well balanced Physical\n"
+          + "and Magical defensive power.\n"
+          + "It makes a good choice when you can't\n"
+          + "decide between Heavy Armor and Robe.";
     }
   },
-  GARMENT("Garment") {
+  ROBE("Robe") {
     @Override
     public String getDescription() {
-      return null;
+      return "Robes have a high magical defensive power,\n"
+          + "reducing damage from enemies magical attacks,\n"
+          + "but makes you more vulnerable to Physical attacks.";
     }
   };
 
@@ -25,7 +33,9 @@ public enum ArmorType {
   ArmorType(String armorType) {
     this.armorType = armorType;
   }
+
   public abstract String getDescription();
+
   @Override
   public String toString() {
     return armorType;

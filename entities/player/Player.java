@@ -15,7 +15,7 @@ public class Player {
   private ArmorType   armorType;
 
   // Constructor for creating New Player
-  private Player(String nickname, RaceType raceType, WeaponType weaponType, ArmorType armorType) {
+  private Player(String nickname, RaceType raceType, ArmorType armorType) {
     this.nickname     =   nickname;
     this.exp          =          0;
     this.hp           =        100;
@@ -44,9 +44,8 @@ public class Player {
 
 
   public static Player createNewPlayer(
-      String nickname, int exp, RaceType raceType,
-      WeaponType weaponType, ArmorType armorType) {
-    return new Player(nickname, raceType, weaponType, armorType);
+      String nickname, RaceType raceType, ArmorType armorType) {
+    return new Player(nickname, raceType, armorType);
   }
 
   public static Player loadExistingPlayer(
