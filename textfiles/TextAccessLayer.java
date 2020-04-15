@@ -1,29 +1,59 @@
 package textfiles;
 
+import javafx.scene.text.Text;
+import utils.ReadFromFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TextAccessLayer implements TextDAO {
 
-  private final Map<String, Path> levelTexts;
+  private final Map<String, Text> levelTexts;
 
   public TextAccessLayer() {
-    this.levelTexts = fetchAllTexts("src/textfiles/firstlevel/texts");
+    this.levelTexts = getLevelTexts();
   }
 
-  private static Map<String, Path> fetchAllTexts(String path) {
-    Map<String, Path> result = new HashMap<>();
+  private Map<String, Text> getLevelTexts() {
+    /*
+    Function to return Map of texts as <Name of the text, Javafx Text node>
+     */
+    Map<String, Text> result = new HashMap<>();
+    List<Path> pathsToTexts = fetchTextsPaths();
+
+    // Iterating through list of paths
+    // and from each path grabbing text and creating StringBuilder Object which is later used
+    // to create JavaFx Text node
+    for (Path path : pathsToTexts) {
+      List<String> textList = ReadFromFile.readTextToList(String.valueOf(path));
+      StringBuilder str = new StringBuilder();
+      for (String s : textList) {
+        str.append(s).append("\n");
+      }
+      String[] name = path.getFileName().toString().split("\\.");
+      result.put(name[0], new Text(String.valueOf(str)));
+    }
+    return result;
+  }
+
+  private List<Path> fetchTextsPaths() {
+    /*
+    Helper function to fetch all the txt file from directory
+    as create list of their paths
+     */
+    List<Path> result = new ArrayList<>();
     // platform independent path to avoid problems like in the first group project, lol
-    File folder = new File(separatorsToSystem(path));
+    File folder = new File(separatorsToSystem("src/textfiles/firstlevel/texts"));
     File[] listOfFiles = folder.listFiles();
     if (listOfFiles != null) {
       for (File listOfFile : listOfFiles) {
         try {
-          String[] name = listOfFile.getName().split("\\.");
-          result.put(name[0], Path.of(separatorsToSystem(listOfFile.getCanonicalPath())));
+          result.add(Path.of(separatorsToSystem(listOfFile.getCanonicalPath())));
         } catch (IOException ex) {
           ex.printStackTrace();
         }
@@ -47,12 +77,12 @@ public class TextAccessLayer implements TextDAO {
   }
 
   @Override
-  public Map<String, Path> getAllTexts() {
+  public Map<String, Text> getAllTexts() {
     return levelTexts;
   }
 
   @Override
-  public Path getText(String textName) {
+  public Text getText(String textName) {
     return levelTexts.get(textName);
   }
 }
