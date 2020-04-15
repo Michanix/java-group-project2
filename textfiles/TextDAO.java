@@ -6,6 +6,6 @@ import java.nio.file.Path;
 import java.util.Map;
 
 public interface TextDAO {
-    public Map<String, Path> getAllTexts();
-    public Path getText(String textName);
+    Map<String, Path> getAllTexts();
+    Path getText(String textName);
 }
