@@ -1,5 +1,7 @@
 package components.views;
 
+// TODO: split logic by view, controller and model...someday
+
 import entities.player.ArmorType;
 import entities.player.Player;
 import entities.player.RaceType;
@@ -36,7 +38,6 @@ public class NewPlayerView {
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
   private final ArmorType[] armorTypes = ArmorType.values();
-  private final WriteToFile writeToFile = new WriteToFile();
 
   public NewPlayerView() {}
 
@@ -68,7 +69,7 @@ public class NewPlayerView {
     // Creating and saving new Player to a file
     createBtn.setOnMouseClicked(
         e -> {
-          writeToFile.writePlayerToFile(
+          WriteToFile.writePlayerToFile(
               Player.createNewPlayer(
                   nicknameField.getText(), raceChoice.getValue(), armorChoice.getValue()));
         });
