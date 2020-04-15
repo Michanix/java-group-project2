@@ -3,6 +3,9 @@ package entities.player;
 // Description of races was borrowed from https://www.lordswm.com/help.php?section=37
 // and https://www.dndbeyond.com/races
 
+
+// TODO: Come up with special abilities
+
 public enum RaceType {
   WOODELF("Wood Elf") {
     @Override
