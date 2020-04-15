@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface TextDAO {
     public Map<String, Path> getAllTexts();
-    public String getText(String textName);
+    public Path getText(String textName);
 }
