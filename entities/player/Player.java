@@ -16,7 +16,7 @@ public class Player {
 
   // Constructor for creating New Player
   private Player(String nickname, RaceType raceType, ArmorType armorType) {
-    this.nickname     =   nickname;
+             setNickname(nickname);
     this.exp          =          0;
     this.hp           =        100;
     this.state        =       true;
@@ -82,7 +82,11 @@ public class Player {
   }
 
   public void setNickname(String nickname) {
-    this.nickname = nickname;
+    if(nickname.isBlank() | nickname.length() > 12) {
+      throw new IllegalArgumentException("Nickname can be empty or longer than 12 characters");
+    } else {
+      this.nickname = nickname;
+    }
   }
 
   public int getExp() {

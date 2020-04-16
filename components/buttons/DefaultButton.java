@@ -3,10 +3,10 @@ package components.buttons;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 
-public class StartMenuButton extends Button {
+public class DefaultButton extends Button {
   // private final String style = ;
 
-  public StartMenuButton(String str) {
+  public DefaultButton(String str) {
     super(str);
     setStartButtonStyle();
     initListeners();
@@ -15,12 +15,13 @@ public class StartMenuButton extends Button {
   private void setStartButtonStyle() {
     setPrefWidth(200);
     setStyle("-fx-background-color: lightblue; -fx-font-size: 16pt");
+    setWrapText(true);
   }
 
   private void initListeners() {
-
+    DropShadow shadow = new DropShadow();
     setOnMouseEntered(e ->{
-      setEffect(new DropShadow());
+      setEffect(shadow);
     });
 
     setOnMouseExited(e -> {

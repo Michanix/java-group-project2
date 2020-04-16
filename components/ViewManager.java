@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class ViewManager {
 
-    private final int WIDTH = 600;
+    private final int WIDTH = 800;
     private final int HEIGHT = 480;
     private AnchorPane anchorPane;
     private Stage stage;
@@ -26,7 +26,7 @@ public class ViewManager {
     }
 
     private void setStarGameMenu() {
-        StartGameMenuView startGameMenuView = new StartGameMenuView();
+        StartGameMenuView startGameMenuView = new StartGameMenuView(anchorPane, scene);
         startGameMenuView.getMenu().setLayoutX(scene.getWidth()/2 - 100);
         startGameMenuView.getMenu().setLayoutY(scene.getHeight()/2 - 50);
         anchorPane.getChildren().add(startGameMenuView.getMenu());

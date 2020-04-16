@@ -1,11 +1,12 @@
 package components.views;
 
 // TODO: split logic by view, controller and model...someday
-
+// TODO: data validation
+// TODO: fix alert
+import components.buttons.DefaultButton;
 import entities.player.ArmorType;
 import entities.player.Player;
 import entities.player.RaceType;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -28,23 +29,30 @@ public class NewPlayerView implements View {
   private final TextField nicknameField = new TextField();
   // Labels
   private final Label nicknameLabel = new Label("Nickname: ");
+  private final Tooltip nicknameTT = new Tooltip("No longer than 12 characters");
   private final Label armorLabel = new Label("Choose armor: ");
   private final Label raceLabel = new Label("Choose race: ");
   private final Label weaponLabel = new Label("Choose weapon:\n Bare Hands");
   private final Tooltip weaponTT = new Tooltip("New players start without actual weapon");
   // Buttons
-  private final Button createBtn = new Button("Create and continue");
+  private final DefaultButton createBtn = new DefaultButton("Create and continue");
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
   private final ArmorType[] armorTypes = ArmorType.values();
 
-  public NewPlayerView() {}
+  public NewPlayerView() {
+    init();
+  }
+
+  public GridPane getView() {
+    return view;
+  }
 
   public void init() {
     int width = 130;
 
-    armorChoice.getItems().addAll(ArmorType.values());
-    raceChoice.getItems().addAll(RaceType.values());
+    armorChoice.getItems().addAll(armorTypes);
+    raceChoice.getItems().addAll(raceTypes);
     armorChoice.setPrefWidth(width);
     raceChoice.setPrefWidth(width);
     nicknameField.setPrefWidth(width);
@@ -64,36 +72,43 @@ public class NewPlayerView implements View {
             (observable, oldValue, newValue) -> {
               armorDisc.setText(String.valueOf(armorTypes[newValue.intValue()].getDescription()));
             });
-
     // Creating and saving new Player to a file
     createBtn.setOnMouseClicked(
         e -> {
-          WriteToFile.writePlayerToFile(
-              Player.createNewPlayer(
-                  nicknameField.getText(), raceChoice.getValue(), armorChoice.getValue()));
+          try {
+            WriteToFile.writePlayerToFile(
+                Player.createNewPlayer(
+                    nicknameField.getText(), raceChoice.getValue(), armorChoice.getValue()));
+          } catch (IllegalArgumentException ex) {
+            System.err.println(ex.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
+            alert.showAndWait()
+                    .filter(res -> res == ButtonType.OK)
+                    .ifPresent(res -> alert.hide());
+          }
         });
 
     // setup
-    view.setAlignment(Pos.CENTER);
     // name
-    view.add(nicknameLabel, 0, 0);
-    view.add(nicknameField, 0, 1);
+    nicknameField.setTooltip(nicknameTT);
+    view.add(nicknameLabel, 1, 2);
+    view.add(nicknameField, 1, 3);
     // race
     displayRaceText.setTextAlignment(TextAlignment.LEFT);
-    view.add(raceLabel, 0, 2);
-    view.add(raceChoice, 0, 3);
-    view.add(displayRaceText, 1, 3);
+    view.add(raceLabel, 1, 4);
+    view.add(raceChoice, 1, 5);
+    view.add(displayRaceText, 2, 5);
     // armor
     displayArmorText.setTextAlignment(TextAlignment.LEFT);
-    view.add(armorLabel, 0, 4);
-    view.add(armorChoice, 0, 5);
-    view.add(displayArmorText, 1, 5);
+    view.add(armorLabel, 1, 6);
+    view.add(armorChoice, 1, 7);
+    view.add(displayArmorText, 2, 7);
     // weapon
-    view.add(weaponLabel, 0, 6);
+    view.add(weaponLabel, 1, 8);
     weaponLabel.setTooltip(weaponTT);
 
-    view.add(createBtn, 1, 7);
-    view.setVgap(20);
-    view.setHgap(20);
+    view.add(createBtn, 2, 9);
+    view.setVgap(5);
+    view.setHgap(100);
   }
 }
