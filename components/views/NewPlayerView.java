@@ -8,13 +8,12 @@ import entities.player.RaceType;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import utils.WriteToFile;
 
-public class NewPlayerView {
+public class NewPlayerView implements View {
   // what player see
   private final GridPane view = new GridPane();
   // Texts
@@ -41,7 +40,7 @@ public class NewPlayerView {
 
   public NewPlayerView() {}
 
-  public Pane init() {
+  public void init() {
     int width = 130;
 
     armorChoice.getItems().addAll(ArmorType.values());
@@ -96,6 +95,5 @@ public class NewPlayerView {
     view.add(createBtn, 1, 7);
     view.setVgap(20);
     view.setHgap(20);
-    return view;
   }
 }
