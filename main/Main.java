@@ -1,6 +1,6 @@
 package main;
 
-import components.ViewManager;
+import components.StartGameManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -8,8 +8,8 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) {
-    ViewManager viewManager = new ViewManager();
-    primaryStage = viewManager.getStage();
+    StartGameManager startGameManager = new StartGameManager();
+    primaryStage = startGameManager.getStage();
     primaryStage.show();
   }
 

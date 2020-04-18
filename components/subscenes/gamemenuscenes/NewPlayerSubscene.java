@@ -1,22 +1,25 @@
-package components.views;
+package components.subscenes.gamemenuscenes;
 
-// TODO: split logic by view, controller and model...someday
-// TODO: data validation
-// TODO: fix alert
 import components.buttons.DefaultButton;
 import entities.player.ArmorType;
 import entities.player.Player;
 import entities.player.RaceType;
-import javafx.scene.control.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import utils.WriteToFile;
 
-public class NewPlayerView implements View {
-  // what player see
+public class NewPlayerSubscene extends AbstractSubScene {
   private final GridPane view = new GridPane();
+  private Player newPlayer;
   // Texts
   private final Text armorDisc = new Text();
   private final Text raceDisc = new Text();
@@ -35,17 +38,18 @@ public class NewPlayerView implements View {
   private final Label weaponLabel = new Label("Choose weapon:\n Bare Hands");
   private final Tooltip weaponTT = new Tooltip("New players start without actual weapon");
   // Buttons
-  private final DefaultButton createBtn = new DefaultButton("Create and continue");
+  private final DefaultButton createBtn = new DefaultButton("Create");
+  private final DefaultButton continueBtn = new DefaultButton("Continue");
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
   private final ArmorType[] armorTypes = ArmorType.values();
+  private final AnchorPane subScene;
 
-  public NewPlayerView() {
+  public NewPlayerSubscene(Pane root) {
+    super(root);
+    subScene = (AnchorPane) this.getRoot();
     init();
-  }
-
-  public GridPane getView() {
-    return view;
+    subScene.getChildren().add(view);
   }
 
   public void init() {
@@ -76,16 +80,25 @@ public class NewPlayerView implements View {
     createBtn.setOnMouseClicked(
         e -> {
           try {
-            WriteToFile.writePlayerToFile(
+            newPlayer =
                 Player.createNewPlayer(
-                    nicknameField.getText(), raceChoice.getValue(), armorChoice.getValue()));
+                    nicknameField.getText(), raceChoice.getValue(), armorChoice.getValue());
+            WriteToFile.writePlayerToFile(newPlayer);
+            Text err = new Text("Character has been created!");
+            err.setFill(Color.GREENYELLOW);
+            view.add(err, 2, 3);
           } catch (IllegalArgumentException ex) {
-            System.err.println(ex.getMessage());
-            Alert alert = new Alert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
-            alert.showAndWait()
-                    .filter(res -> res == ButtonType.OK)
-                    .ifPresent(res -> alert.hide());
+            Text err = new Text(ex.getMessage());
+            err.setFill(Color.RED);
+            view.add(err, 2, 3);
           }
+        });
+
+    continueBtn.setOnMouseClicked(
+        e -> {
+          System.out.println(newPlayer);
+          ShowCurrentPlayerScene showPlayer = new ShowCurrentPlayerScene(subScene, newPlayer);
+          subScene.getChildren().add(showPlayer);
         });
 
     // setup
@@ -108,6 +121,7 @@ public class NewPlayerView implements View {
     weaponLabel.setTooltip(weaponTT);
 
     view.add(createBtn, 2, 9);
+    view.add(continueBtn, 2, 10);
     view.setVgap(5);
     view.setHgap(100);
   }

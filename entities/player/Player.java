@@ -83,7 +83,7 @@ public class Player {
 
   public void setNickname(String nickname) {
     if(nickname.isBlank() | nickname.length() > 12) {
-      throw new IllegalArgumentException("Nickname can be empty or longer than 12 characters");
+      throw new IllegalArgumentException("Nickname cannot be empty or longer than 12 characters");
     } else {
       this.nickname = nickname;
     }
