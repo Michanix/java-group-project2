@@ -19,7 +19,7 @@ public class AdventureMenuSubScene extends AbstractSubScene {
     super(root);
     subScene = (AnchorPane) this.getRoot();
     List<AbstractSubScene> adventureMenu = new ArrayList<>();
-    createButton("1 st adventure", null);
+    createButton("1 st adventure");
     view.getChildren().addAll(advButtonList);
     view.setTileAlignment(Pos.CENTER);
     view.setHgap(5);
@@ -27,10 +27,10 @@ public class AdventureMenuSubScene extends AbstractSubScene {
     subScene.getChildren().add(view);
   }
 
-  private void createButton(String name, AbstractSubScene level) {
+  private void createButton(String name) {
     DefaultButton startLevel = new DefaultButton(name);
     startLevel.setOnMouseClicked(e ->{
-      //level.start();
+      //InGameManager manager = inGameManager.start();
     });
     advButtonList.add(startLevel);
   }
