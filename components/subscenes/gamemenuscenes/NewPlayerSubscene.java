@@ -18,7 +18,6 @@ import javafx.scene.text.TextFlow;
 import utils.WriteToFile;
 
 public class NewPlayerSubscene extends AbstractSubScene {
-  private final GridPane view = new GridPane();
   private Player newPlayer;
   // Texts
   private final Text armorDisc = new Text();
@@ -48,11 +47,11 @@ public class NewPlayerSubscene extends AbstractSubScene {
   public NewPlayerSubscene(Pane root) {
     super(root);
     subScene = (AnchorPane) this.getRoot();
-    init();
-    subScene.getChildren().add(view);
+    subScene.getChildren().add(createView());
   }
 
-  public void init() {
+  private GridPane createView() {
+    GridPane view = new GridPane();
     int width = 130;
 
     armorChoice.getItems().addAll(armorTypes);
@@ -84,9 +83,10 @@ public class NewPlayerSubscene extends AbstractSubScene {
                 Player.createNewPlayer(
                     nicknameField.getText(), raceChoice.getValue(), armorChoice.getValue());
             WriteToFile.writePlayerToFile(newPlayer);
-            Text err = new Text("Character has been created!");
-            err.setFill(Color.GREENYELLOW);
-            view.add(err, 2, 3);
+            Text success = new Text("Character has been created!");
+            success.setFill(Color.GREEN);
+            view.add(continueBtn, 2, 10);
+            view.add(success, 2, 3);
           } catch (IllegalArgumentException ex) {
             Text err = new Text(ex.getMessage());
             err.setFill(Color.RED);
@@ -94,13 +94,13 @@ public class NewPlayerSubscene extends AbstractSubScene {
           }
         });
 
-    continueBtn.setOnMouseClicked(
-        e -> {
-          System.out.println(newPlayer);
-          ShowCurrentPlayerScene showPlayer = new ShowCurrentPlayerScene(subScene, newPlayer);
-          subScene.getChildren().add(showPlayer);
-        });
 
+    continueBtn.setOnMouseClicked(
+            e -> {
+              System.out.println(newPlayer);
+              ShowCurrentPlayerScene showPlayer = new ShowCurrentPlayerScene(subScene, newPlayer);
+              subScene.getChildren().add(showPlayer);
+            });
     // setup
     // name
     nicknameField.setTooltip(nicknameTT);
@@ -121,8 +121,9 @@ public class NewPlayerSubscene extends AbstractSubScene {
     weaponLabel.setTooltip(weaponTT);
 
     view.add(createBtn, 2, 9);
-    view.add(continueBtn, 2, 10);
     view.setVgap(5);
     view.setHgap(100);
+
+    return view;
   }
 }
