@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShowCurrentPlayerScene extends AbstractSubScene {
-  private DefaultButton continueBtn;
-  private AnchorPane subScene;
 
   public ShowCurrentPlayerScene(Pane root, Player player) {
     super(root);
@@ -29,9 +27,9 @@ public class ShowCurrentPlayerScene extends AbstractSubScene {
     for (TitledPane pane : titledPaneList) {
       pane.setExpanded(true);
     }
-    subScene = (AnchorPane) this.getRoot();
+    AnchorPane subScene = (AnchorPane) this.getRoot();
     VBox stats = new VBox();
-    continueBtn = new DefaultButton("Continue");
+    DefaultButton continueBtn = new DefaultButton("Continue");
 
     continueBtn.setOnMouseClicked(
         e -> {

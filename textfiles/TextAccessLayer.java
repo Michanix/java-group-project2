@@ -1,7 +1,7 @@
 package textfiles;
 
 // TODO: less complexity....
-
+// TODO: refactoring, separate concerns, maybe more abstraction
 import javafx.scene.text.Text;
 import utils.ReadFromFile;
 
@@ -10,18 +10,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TextAccessLayer implements TextDAO {
+// TODO: generic access to adventures text as there can be more than one adventure...
+
+public class TextAccessLayer {
 
   private final Map<String, Text> levelTexts;
+  private final TextType textType;
+  private final String pathToTexts = "src/textfiles/firstadventure/";
 
-  public TextAccessLayer() {
+  public TextAccessLayer(TextType textType) {
+    this.textType = textType;
     this.levelTexts = getLevelTexts();
   }
 
   private Map<String, Text> getLevelTexts() {
+    String source =
+        textType == TextType.FUNCTIONAL
+            ? pathToTexts + "functionaltexts"
+            : pathToTexts + "basictexts";
     Map<String, Text> result = new HashMap<>();
     // platform independent path to avoid problems like in the first group project, lol
-    File folder = new File(separatorsToSystem("src/textfiles/firstlevel/texts"));
+    File folder = new File(separatorsToSystem(source));
     File[] listOfFiles = folder.listFiles();
     StringBuilder str = new StringBuilder();
 
@@ -30,7 +39,7 @@ public class TextAccessLayer implements TextDAO {
         // getting content of the file as List
         List<String> textList = ReadFromFile.readTextToList(String.valueOf(listOfFile));
         // String to be used for Text node
-        for (String s: textList) {
+        for (String s : textList) {
           str.append(s).append("\n");
         }
         String[] name = listOfFile.getName().split("\\.");
@@ -56,12 +65,6 @@ public class TextAccessLayer implements TextDAO {
     }
   }
 
-  @Override
-  public Map<String, Text> getAllTexts() {
-    return levelTexts;
-  }
-
-  @Override
   public Text getText(String textName) {
     return levelTexts.get(textName);
   }
