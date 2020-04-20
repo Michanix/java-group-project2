@@ -1,5 +1,6 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.AdventureManager;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 import javafx.scene.layout.HBox;
@@ -21,7 +22,7 @@ public class StartPane extends AbstractPane {
     left.setOnMouseClicked(
         e -> {
           AbstractPane leftTurn = new LeftTurnPane(mainStage, "armorFound", TextType.REGULAR);
-          mainStage.getScene().setRoot(leftTurn);
+            mainStage.getScene().setRoot(leftTurn);
         });
 
     right.setOnMouseClicked(

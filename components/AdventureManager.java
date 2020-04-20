@@ -8,10 +8,9 @@ import textfiles.TextType;
 // TODO: better naming
 
 public class AdventureManager {
-  private final Stage mainAdventureStage;
+  private final Stage mainAdventureStage = new Stage();
 
   public AdventureManager() {
-    mainAdventureStage = new Stage();
     StartPane startMenu = new StartPane(mainAdventureStage, "begining", TextType.FUNCTIONAL);
     Scene mainScene = new Scene(startMenu, 600, 480);
     mainAdventureStage.setScene(mainScene);
@@ -20,5 +19,9 @@ public class AdventureManager {
   public void startAdventure(Stage currentStage) {
     currentStage.hide();
     mainAdventureStage.show();
+  }
+
+  public Stage getMainAdventureStage() {
+    return mainAdventureStage;
   }
 }

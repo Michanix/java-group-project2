@@ -1,5 +1,6 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.AdventureManager;
 import components.buttons.DefaultButton;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -16,7 +17,7 @@ public abstract class AbstractPane extends BorderPane {
     DefaultButton backButton = new DefaultButton("Back");
     backButton.setOnMouseClicked(
         e -> {
-          mainStage.getScene().setRoot(new StartPane(mainStage, "begining", TextType.FUNCTIONAL));
+          backButton.getScene().setRoot(new StartPane(mainStage, "begining", TextType.FUNCTIONAL));
         });
 
     setBottom(backButton);
