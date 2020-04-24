@@ -16,7 +16,6 @@ public class TextAccessLayer {
 
   private final Map<String, Text> levelTexts;
   private final TextType textType;
-  private final String pathToTexts = "src/textfiles/firstadventure/";
 
   public TextAccessLayer(TextType textType) {
     this.textType = textType;
@@ -24,10 +23,11 @@ public class TextAccessLayer {
   }
 
   private Map<String, Text> getLevelTexts() {
+    String pathToTexts = "src/textfiles/firstadventure";
     String source =
         textType == TextType.FUNCTIONAL
-            ? pathToTexts + "functionaltexts"
-            : pathToTexts + "basictexts";
+            ? pathToTexts + "/functionaltexts"
+            : pathToTexts + "/basictexts";
     Map<String, Text> result = new HashMap<>();
     // platform independent path to avoid problems like in the first group project, lol
     File folder = new File(separatorsToSystem(source));

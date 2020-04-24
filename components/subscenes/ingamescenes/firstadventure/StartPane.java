@@ -1,6 +1,5 @@
 package components.subscenes.ingamescenes.firstadventure;
 
-import components.AdventureManager;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 import javafx.scene.layout.HBox;
@@ -9,7 +8,7 @@ import textfiles.TextType;
 
 // TODO: more generic access to texts
 
-public class StartPane extends AbstractPane {
+public class StartPane extends AbstracPane {
   private Player player;
 
   public StartPane(Stage mainStage, String textname, TextType textType) {
@@ -21,13 +20,13 @@ public class StartPane extends AbstractPane {
 
     left.setOnMouseClicked(
         e -> {
-          AbstractPane leftTurn = new LeftTurnPane(mainStage, "armorFound", TextType.REGULAR);
-            mainStage.getScene().setRoot(leftTurn);
+          AbstracPane leftTurn = new LeftTurnPane(mainStage, "armorFound", TextType.REGULAR);
+          mainStage.getScene().setRoot(leftTurn);
         });
 
     right.setOnMouseClicked(
         e -> {
-          AbstractPane rightTurn = new RightTurnPane(mainStage, "trap", TextType.FUNCTIONAL);
+          AbstracPane rightTurn = new RightTurnPane(mainStage, "trap", TextType.FUNCTIONAL);
           mainStage.getScene().setRoot(rightTurn);
         });
 
