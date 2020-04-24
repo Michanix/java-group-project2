@@ -20,13 +20,14 @@ public class DefaultButton extends Button {
 
   private void initListeners() {
     DropShadow shadow = new DropShadow();
-    setOnMouseEntered(e ->{
-      setEffect(shadow);
-    });
+    setOnMouseEntered(
+        e -> {
+          setEffect(shadow);
+        });
 
-    setOnMouseExited(e -> {
-      setEffect(null);
-    });
+    setOnMouseExited(
+        e -> {
+          setEffect(null);
+        });
   }
-
 }

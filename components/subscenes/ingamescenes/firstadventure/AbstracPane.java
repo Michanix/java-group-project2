@@ -10,6 +10,7 @@ import textfiles.TextType;
 // TODO: Figure out how to switch between panes without creating new object
 
 public abstract class AbstracPane extends BorderPane {
+  private boolean isVisited = false;
 
   public AbstracPane(Stage mainStage, String textname, TextType textType) {
     TextAccessLayer textDAO = new TextAccessLayer(textType);
@@ -17,10 +18,18 @@ public abstract class AbstracPane extends BorderPane {
 
     backButton.setOnMouseClicked(
         e -> {
-          backButton.getScene().setRoot(new StartPane(mainStage, "begining", TextType.FUNCTIONAL));
+          // backButton.getScene().setRoot(mainStage.getScene().getRoot());
         });
 
     setBottom(backButton);
     setCenter(textDAO.getText(textname));
+  }
+
+  public boolean isVisited() {
+    return isVisited;
+  }
+
+  public void setVisited(boolean visited) {
+    isVisited = visited;
   }
 }

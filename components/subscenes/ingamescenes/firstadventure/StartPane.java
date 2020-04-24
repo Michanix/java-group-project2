@@ -3,6 +3,7 @@ package components.subscenes.ingamescenes.firstadventure;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import textfiles.TextType;
 
@@ -21,9 +22,12 @@ public class StartPane extends AbstracPane {
     left.setOnMouseClicked(
         e -> {
           AbstracPane leftTurn = new LeftTurnPane(mainStage, "armorFound", TextType.REGULAR);
-          mainStage.getScene().setRoot(leftTurn);
+          if (leftTurn.isVisited()) {
+              setCenter(new Text("Seems like you already been there."));
+          } else {
+              mainStage.getScene().setRoot(leftTurn);
+          }
         });
-
     right.setOnMouseClicked(
         e -> {
           AbstracPane rightTurn = new RightTurnPane(mainStage, "trap", TextType.FUNCTIONAL);

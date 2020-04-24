@@ -21,7 +21,7 @@ public class AdventureManager {
     mainAdventureStage.show();
   }
 
-  public Stage getMainAdventureStage() {
+  public Stage getStage() {
     return mainAdventureStage;
   }
 }
