@@ -1,6 +1,5 @@
 package components.subscenes.ingamescenes.firstadventure;
 
-import components.buttons.DefaultButton;
 import components.buttons.GoBackButton;
 import entities.player.ArmorType;
 import entities.player.Player;

@@ -22,4 +22,8 @@ public abstract class AbstracPane extends BorderPane {
   public void addToActionMenu(Node node) {
     actionMenu.getChildren().add(node);
   }
+
+  public ActionMenu getActionMenu() {
+    return actionMenu;
+  }
 }
