@@ -1,5 +1,6 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.actionmenu.ActionMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 import entities.player.WeaponType;
@@ -11,14 +12,16 @@ public class LeftTurnPane extends AbstracPane {
 
   public LeftTurnPane(Player player, String textname, TextType textType) {
     super(textname, textType);
+    ActionMenu actionMenu = new ActionMenu();
     WeaponType rndWeapon = GetRandomType.randomEnum(WeaponType.class);
-    setRight(new Text(String.format("You got %s", rndWeapon.toString())));
+    setBottom(new Text(String.format("You got %s", rndWeapon.toString())));
     player.setWeaponType(rndWeapon);
     DefaultButton backButton = new DefaultButton("Back");
     backButton.setOnMouseClicked(
         e -> {
           getScene().setRoot(new StartPane(player, "begining", TextType.FUNCTIONAL));
         });
-    setLeft(backButton);
+    actionMenu.getChildren().add(backButton);
+    setRight(actionMenu);
   }
 }

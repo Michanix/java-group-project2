@@ -1,22 +1,25 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.actionmenu.ActionMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import textfiles.TextType;
 
 public class TrapEscapePane extends AbstracPane {
   public TrapEscapePane(Player player, String textname, TextType textType) {
     super(textname, textType);
     DefaultButton checkBtn = new DefaultButton("Check");
-    Label actionsL = new Label("Actions");
-    VBox actionMenu = new VBox(10);
+    ActionMenu actionMenu = new ActionMenu();
     checkBtn.setOnMouseClicked(
         e -> {
           getScene().setRoot(new SecretPassage(player, "armorFound", TextType.REGULAR));
         });
-    actionMenu.getChildren().addAll(actionsL, checkBtn);
+    DefaultButton backButton = new DefaultButton("Back");
+    backButton.setOnMouseClicked(
+        e -> {
+          getScene().setRoot(new StartPane(player, "begining", TextType.FUNCTIONAL));
+        });
+    actionMenu.getChildren().addAll(checkBtn, backButton);
     setRight(actionMenu);
   }
 }

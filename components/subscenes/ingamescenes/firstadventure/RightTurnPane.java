@@ -1,10 +1,9 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.actionmenu.ActionMenu;
 import components.buttons.DefaultButton;
 import entities.player.DiceType;
 import entities.player.Player;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import textfiles.TextType;
 import utils.DiceAction;
@@ -14,8 +13,7 @@ public class RightTurnPane extends AbstracPane {
   public RightTurnPane(Player player, String textname, TextType textType) {
     super(textname, textType);
     DefaultButton rollTheDie = new DefaultButton("Roll the die!");
-    Label actionsL = new Label("Actions");
-    VBox actionMenu = new VBox(10);
+    ActionMenu actionMenu = new ActionMenu();
     rollTheDie.setOnMouseClicked(
         e -> {
           int result = DiceAction.roll2Dices(DiceType.D6);
@@ -25,7 +23,7 @@ public class RightTurnPane extends AbstracPane {
             getScene().setRoot(new TrapEscapePane(player, "escapedTrap", TextType.FUNCTIONAL));
           }
         });
-    actionMenu.getChildren().addAll(actionsL, rollTheDie);
+    actionMenu.getChildren().add(rollTheDie);
     setRight(actionMenu);
   }
 }

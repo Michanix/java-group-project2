@@ -1,6 +1,5 @@
 package components.subscenes.ingamescenes.firstadventure;
 
-import components.buttons.DefaultButton;
 import javafx.scene.layout.BorderPane;
 import textfiles.TextAccessLayer;
 import textfiles.TextType;
