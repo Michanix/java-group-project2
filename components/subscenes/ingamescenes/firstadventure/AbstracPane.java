@@ -1,26 +1,25 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.actionmenu.ActionMenu;
+import entities.player.Player;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import textfiles.TextAccessLayer;
-import textfiles.TextType;
 
 // TODO: better naming for class
 // TODO: Figure out how to switch between panes without creating new object
 
 public abstract class AbstracPane extends BorderPane {
-  private boolean isVisited = false;
+  private final ActionMenu actionMenu = new ActionMenu();
 
-  public AbstracPane(String textname, TextType textType) {
-    TextAccessLayer textDAO = new TextAccessLayer(textType);
+  public AbstracPane(Player player, String textname) {
+    TextAccessLayer textDAO = new TextAccessLayer("src/textfiles/firstadventure/texts");
 
     setCenter(textDAO.getText(textname));
+    setRight(actionMenu);
   }
 
-  public boolean isVisited() {
-    return isVisited;
-  }
-
-  public void setVisited(boolean visited) {
-    isVisited = visited;
+  public void addToActionMenu(Node node) {
+    actionMenu.getChildren().add(node);
   }
 }

@@ -43,4 +43,29 @@ public abstract class Monster {
         + expPer
         + '}';
   }
+
+  // getters
+  public int getHp() {
+    return hp;
+  }
+
+  public double getPhyDmg() {
+    return phyDmg;
+  }
+
+  public double getMagDmg() {
+    return magDmg;
+  }
+
+  public double getPhyDef() {
+    return phyDef;
+  }
+
+  public double getMagDef() {
+    return magDef;
+  }
+
+  public int getExpPer() {
+    return expPer;
+  }
 }

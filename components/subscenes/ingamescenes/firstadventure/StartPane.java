@@ -3,7 +3,6 @@ package components.subscenes.ingamescenes.firstadventure;
 import components.actionmenu.ActionMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
-import textfiles.TextType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +13,8 @@ import java.util.Map;
 
 public class StartPane extends AbstracPane {
 
-  public StartPane(Player player, String textname, TextType textType) {
-    super(textname, textType);
+  public StartPane(Player player, String textname) {
+    super(player, textname);
     ActionMenu actionMenu = new ActionMenu();
     DefaultButton right = new DefaultButton("right");
     DefaultButton left = new DefaultButton("left");
@@ -25,11 +24,15 @@ public class StartPane extends AbstracPane {
 
     left.setOnMouseClicked(
         e -> {
-          getScene().setRoot(new LeftTurnPane(player, "weaponFound", TextType.REGULAR));
+          getScene().setRoot(new LeftTurnPane(player, "weaponFound"));
         });
     right.setOnMouseClicked(
         e -> {
-          getScene().setRoot(new RightTurnPane(player, "trap", TextType.FUNCTIONAL));
+          getScene().setRoot(new RightTurnPane(player, "trap"));
+        });
+    forward.setOnMouseClicked(
+        e -> {
+          getScene().setRoot(new ForwardPane(player, "forward"));
         });
 
     /*

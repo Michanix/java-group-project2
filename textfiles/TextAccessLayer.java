@@ -15,22 +15,17 @@ import java.util.Map;
 public class TextAccessLayer {
 
   private final Map<String, Text> levelTexts;
-  private final TextType textType;
+  private final String pathToTexts;
 
-  public TextAccessLayer(TextType textType) {
-    this.textType = textType;
+  public TextAccessLayer(String pathToTexts) {
+    this.pathToTexts = pathToTexts;
     this.levelTexts = getLevelTexts();
   }
 
   private Map<String, Text> getLevelTexts() {
-    String pathToTexts = "src/textfiles/firstadventure";
-    String source =
-        textType == TextType.FUNCTIONAL
-            ? pathToTexts + "/functionaltexts"
-            : pathToTexts + "/basictexts";
     Map<String, Text> result = new HashMap<>();
     // platform independent path to avoid problems like in the first group project, lol
-    File folder = new File(separatorsToSystem(source));
+    File folder = new File(separatorsToSystem(pathToTexts));
     File[] listOfFiles = folder.listFiles();
     StringBuilder str = new StringBuilder();
 

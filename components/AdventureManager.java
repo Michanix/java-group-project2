@@ -6,7 +6,6 @@ import entities.player.Player;
 import entities.player.RaceType;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import textfiles.TextType;
 
 // TODO: better naming
 
@@ -16,7 +15,7 @@ public class AdventureManager {
           "mihhail", RaceType.BARBARIAN, ArmorType.HEAVYARMOR
   );
   public AdventureManager() {
-    StartPane startMenu = new StartPane(player, "begining", TextType.FUNCTIONAL);
+    StartPane startMenu = new StartPane(player, "begining");
     Scene mainScene = new Scene(startMenu, 600, 480);
     mainAdventureStage.setScene(mainScene);
   }
