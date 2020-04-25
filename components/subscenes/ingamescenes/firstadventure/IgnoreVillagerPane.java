@@ -11,5 +11,6 @@ public class IgnoreVillagerPane extends AbstracPane {
         e -> {
           getScene().setRoot(new GoddessEncounterPane(player, "godessEncounter"));
         });
+    addToActionMenu(nextBtn);
   }
 }

@@ -1,6 +1,7 @@
 package components.subscenes.ingamescenes.firstadventure;
 
 import components.buttons.DefaultButton;
+import components.buttons.GoBackButton;
 import entities.player.ArmorType;
 import entities.player.Player;
 import javafx.scene.text.Text;
@@ -11,9 +12,9 @@ public class SecretPassage extends AbstracPane {
   public SecretPassage(Player player, String textname) {
     super(player, textname);
     ArmorType rndArmor = GetRandomType.randomEnum(ArmorType.class);
-    setRight(new Text(String.format("You got %s", rndArmor.toString())));
+    setBottom(new Text(String.format("You got %s", rndArmor.toString())));
     player.setArmorType(rndArmor);
-    DefaultButton backButton = new DefaultButton("Back");
+    GoBackButton backButton = new GoBackButton();
     backButton.setOnMouseClicked(
         e -> {
           getScene().setRoot(new StartPane(player, "begining"));

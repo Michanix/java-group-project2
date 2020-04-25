@@ -6,7 +6,10 @@ import javafx.scene.effect.DropShadow;
 public class DefaultButton extends Button {
   // private final String style = ;
 
-  public DefaultButton(String str) {
+    public DefaultButton() {
+    }
+
+    public DefaultButton(String str) {
     super(str);
     setStartButtonStyle();
     initListeners();
