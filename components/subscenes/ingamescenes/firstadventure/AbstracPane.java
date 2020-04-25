@@ -2,7 +2,6 @@ package components.subscenes.ingamescenes.firstadventure;
 
 import components.buttons.DefaultButton;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import textfiles.TextAccessLayer;
 import textfiles.TextType;
 
@@ -12,16 +11,9 @@ import textfiles.TextType;
 public abstract class AbstracPane extends BorderPane {
   private boolean isVisited = false;
 
-  public AbstracPane(Stage mainStage, String textname, TextType textType) {
+  public AbstracPane(String textname, TextType textType) {
     TextAccessLayer textDAO = new TextAccessLayer(textType);
-    DefaultButton backButton = new DefaultButton("Back");
 
-    backButton.setOnMouseClicked(
-        e -> {
-          // backButton.getScene().setRoot(mainStage.getScene().getRoot());
-        });
-
-    setBottom(backButton);
     setCenter(textDAO.getText(textname));
   }
 

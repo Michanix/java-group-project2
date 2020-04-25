@@ -2,17 +2,17 @@ package components.subscenes.ingamescenes.firstadventure;
 
 import components.buttons.DefaultButton;
 import entities.player.DiceType;
+import entities.player.Player;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import textfiles.TextType;
 import utils.DiceAction;
 
 public class RightTurnPane extends AbstracPane {
 
-  public RightTurnPane(Stage mainStage, String textname, TextType textType) {
-    super(mainStage, textname, textType);
+  public RightTurnPane(Player player, String textname, TextType textType) {
+    super(textname, textType);
     DefaultButton rollTheDie = new DefaultButton("Roll the die!");
     Label actionsL = new Label("Actions");
     VBox actionMenu = new VBox(10);
@@ -22,7 +22,7 @@ public class RightTurnPane extends AbstracPane {
           if (result < 10) {
             setCenter(new Text("You died"));
           } else {
-            setCenter(new Text("next scene"));
+            getScene().setRoot(new TrapEscapePane(player, "escapedTrap", TextType.FUNCTIONAL));
           }
         });
     actionMenu.getChildren().addAll(actionsL, rollTheDie);

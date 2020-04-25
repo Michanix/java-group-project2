@@ -47,7 +47,7 @@ public class Player {
       String nickname, RaceType raceType, ArmorType armorType) {
     return new Player(nickname, raceType, armorType);
   }
-
+  // TODO: load player based only on nickname
   public static Player loadExistingPlayer(
       String nickname, int exp, RaceType raceType,
       Abilities abilities, WeaponType weaponType, ArmorType armorType) {
