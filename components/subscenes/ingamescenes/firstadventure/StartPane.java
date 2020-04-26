@@ -35,23 +35,6 @@ public class StartPane extends AbstracPane {
           getScene().setRoot(new ForwardPane(player, "forward"));
         });
 
-    /*
-       left.setOnMouseClicked(
-           e -> {
-           if (leftTurn not in visited) {
-             leftTurn.init
-             visited.add(leftTurn)
-             } else {
-               "you already was there"
-           });
-       right.setOnMouseClicked(
-           e -> {
-             AbstracPane rightTurn = new RightTurnPane(mainStage, "trap", TextType.FUNCTIONAL);
-             mainStage.getScene().setRoot(rightTurn);
-           });
-
-
-    */
     actionMenu.getChildren().addAll(left, forward, right);
     setRight(actionMenu);
   }

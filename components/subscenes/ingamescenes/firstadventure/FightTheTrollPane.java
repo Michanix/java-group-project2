@@ -14,6 +14,5 @@ public class FightTheTrollPane extends AbstracPane {
           getActionMenu().getChildren().remove(nextBtn);
         });
     addToActionMenu(nextBtn);
-
   }
 }

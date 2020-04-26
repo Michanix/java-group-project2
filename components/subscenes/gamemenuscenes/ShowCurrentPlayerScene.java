@@ -15,6 +15,15 @@ public class ShowCurrentPlayerScene extends AbstractSubScene {
 
   public ShowCurrentPlayerScene(Pane root, Player player) {
     super(root);
+    String abilities = String.format(
+            "wisdom: %s\nstrength: %s\ncharisma: %s\n" +
+            "dexterity: %s\nconstitution: %s\nintelligence: %s",
+            player.getAbilities().getWisdom(),
+            player.getAbilities().getStrength(),
+            player.getAbilities().getCharisma(),
+            player.getAbilities().getDexterity(),
+            player.getAbilities().getConstitution(),
+            player.getAbilities().getIntelligence());
     List<TitledPane> titledPaneList =
         new ArrayList<>(
             List.of(
@@ -23,7 +32,7 @@ public class ShowCurrentPlayerScene extends AbstractSubScene {
                 new TitledPane("Race", new Label(player.getRaceType().toString())),
                 new TitledPane("Armor", new Label(player.getArmorType().toString())),
                 new TitledPane("Weapon", new Label(player.getWeaponType().toString())),
-                new TitledPane("Abilities", new Label(player.getAbilities().toString()))));
+                new TitledPane("Abilities", new Label(abilities))));
     for (TitledPane pane : titledPaneList) {
       pane.setExpanded(true);
     }

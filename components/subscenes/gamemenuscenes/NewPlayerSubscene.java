@@ -87,13 +87,13 @@ public class NewPlayerSubscene extends AbstractSubScene {
             success.setFill(Color.GREEN);
             view.add(continueBtn, 2, 10);
             view.add(success, 2, 3);
+            view.getChildren().remove(createBtn);
           } catch (IllegalArgumentException ex) {
             Text err = new Text(ex.getMessage());
             err.setFill(Color.RED);
             view.add(err, 2, 3);
           }
         });
-
 
     continueBtn.setOnMouseClicked(
             e -> {

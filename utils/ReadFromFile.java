@@ -1,5 +1,7 @@
 package utils;
 
+import entities.player.*;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,10 +11,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// TODO: find a better, less confusing way to parse player back from file
+
 public class ReadFromFile {
   public static List<String> readTextToList(String path) {
     // Takes in text file with some data and returns it as ArrayList<>()
-    // Assumed that data on seperate line
+    // Assumed that data on separate line
     List<String> listOFText = new ArrayList<>();
     try (BufferedReader input = new BufferedReader(new FileReader(path))) {
       String line;
@@ -28,7 +32,7 @@ public class ReadFromFile {
   }
 
   // Loading player from file based on nickname
-  public static List<String> readPlayerParamsFromFile(String nickname) {
+  private static List<String> readPlayerParamsFromFile(String nickname) {
     String path = "players/players.txt";
     List<String> playerParams = new ArrayList<>();
     try (BufferedReader input = new BufferedReader(new FileReader(path))) {
@@ -53,5 +57,42 @@ public class ReadFromFile {
       er.printStackTrace();
     }
     return playerParams;
+  }
+
+  // The two private methods below help
+  // parse string representation on RaceType, ArmorType and WeapongType
+  // from String to Enums
+  private static String splitConcatString(String str) {
+    String[] s = str.toUpperCase().split(" ");
+    return s[0] + s[1];
+  }
+
+  private static String formatString(String str) {
+    return !str.contains(" ") ? str.toUpperCase() : splitConcatString(str);
+  }
+
+  public static Player loadPlayerFromFile(String nickname) {
+    List<String> params = readPlayerParamsFromFile(nickname);
+    String race = formatString(params.get(4));
+    String weapon = formatString(params.get(11));
+    String armor = formatString(params.get(12));
+    Abilities abilities =
+        Abilities.loadExisting(
+            Integer.parseInt(params.get(5)),
+            Integer.parseInt(params.get(6)),
+            Integer.parseInt(params.get(7)),
+            Integer.parseInt(params.get(8)),
+            Integer.parseInt(params.get(9)),
+            Integer.parseInt(params.get(10)));
+    Player player =
+        Player.loadExistingPlayer(
+            params.get(0),
+            Integer.parseInt(params.get(1)),
+            RaceType.valueOf(race),
+            abilities,
+            WeaponType.valueOf(weapon),
+            ArmorType.valueOf(armor));
+
+    return player;
   }
 }

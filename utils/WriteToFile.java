@@ -2,18 +2,16 @@ package utils;
 
 import entities.player.Player;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
-// TODO: make path compatible with others platforms
-// TODO: Substitute PrintWriter with BufferedWriter for performance(according to internet).
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class WriteToFile {
   public static void writePlayerToFile(Player player) {
-    try (PrintWriter output = new PrintWriter(new FileWriter("players/players.txt", true))) {
-      output.println(player.toString());
+    try (Writer output =
+        new BufferedWriter(
+            new OutputStreamWriter(
+                new FileOutputStream("players/players.txt", true), StandardCharsets.UTF_8))) {
+      output.append(player.toString()).append("\r\n");
       System.out.println("Player " + player.getNickname() + " was created.");
     } catch (FileNotFoundException e) {
       System.err.println("File not found." + e);

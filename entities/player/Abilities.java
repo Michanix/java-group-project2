@@ -59,15 +59,15 @@ public class Abilities {
   public String toString() {
     return "wisdom="
         + wisdom
-        + ",\nstrength="
+        + ",strength="
         + strength
-        + ",\ncharisma="
+        + ",charisma="
         + charisma
-        + ",\ndexterity="
+        + ",dexterity="
         + dexterity
-        + ",\nconstitution="
+        + ",constitution="
         + constitution
-        + ",\nintelligence="
+        + ",intelligence="
         + intelligence;
   }
 
