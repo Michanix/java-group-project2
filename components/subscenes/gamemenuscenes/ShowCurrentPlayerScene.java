@@ -16,8 +16,12 @@ public class ShowCurrentPlayerScene extends AbstractSubScene {
   public ShowCurrentPlayerScene(Pane root, Player player) {
     super(root);
     String abilities = String.format(
-            "wisdom: %s\nstrength: %s\ncharisma: %s\n" +
-            "dexterity: %s\nconstitution: %s\nintelligence: %s",
+            "wisdom:         %d\n" +
+            "strength:       %d\n" +
+            "charisma:       %d\n" +
+            "dexterity:      %d\n" +
+            "constitution:   %d\n" +
+            "intelligence:     %d",
             player.getAbilities().getWisdom(),
             player.getAbilities().getStrength(),
             player.getAbilities().getCharisma(),

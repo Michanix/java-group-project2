@@ -59,8 +59,8 @@ public class ReadFromFile {
     return playerParams;
   }
 
-  // The two private methods below help
-  // parse string representation on RaceType, ArmorType and WeapongType
+  // The two private methods below help to
+  // parse string representation of RaceType, ArmorType and WeaponType
   // from String to Enums
   private static String splitConcatString(String str) {
     String[] s = str.toUpperCase().split(" ");

@@ -24,6 +24,7 @@ public class NewPlayerSubscene extends AbstractSubScene {
   private final Text raceDisc = new Text();
   private final TextFlow displayArmorText = new TextFlow(armorDisc);
   private final TextFlow displayRaceText = new TextFlow(raceDisc);
+  private final Text err = new Text();
   // Choices
   private final ChoiceBox<ArmorType> armorChoice = new ChoiceBox<>();
   private final ChoiceBox<RaceType> raceChoice = new ChoiceBox<>();
@@ -88,12 +89,16 @@ public class NewPlayerSubscene extends AbstractSubScene {
             view.add(continueBtn, 2, 10);
             view.add(success, 2, 3);
             view.getChildren().remove(createBtn);
-          } catch (IllegalArgumentException ex) {
-            Text err = new Text(ex.getMessage());
+          } catch (IllegalArgumentException | NullPointerException ex) {
+            err.setText(ex.getMessage());
             err.setFill(Color.RED);
             view.add(err, 2, 3);
           }
         });
+
+    createBtn.setOnMouseReleased(e -> {
+      view.getChildren().remove(err);
+    });
 
     continueBtn.setOnMouseClicked(
             e -> {

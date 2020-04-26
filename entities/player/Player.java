@@ -3,6 +3,8 @@ package entities.player;
 // Making use of Static Factory method pattern
 // Will see how it plays out tho...
 
+import java.util.Objects;
+
 public class Player {
   private String       nickname;
   private int               exp; // player current experience
@@ -21,10 +23,10 @@ public class Player {
     this.hp           =        100;
     this.state        =       true;
     this.inAdventure  =      false;
-    this.raceType     =   raceType;
+             setRaceType(raceType);
     this.abilities    = Abilities.initAbilities();
     this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
-    this.armorType    =  armorType;
+           setArmorType(armorType);
   }
 
   // Constructor to load existing Player from file
@@ -82,9 +84,12 @@ public class Player {
   }
 
   public void setNickname(String nickname) {
-    if(nickname.isBlank() | nickname.length() > 12) {
-      throw new IllegalArgumentException("Nickname cannot be empty or longer than 12 characters");
+    if(nickname.isBlank()) {
+      throw new IllegalArgumentException("Nickname cannot be empty.");
+    } else if (nickname.length() < 3 | nickname.length() > 12) {
+      throw new IllegalArgumentException("Nickname length should be from 3 to 12 characters.");
     } else {
+      // Neat trick from Effective Java book
       this.nickname = nickname;
     }
   }
@@ -118,7 +123,7 @@ public class Player {
   }
 
   public void setRaceType(RaceType raceType) {
-    this.raceType = raceType;
+    this.raceType = Objects.requireNonNull(raceType, "RaceType cannot be null.");
   }
 
   public Abilities getAbilities() {
@@ -142,6 +147,6 @@ public class Player {
   }
 
   public void setArmorType(ArmorType armorType) {
-    this.armorType = armorType;
+    this.armorType = Objects.requireNonNull(armorType, "ArmorType cannot be null.");
   }
 }
