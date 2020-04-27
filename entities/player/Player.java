@@ -67,10 +67,11 @@ public class Player {
     return DiceAction.roll2Dices(DiceType.D6) + extraDmg;
   }
 
-  // Same as previous method, but the damage from magic attack can be higher
+  // Same as previous method, but the damage from magic attacks is higher
+  // because...uhm...well...you know...magic and stuff
   public int basicMagAttack() {
     int extraDmg = getWeaponType().getMagicDmg();
-    return DiceAction.roll2Dices(DiceType.D8) + extraDmg;
+    return DiceAction.roll2Dices(DiceType.D12) + extraDmg;
   }
 
   // Overrides

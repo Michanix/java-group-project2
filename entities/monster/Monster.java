@@ -1,26 +1,31 @@
 package entities.monster;
 
+import entities.player.DiceType;
+import utils.DiceAction;
+
 public abstract class Monster {
   private final int         hp; // health
-  private final double  phyDmg; // Physical damage
-  private final double  magDmg; // Magical damage
   private final double  phyDef; // Defense against physical damage
   private final double  magDef; // Same but magical
   private final int     expPer; // experience per killed monster
 
   public Monster(
-          int hp, double phyDmg, double magDmg,
-          double phyDef, double magDef, int expPer) {
+          int hp, double phyDef,
+          double magDef, int expPer) {
     this.hp     =     hp;
-    this.phyDmg = phyDmg;
-    this.magDmg = magDmg;
     this.phyDef = phyDef;
     this.magDef = magDef;
     this.expPer = expPer;
   }
 
-  // Ordinary hit
-  public abstract void attack();
+  // Basic attack depends on the outcome of D4 dice
+  public int basicPhysAttack() {
+    return DiceAction.roll2Dices(DiceType.D4);
+  };
+
+  public int basicMagAttack() {
+    return DiceAction.roll2Dices(DiceType.D6);
+  }
   // Special attack
   public abstract void specialAttack();
 
@@ -31,10 +36,6 @@ public abstract class Monster {
         + getClass().getSimpleName()
         + ", hp="
         + hp
-        + ", phyDmg="
-        + phyDmg
-        + ", magDmg="
-        + magDmg
         + ", phyDef="
         + phyDef
         + ", magDef="
@@ -47,14 +48,6 @@ public abstract class Monster {
   // getters
   public int getHp() {
     return hp;
-  }
-
-  public double getPhyDmg() {
-    return phyDmg;
-  }
-
-  public double getMagDmg() {
-    return magDmg;
   }
 
   public double getPhyDef() {

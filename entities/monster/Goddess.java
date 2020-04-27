@@ -3,14 +3,9 @@ package entities.monster;
 public class Goddess extends Monster {
 
   public Goddess(
-          int hp, double phyDmg, double magDmg,
-          double phyDef, double magDef, int expPer) {
-    super(hp, phyDmg, magDmg, phyDef, magDef, expPer);
-  }
-
-  @Override
-  public void attack() {
-    System.out.println("Goddess basic attack");
+          int hp, double phyDef,
+          double magDef, int expPer) {
+    super(hp, phyDef, magDef, expPer);
   }
 
   @Override

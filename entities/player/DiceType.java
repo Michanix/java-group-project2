@@ -9,11 +9,11 @@ public enum DiceType {
   D20("D20", 20) {};
 
   private final String diceName;
-  private final int sides;
+  private final int       sides;
 
   DiceType(String diceName, int sides) {
     this.diceName = diceName;
-    this.sides = sides;
+    this.sides    =    sides;
   }
 
   public int getSides() {

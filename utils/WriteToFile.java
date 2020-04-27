@@ -13,8 +13,6 @@ public class WriteToFile {
                 new FileOutputStream("players/players.txt", true), StandardCharsets.UTF_8))) {
       output.append(player.toString()).append("\r\n");
       System.out.println("Player " + player.getNickname() + " was created.");
-    } catch (FileNotFoundException e) {
-      System.err.println("File not found." + e);
     } catch (IOException e) {
       e.printStackTrace();
     }

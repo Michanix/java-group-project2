@@ -39,7 +39,7 @@ public class ReadFromFile {
       String line;
       while ((line = input.readLine()) != null) {
         if (line.contains(nickname)) {
-          // Some expensive Regex hacks to parse Player back to object
+          // Some expensive Regex hacks to parse Player params to List<String>
           // ~2ms to parse a line so its okay
           String[] tmp = line.split(",");
           Pattern rgx = Pattern.compile("(?>=(\\w*.\\w*))");

@@ -8,12 +8,12 @@ public enum WeaponType {
   WIZARDSTAFF("Wizard staff", 15, 45);
 
   private final String weapon;
-  private final int physDmg; // addition Physical dmg from weapon
-  private final int magicDmg;
+  private final int   physDmg; // addition Physical dmg from weapon
+  private final int   magicDmg;
 
   WeaponType(String weapon, int physDmg, int magicDmg) {
-    this.weapon = weapon;
-    this.physDmg = physDmg;
+    this.weapon   =   weapon;
+    this.physDmg  =  physDmg;
     this.magicDmg = magicDmg;
   }
 
