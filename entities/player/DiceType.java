@@ -21,7 +21,7 @@ public enum DiceType {
   }
 
   public int rollTheDie() {
-    return (int) (Math.random() * getSides());
+    return 1 + (int) (Math.random() * (getSides() - 1) + 1);
   }
 
   @Override

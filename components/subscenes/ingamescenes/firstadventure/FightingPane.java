@@ -18,12 +18,17 @@ public class FightingPane extends AbstracPane {
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack);
         });
-
+    System.out.println(player.getWeaponType());
+    System.out.println(player.getArmorType());
     physAttack.setOnMouseClicked(
         e -> {
-          int hp = monster.getHp();
-          int dmgDealt = monster.getPhyDef() - player.basicPhysAttack();
-          if (dmgDealt < 0) {
+          int playerDmg = player.basicPhysAttack();
+          int dmgDealt = playerDmg - monster.getPhyDef();
+          System.out.println("-------------------");
+          System.out.println("Monster phys def: "+ monster.getPhyDef());
+          System.out.println("Player phys attack: " + playerDmg);
+          System.out.println("Damage dealt= " + dmgDealt);
+          if (dmgDealt <= 0) {
             setCenter(
                 new Text(
                     String.format(
@@ -31,9 +36,9 @@ public class FightingPane extends AbstracPane {
                         monster.getClass().getSimpleName())));
           } else {
             monster.setHp(dmgDealt);
+            System.out.println("Current monster hp= " + monster.getHp());
             setCenter(new Text(String.format("You dealt %d damage", dmgDealt)));
           }
-          System.out.println("Current monster hp= " + hp);
         });
     addToActionMenu(nextBtn);
   }

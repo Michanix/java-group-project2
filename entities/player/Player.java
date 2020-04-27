@@ -69,14 +69,18 @@ public class Player {
   // Refer to DiceAction class for more information
   public int basicPhysAttack() {
     int extraDmg = getWeaponType().getPhysDmg();
-    return DiceAction.roll2Dices(DiceType.D6) + extraDmg;
+    int playerDmg = DiceAction.roll2Dices(DiceType.D6);
+    System.out.println("Weapong extra dmg= " + extraDmg);
+    System.out.println("Player actual dmg: " + playerDmg);
+    return playerDmg + extraDmg;
   }
 
   // Same as previous method, but the damage from magic attacks is higher
   // because...uhm...well...you know...magic and stuff
   public int basicMagAttack() {
     int extraDmg = getWeaponType().getMagicDmg();
-    return DiceAction.roll2Dices(DiceType.D12) + extraDmg;
+    int playerDmg = DiceAction.roll2Dices(DiceType.D12);
+    return playerDmg + extraDmg;
   }
 
   // Overrides

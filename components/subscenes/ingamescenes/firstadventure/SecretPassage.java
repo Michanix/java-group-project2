@@ -6,6 +6,8 @@ import entities.player.Player;
 import javafx.scene.text.Text;
 import utils.GetRandomType;
 
+// TODO: if player finds nothing new, do something
+
 public class SecretPassage extends AbstracPane {
 
   public SecretPassage(Player player, String textname) {

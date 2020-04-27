@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 import utils.GetRandomType;
 
 // TODO: proper Text display
-
+// TODO: if nothing new found, tell about it, lol
 public class LeftTurnPane extends AbstracPane {
 
   public LeftTurnPane(Player player, String textname) {
