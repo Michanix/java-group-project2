@@ -11,7 +11,7 @@ public class Main extends Application {
   public void start(Stage primaryStage) {
     StartGameManager startGameManager = new StartGameManager();
     AdventureManager adventureManager = new AdventureManager();
-    primaryStage = adventureManager.getStage();
+    primaryStage = startGameManager.getStage();
     primaryStage.show();
   }
 

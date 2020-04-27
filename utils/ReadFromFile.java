@@ -33,7 +33,7 @@ public class ReadFromFile {
 
   // Loading player from file based on nickname
   private static List<String> readPlayerParamsFromFile(String nickname) {
-    String path = "players/players.txt";
+    String path = "players.txt";
     List<String> playerParams = new ArrayList<>();
     try (BufferedReader input = new BufferedReader(new FileReader(path))) {
       String line;

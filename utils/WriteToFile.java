@@ -10,7 +10,7 @@ public class WriteToFile {
     try (Writer output =
         new BufferedWriter(
             new OutputStreamWriter(
-                new FileOutputStream("players/players.txt", true), StandardCharsets.UTF_8))) {
+                new FileOutputStream("players.txt", true), StandardCharsets.UTF_8))) {
       output.append(player.toString()).append("\r\n");
       System.out.println("Player " + player.getNickname() + " was created.");
     } catch (IOException e) {
