@@ -1,6 +1,12 @@
 package entities.player;
 
 public enum ArmorType {
+  CLOTHES("Clothes", 1, 1) {
+    @Override
+    public String getDescription() {
+      return "Regular clothes outfit that all beginners start with.";
+    }
+  },
   HEAVYARMOR("Heavy armor", 75, 30) {
     @Override
     public String getDescription() {
