@@ -1,6 +1,8 @@
 package components.subscenes.ingamescenes.firstadventure;
 
 import components.buttons.DefaultButton;
+import entities.monster.Monster;
+import entities.monster.Troll;
 import entities.player.Player;
 
 public class HelpVillagerPane extends AbstracPane {
@@ -9,7 +11,8 @@ public class HelpVillagerPane extends AbstracPane {
     DefaultButton next = new DefaultButton("Next");
     next.setOnMouseClicked(
         e -> {
-          getScene().setRoot(new FightTheTrollPane(player, "trollAttacks"));
+          Monster troll = new Troll(130, 30, 30, 300);
+          getScene().setRoot(new FightingPane(player, troll, "trollAttacks"));
         });
     addToActionMenu(next);
   }

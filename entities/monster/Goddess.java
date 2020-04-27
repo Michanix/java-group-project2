@@ -3,8 +3,8 @@ package entities.monster;
 public class Goddess extends Monster {
 
   public Goddess(
-          int hp, double phyDef,
-          double magDef, int expPer) {
+          int hp, int phyDef,
+          int magDef, int expPer) {
     super(hp, phyDef, magDef, expPer);
   }
 

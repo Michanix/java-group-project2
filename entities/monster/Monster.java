@@ -3,15 +3,17 @@ package entities.monster;
 import entities.player.DiceType;
 import utils.DiceAction;
 
+// TODO: turn into interface
+
 public abstract class Monster {
-  private final int         hp; // health
-  private final double  phyDef; // Defense against physical damage
-  private final double  magDef; // Same but magical
+  private int               hp; // health
+  private final int     phyDef; // Defense against physical damage
+  private final int     magDef; // Same but magical
   private final int     expPer; // experience per killed monster
 
   public Monster(
-          int hp, double phyDef,
-          double magDef, int expPer) {
+          int hp, int phyDef,
+          int magDef, int expPer) {
     this.hp     =     hp;
     this.phyDef = phyDef;
     this.magDef = magDef;
@@ -26,6 +28,11 @@ public abstract class Monster {
   public int basicMagAttack() {
     return DiceAction.roll2Dices(DiceType.D6);
   }
+
+  public void setHp(int dmg) {
+    this.hp -= dmg;
+  }
+
   // Special attack
   public abstract void specialAttack();
 
@@ -50,11 +57,11 @@ public abstract class Monster {
     return hp;
   }
 
-  public double getPhyDef() {
+  public int getPhyDef() {
     return phyDef;
   }
 
-  public double getMagDef() {
+  public int getMagDef() {
     return magDef;
   }
 

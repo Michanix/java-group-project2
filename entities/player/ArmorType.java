@@ -1,7 +1,7 @@
 package entities.player;
 
 public enum ArmorType {
-  HEAVYARMOR("Heavy armor") {
+  HEAVYARMOR("Heavy armor", 75, 30) {
     @Override
     public String getDescription() {
       return "Heavy armor is good at protecting against\n"
@@ -10,7 +10,7 @@ public enum ArmorType {
           + "to magical attacks.";
     }
   },
-  LIGHTARMOR("Light armor") {
+  LIGHTARMOR("Light armor", 50, 50) {
     @Override
     public String getDescription() {
       return "Light armor has a well balanced Physical\n"
@@ -19,7 +19,7 @@ public enum ArmorType {
           + "decide between Heavy Armor and Robe.";
     }
   },
-  ROBE("Robe") {
+  ROBE("Robe", 35, 70) {
     @Override
     public String getDescription() {
       return "Robes have a high magical defensive power,\n"
@@ -29,12 +29,24 @@ public enum ArmorType {
   };
 
   private final String armorType;
+  private final int      physDef;
+  private final int       magDef;
 
-  ArmorType(String armorType) {
+  ArmorType(String armorType, int physDef, int magDef) {
     this.armorType = armorType;
+    this.physDef   =   physDef;
+    this.magDef    =    magDef;
   }
 
   public abstract String getDescription();
+
+  public int getPhysDef() {
+    return physDef;
+  }
+
+  public int getMagDef() {
+    return magDef;
+  }
 
   @Override
   public String toString() {

@@ -10,14 +10,15 @@ import java.util.Objects;
 public class Player {
   private String       nickname;
   private int               exp; // player current experience
-  private double             hp; // Health
+  private int             hp; // Health
   private boolean         state; // Dead or alive?
   private boolean   inAdventure;
   private RaceType     raceType;
   private Abilities   abilities;
   private WeaponType weaponType;
   private ArmorType   armorType;
-
+  private int           physDef;
+  private int          magicDef;
   // Constructor for creating New Player
   private Player(String nickname, RaceType raceType, ArmorType armorType) {
              setNickname(nickname);
@@ -29,6 +30,8 @@ public class Player {
     this.abilities    = Abilities.initAbilities();
     this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
            setArmorType(armorType);
+    this.physDef      =         10;
+    this.magicDef     =          7;
   }
 
   // Constructor to load existing Player from file
@@ -44,6 +47,8 @@ public class Player {
     this.abilities   =  abilities;
     this.weaponType  = weaponType;
     this.armorType   =  armorType;
+                     setPhysDef();
+                    setMagicDef();
   }
 
 
@@ -94,6 +99,10 @@ public class Player {
         + weaponType
         + ", armorType="
         + armorType
+        + ", physDef="
+        + physDef
+        + ", magicDef="
+        + magicDef
         + '}';
   }
   // Getters and setters
@@ -117,6 +126,14 @@ public class Player {
 
   public void setExp(int exp) {
     this.exp = exp;
+  }
+
+  public int getHp() {
+    return hp;
+  }
+
+  public void setHp(int hp) {
+    this.hp = hp;
   }
 
   public boolean isState() {
@@ -165,5 +182,21 @@ public class Player {
 
   public void setArmorType(ArmorType armorType) {
     this.armorType = Objects.requireNonNull(armorType, "ArmorType cannot be null.");
+  }
+
+  public int getPhysDef() {
+    return physDef;
+  }
+
+  public int getMagicDef() {
+    return magicDef;
+  }
+
+  public void setPhysDef() {
+    this.physDef += armorType.getPhysDef();
+  }
+
+  public void setMagicDef() {
+    this.magicDef += armorType.getMagDef();
   }
 }
