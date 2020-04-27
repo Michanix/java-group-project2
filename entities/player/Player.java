@@ -3,6 +3,8 @@ package entities.player;
 // Making use of Static Factory method pattern
 // Will see how it plays out tho...
 
+import utils.DiceAction;
+
 import java.util.Objects;
 
 public class Player {
@@ -56,6 +58,21 @@ public class Player {
     return new Player(nickname, exp, raceType, abilities, weaponType, armorType);
   }
 
+  // attack methods
+  // Damage from basic attacks calculated as outcome from
+  // rolling D6 two times plus the type of Weapon the player has.
+  // Refer to DiceAction class for more information
+  public int basicPhysAttack() {
+    int extraDmg = getWeaponType().getPhysDmg();
+    return DiceAction.roll2Dices(DiceType.D6) + extraDmg;
+  }
+
+  // Same as previous method, but the damage from magic attack can be higher
+  public int basicMagAttack() {
+    int extraDmg = getWeaponType().getMagicDmg();
+    return DiceAction.roll2Dices(DiceType.D8) + extraDmg;
+  }
+
   // Overrides
   @Override
   public String toString() {
@@ -89,7 +106,6 @@ public class Player {
     } else if (nickname.length() < 3 | nickname.length() > 12) {
       throw new IllegalArgumentException("Nickname length should be from 3 to 12 characters.");
     } else {
-      // Neat trick from Effective Java book
       this.nickname = nickname;
     }
   }

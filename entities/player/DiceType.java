@@ -1,64 +1,28 @@
 package entities.player;
 
 public enum DiceType {
-  D4("D4") {
-    public int sides() {
-      return 4;
-    }
-    public int rollTheDie() {
-      return (int) (Math.random() * sides());
-    }
-  },
-  D6("D6") {
-    public int sides() {
-      return 6;
-    }
-    public int rollTheDie() {
-      return (int) (Math.random() * sides());
-    }
-  },
-  D8("D8") {
-    public int sides() {
-      return 8;
-    }
-    public int rollTheDie() {
-      return (int) (Math.random() * sides());
-    }
-  },
-  D10("D10") {
-    public int sides() {
-      return 10;
-    }
-    public int rollTheDie() {
-      return (int) (Math.random() * sides());
-    }
-  },
-  D12("D12") {
-    public int sides() {
-      return 12;
-    }
-    public int rollTheDie() {
-      return (int) (Math.random() * sides());
-    }
-  },
-  D20("D20") {
-    public int sides() {
-      return 20;
-    }
-    public int rollTheDie() {
-      return (int) (Math.random() * sides());
-    }
-  };
+  D4("D4", 4) {},
+  D6("D6", 6) {},
+  D8("D8", 8) {},
+  D10("D10", 10) {},
+  D12("D12", 12) {},
+  D20("D20", 20) {};
 
   private final String diceName;
+  private final int sides;
 
-  DiceType(String diceName) {
+  DiceType(String diceName, int sides) {
     this.diceName = diceName;
+    this.sides = sides;
   }
 
-  public abstract int sides();
+  public int getSides() {
+    return sides;
+  }
 
-  public abstract int rollTheDie();
+  public int rollTheDie() {
+    return (int) (Math.random() * getSides());
+  }
 
   @Override
   public String toString() {
