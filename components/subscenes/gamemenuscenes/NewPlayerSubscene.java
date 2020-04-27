@@ -26,14 +26,14 @@ public class NewPlayerSubscene extends AbstractSubScene {
   private final TextFlow displayRaceText = new TextFlow(raceDisc);
   private final Text err = new Text();
   // Choices
-  private final ChoiceBox<ArmorType> armorChoice = new ChoiceBox<>();
   private final ChoiceBox<RaceType> raceChoice = new ChoiceBox<>();
   // Textfields
   private final TextField nicknameField = new TextField();
   // Labels
   private final Label nicknameLabel = new Label("Nickname: ");
   private final Tooltip nicknameTT = new Tooltip("No longer than 12 characters");
-  private final Label armorLabel = new Label("Choose armor: ");
+  private final Label armorLabel = new Label("Choose armor:\nClothes");
+  private final Tooltip armorTT = new Tooltip("New player start in regular clothes");
   private final Label raceLabel = new Label("Choose race: ");
   private final Label weaponLabel = new Label("Choose weapon:\n Bare Hands");
   private final Tooltip weaponTT = new Tooltip("New players start without actual weapon");
@@ -42,7 +42,6 @@ public class NewPlayerSubscene extends AbstractSubScene {
   private final DefaultButton continueBtn = new DefaultButton("Continue");
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
-  private final ArmorType[] armorTypes = ArmorType.values();
   private final AnchorPane subScene;
 
   public NewPlayerSubscene(Pane root) {
@@ -55,9 +54,7 @@ public class NewPlayerSubscene extends AbstractSubScene {
     GridPane view = new GridPane();
     int width = 130;
 
-    armorChoice.getItems().addAll(armorTypes);
     raceChoice.getItems().addAll(raceTypes);
-    armorChoice.setPrefWidth(width);
     raceChoice.setPrefWidth(width);
     nicknameField.setPrefWidth(width);
 
@@ -69,20 +66,13 @@ public class NewPlayerSubscene extends AbstractSubScene {
             (observable, oldValue, newValue) -> {
               raceDisc.setText(String.valueOf(raceTypes[newValue.intValue()].getDescription()));
             });
-    armorChoice
-        .getSelectionModel()
-        .selectedIndexProperty()
-        .addListener(
-            (observable, oldValue, newValue) -> {
-              armorDisc.setText(String.valueOf(armorTypes[newValue.intValue()].getDescription()));
-            });
     // Creating and saving new Player to a file
     createBtn.setOnMouseClicked(
         e -> {
           try {
             newPlayer =
                 Player.createNewPlayer(
-                    nicknameField.getText(), raceChoice.getValue(), armorChoice.getValue());
+                    nicknameField.getText(), raceChoice.getValue(), ArmorType.CLOTHES);
             WriteToFile.writePlayerToFile(newPlayer);
             Text success = new Text("Character has been created!");
             success.setFill(Color.GREEN);
@@ -119,8 +109,7 @@ public class NewPlayerSubscene extends AbstractSubScene {
     // armor
     displayArmorText.setTextAlignment(TextAlignment.LEFT);
     view.add(armorLabel, 1, 6);
-    view.add(armorChoice, 1, 7);
-    view.add(displayArmorText, 2, 7);
+    armorLabel.setTooltip(armorTT);
     // weapon
     view.add(weaponLabel, 1, 8);
     weaponLabel.setTooltip(weaponTT);
