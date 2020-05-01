@@ -6,10 +6,13 @@ import entities.player.Player;
 import javafx.scene.control.TextArea;
 
 // TODO: refactor calculating values for damage
+// TODO: refactoring - Extract Functions
 
 public class FightingPane extends AbstracPane {
   private final DefaultButton physAttack = new DefaultButton("Physical attack");
+  private final DefaultButton magAttack = new DefaultButton("Magical attack");
   private final DefaultButton nextBtn = new DefaultButton("Next");
+  private final FightPaneController fightController = new FightPaneController();
 
   public FightingPane(Player player, Monster monster, String textname) {
     super(player, textname);
@@ -19,29 +22,14 @@ public class FightingPane extends AbstracPane {
           textArea.appendText("You are analysing your situation...\n");
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack);
+          addToActionMenu(magAttack);
         });
     System.out.println(player.getWeaponType());
     System.out.println(player.getArmorType());
-    physAttack.setOnMouseClicked(
-        e -> {
-          int playerDmg = player.basicPhysAttack();
-          int dmgDealt = playerDmg - monster.getPhyDef();
-          String msg;
-          System.out.println("-------------------");
-          System.out.println("Monster phys def: " + monster.getPhyDef());
-          System.out.println("Player phys attack: " + playerDmg);
-          System.out.println("Damage dealt= " + dmgDealt);
-          if (dmgDealt <= 0) {
-            msg =
-                String.format(
-                    "You couldn't get through %s defense.\n", monster.getClass().getSimpleName());
-          } else {
-            monster.setHp(dmgDealt);
-            System.out.println("Current monster hp= " + monster.getHp());
-            msg = String.format("You dealt %d damage\n", dmgDealt);
-          }
-          textArea.appendText(msg);
-        });
+
+    fightController.physAttackController(physAttack, player, monster, textArea);
+    fightController.magAttackController(magAttack, player, monster, textArea);
+
     textArea.autosize();
     textArea.setEditable(false);
     setCenter(textArea);
