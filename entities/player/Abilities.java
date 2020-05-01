@@ -44,7 +44,7 @@ public class Abilities {
 
   // "Roll four 6-sided dice and record the total of the highest three dice"
   private int generateRndAbilityVal() {
-    int d20 = 20;
+    int d20 = DiceType.D20.getSides();
     int[] values = new int[4];
     for (int i = 0; i < 4; i++) {
       int x = (int) (Math.random() * d20 + 1);

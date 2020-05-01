@@ -79,7 +79,7 @@ public class Player {
   // because...uhm...well...you know...magic and stuff
   public int basicMagAttack() {
     int extraDmg = getWeaponType().getMagicDmg();
-    int playerDmg = DiceAction.roll2Dices(DiceType.D12);
+    int playerDmg = DiceAction.roll2Dices(DiceType.D8);
     return playerDmg + extraDmg;
   }
 
