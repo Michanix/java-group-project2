@@ -18,6 +18,7 @@ public class TrapEscapePane extends AbstracPane {
         e -> {
           getScene().setRoot(new StartPane(player, "begining"));
         });
+    
     addToActionMenu(checkBtn);
     addToActionMenu(backButton);
   }
