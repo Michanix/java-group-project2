@@ -3,18 +3,20 @@ package components.subscenes.ingamescenes.firstadventure;
 import components.buttons.DefaultButton;
 import entities.monster.Monster;
 import entities.player.Player;
-import javafx.scene.text.Text;
+import javafx.scene.control.TextArea;
 
 // TODO: refactor calculating values for damage
 
 public class FightingPane extends AbstracPane {
+  private final DefaultButton physAttack = new DefaultButton("Physical attack");
+  private final DefaultButton nextBtn = new DefaultButton("Next");
+
   public FightingPane(Player player, Monster monster, String textname) {
     super(player, textname);
-    DefaultButton physAttack = new DefaultButton("Physical attack");
-    DefaultButton nextBtn = new DefaultButton("Next");
+    TextArea textArea = new TextArea();
     nextBtn.setOnMouseClicked(
         e -> {
-          setCenter(new Text("You are analysing your situation..."));
+          textArea.appendText("You are analysing your situation...\n");
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack);
         });
@@ -24,22 +26,25 @@ public class FightingPane extends AbstracPane {
         e -> {
           int playerDmg = player.basicPhysAttack();
           int dmgDealt = playerDmg - monster.getPhyDef();
+          String msg;
           System.out.println("-------------------");
-          System.out.println("Monster phys def: "+ monster.getPhyDef());
+          System.out.println("Monster phys def: " + monster.getPhyDef());
           System.out.println("Player phys attack: " + playerDmg);
           System.out.println("Damage dealt= " + dmgDealt);
           if (dmgDealt <= 0) {
-            setCenter(
-                new Text(
-                    String.format(
-                        "You couldn't get through %s defense.",
-                        monster.getClass().getSimpleName())));
+            msg =
+                String.format(
+                    "You couldn't get through %s defense.\n", monster.getClass().getSimpleName());
           } else {
             monster.setHp(dmgDealt);
             System.out.println("Current monster hp= " + monster.getHp());
-            setCenter(new Text(String.format("You dealt %d damage", dmgDealt)));
+            msg = String.format("You dealt %d damage\n", dmgDealt);
           }
+          textArea.appendText(msg);
         });
+    textArea.autosize();
+    textArea.setEditable(false);
+    setCenter(textArea);
     addToActionMenu(nextBtn);
   }
 }
