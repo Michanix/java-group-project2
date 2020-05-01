@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 public class FightPaneController {
   private final Monster monster;
   private final Player   player;
+  private String msg;
 
   public FightPaneController(Monster monster, Player player) {
     this.monster = monster;
@@ -19,7 +20,6 @@ public class FightPaneController {
     physDmgBtn.setOnMouseClicked(
         e -> {
           int dmgDealt = calcPhysDmg();
-          String msg; // Displayed message in TextArea
           if (dmgDealt <= 0) {
             msg =
                 String.format(
@@ -36,7 +36,6 @@ public class FightPaneController {
     magDmgBtn.setOnMouseClicked(
         e -> {
           int dmgDealt = calcMagicDmg();
-          String msg; // Displayed message in TextArea
           if (dmgDealt <= 0) {
             msg =
                 String.format(
