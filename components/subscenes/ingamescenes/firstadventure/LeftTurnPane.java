@@ -13,9 +13,10 @@ public class LeftTurnPane extends AbstracPane {
   public LeftTurnPane(Player player, String textname) {
     super(player, textname);
     WeaponType rndWeapon = GetRandomType.randomEnum(WeaponType.class);
-    setBottom(new Text(String.format("You got %s", rndWeapon.toString())));
+    setBottom(new Text(String.format("You got %s", rndWeapon.getWeapon())));
     player.setWeaponType(rndWeapon);
     GoBackButton backButton = new GoBackButton();
+
     backButton.setOnMouseClicked(
         e -> {
           getScene().setRoot(new StartPane(player, "begining"));

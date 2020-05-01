@@ -16,6 +16,7 @@ public class GoddessEncounterPane extends AbstracPane {
     MonsterFactory monsterFactory = new MonsterFactory();
     DefaultButton betBtn = new DefaultButton("Bet your luck");
     GoBackButton backBtn = new GoBackButton();
+
     betBtn.setOnMouseClicked(
         e -> {
           int result = DiceAction.roll2Dices(DiceType.D10);

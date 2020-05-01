@@ -16,6 +16,7 @@ public class SecretPassage extends AbstracPane {
     setBottom(new Text(String.format("You got %s", rndArmor.toString())));
     player.setArmorType(rndArmor);
     GoBackButton backButton = new GoBackButton();
+
     backButton.setOnMouseClicked(
         e -> {
           getScene().setRoot(new StartPane(player, "begining"));
