@@ -18,8 +18,7 @@ public class FightPaneController {
   public void physAttackController(Button physDmgBtn, TextArea textArea) {
     physDmgBtn.setOnMouseClicked(
         e -> {
-          int playerDmg = player.basicPhysAttack();
-          int dmgDealt = playerDmg - monster.getPhyDef();
+          int dmgDealt = calcPhysDmg();
           String msg; // Displayed message in TextArea
           if (dmgDealt <= 0) {
             msg =
@@ -36,8 +35,7 @@ public class FightPaneController {
   public void magAttackController(Button magDmgBtn, TextArea textArea) {
     magDmgBtn.setOnMouseClicked(
         e -> {
-          int playerDmg = player.basicMagAttack();
-          int dmgDealt = playerDmg - monster.getMagDef();
+          int dmgDealt = calcMagicDmg();
           String msg; // Displayed message in TextArea
           if (dmgDealt <= 0) {
             msg =
@@ -50,4 +48,16 @@ public class FightPaneController {
           textArea.appendText(msg);
         });
   }
+
+
+  // Two functions below calculate how much damage
+  // Player dealt to Monster
+  private int calcPhysDmg() {
+      return player.basicPhysAttack() - monster.getPhyDef();
+  }
+
+  private int calcMagicDmg() {
+      return player.basicMagAttack() - monster.getMagDef();
+  }
+
 }
