@@ -5,15 +5,14 @@ import entities.player.Player;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-
 public class FightPaneController {
   private final Monster monster;
   private final Player   player;
-  private String msg;
+  private String            msg;
 
   public FightPaneController(Monster monster, Player player) {
     this.monster = monster;
-    this.player = player;
+    this.player  =  player;
   }
 
   public void physAttackController(Button physDmgBtn, TextArea textArea) {
@@ -48,15 +47,13 @@ public class FightPaneController {
         });
   }
 
-
   // Two functions below calculate how much damage
   // Player dealt to Monster
   private int calcPhysDmg() {
-      return player.basicPhysAttack() - monster.getPhyDef();
+    return player.basicPhysAttack() - monster.getPhyDef();
   }
 
   private int calcMagicDmg() {
-      return player.basicMagAttack() - monster.getMagDef();
+    return player.basicMagAttack() - monster.getMagDef();
   }
-
 }
