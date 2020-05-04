@@ -1,3 +1,6 @@
+Victory!
 You are hailed as a village hero!
 It seems that your stats have gone up.
 Go on, choose your next adventure.
+
+Will you go on, start again or quit?

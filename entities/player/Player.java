@@ -30,8 +30,8 @@ public class Player {
     this.abilities    = Abilities.initAbilities();
     this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
            setArmorType(armorType);
-    this.physDef      =         10;
-    this.magicDef     =          7;
+                      setPhysDef();
+                     setMagicDef();
   }
 
   // Constructor to load existing Player from file
@@ -70,8 +70,6 @@ public class Player {
   public int basicPhysAttack() {
     int extraDmg = getWeaponType().getPhysDmg();
     int playerDmg = DiceAction.roll2Dices(DiceType.D6);
-    System.out.println("Weapong extra dmg= " + extraDmg);
-    System.out.println("Player actual dmg: " + playerDmg);
     return playerDmg + extraDmg;
   }
 
@@ -136,8 +134,8 @@ public class Player {
     return hp;
   }
 
-  public void setHp(int hp) {
-    this.hp = hp;
+  public void setHp(int dmg) {
+    this.hp -= dmg;
   }
 
   public boolean isState() {

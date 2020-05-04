@@ -3,7 +3,6 @@ package components.subscenes.ingamescenes.firstadventure;
 import components.actionmenu.ActionMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
-import javafx.scene.control.Button;
 
 // TODO: more generic access to texts
 
@@ -31,12 +30,5 @@ public class StartPane extends AbstracPane {
 
     actionMenu.getChildren().addAll(leftBtn, rightBtn, forwardBtn);
     setRight(actionMenu);
-  }
-
-  public void setTurnPane(Button button, AbstracPane pane) {
-    button.setOnMouseClicked(
-        e -> {
-          getScene().setRoot(pane);
-        });
   }
 }

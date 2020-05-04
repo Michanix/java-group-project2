@@ -4,7 +4,7 @@ import entities.player.DiceType;
 import utils.DiceAction;
 
 /*
-Troll has very strong physically, but lacks magic damage.
+Troll is very strong physically, but lacks magical abilities.
  */
 
 public class Troll extends Monster {
