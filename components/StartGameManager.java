@@ -14,8 +14,8 @@ public class StartGameManager {
   private final Stage stage;
 
   public StartGameManager() {
-    int HEIGHT = 480;
     int WIDTH = 800;
+    int HEIGHT = 480;
     mainPane = new AnchorPane();
     Scene scene = new Scene(mainPane, WIDTH, HEIGHT);
     stage = new Stage();

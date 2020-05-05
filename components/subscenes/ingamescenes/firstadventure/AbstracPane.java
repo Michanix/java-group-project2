@@ -1,6 +1,8 @@
 package components.subscenes.ingamescenes.firstadventure;
 
 import components.actionmenu.ActionMenu;
+import components.actionmenu.BottomMenu;
+import components.actionmenu.TopMenu;
 import entities.player.Player;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -11,16 +13,24 @@ import textfiles.TextAccessLayer;
 
 public abstract class AbstracPane extends BorderPane {
   private final ActionMenu actionMenu = new ActionMenu();
+  private final BottomMenu bottomMenu = new BottomMenu();
 
   public AbstracPane(Player player, String textname) {
     TextAccessLayer textDAO = new TextAccessLayer("src/textfiles/firstadventure/texts");
+    TopMenu topMenu = new TopMenu(player);
 
     setCenter(textDAO.getText(textname));
     setRight(actionMenu);
+    setBottom(bottomMenu);
+    setTop(topMenu);
   }
 
-  public void addToActionMenu(Node node) {
-    actionMenu.getChildren().add(node);
+  public void addToActionMenu(Node... node) {
+    actionMenu.getChildren().addAll(node);
+  }
+
+  public void addToBottomMenu(Node... node) {
+    bottomMenu.getChildren().addAll(node);
   }
 
   public ActionMenu getActionMenu() {

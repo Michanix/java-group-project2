@@ -18,7 +18,6 @@ import javafx.scene.text.TextFlow;
 import utils.WriteToFile;
 
 public class NewPlayerSubscene extends AbstractSubScene {
-  private Player newPlayer;
   // Texts
   private final Text armorDisc = new Text();
   private final Text raceDisc = new Text();
@@ -43,6 +42,7 @@ public class NewPlayerSubscene extends AbstractSubScene {
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
   private final AnchorPane subScene;
+  private Player newPlayer;
 
   public NewPlayerSubscene(Pane root) {
     super(root);
@@ -86,16 +86,17 @@ public class NewPlayerSubscene extends AbstractSubScene {
           }
         });
 
-    createBtn.setOnMouseReleased(e -> {
-      view.getChildren().remove(err);
-    });
+    createBtn.setOnMouseReleased(
+        e -> {
+          view.getChildren().remove(err);
+        });
 
     continueBtn.setOnMouseClicked(
-            e -> {
-              System.out.println(newPlayer);
-              ShowCurrentPlayerScene showPlayer = new ShowCurrentPlayerScene(subScene, newPlayer);
-              subScene.getChildren().add(showPlayer);
-            });
+        e -> {
+          System.out.println(newPlayer);
+          ShowNewPlayerScene showPlayer = new ShowNewPlayerScene(subScene, newPlayer);
+          subScene.getChildren().add(showPlayer);
+        });
     // setup
     // name
     nicknameField.setTooltip(nicknameTT);

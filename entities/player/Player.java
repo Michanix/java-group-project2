@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Player {
   private String       nickname;
   private int               exp; // player current experience
-  private int             hp; // Health
+  private int                hp; // Health
   private boolean         state; // Dead or alive?
   private boolean   inAdventure;
   private RaceType     raceType;
@@ -19,6 +19,7 @@ public class Player {
   private ArmorType   armorType;
   private int           physDef;
   private int          magicDef;
+
   // Constructor for creating New Player
   private Player(String nickname, RaceType raceType, ArmorType armorType) {
              setNickname(nickname);

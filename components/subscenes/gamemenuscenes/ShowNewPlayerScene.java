@@ -11,17 +11,18 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowCurrentPlayerScene extends AbstractSubScene {
+public class ShowNewPlayerScene extends AbstractSubScene {
 
-  public ShowCurrentPlayerScene(Pane root, Player player) {
+  public ShowNewPlayerScene(Pane root, Player player) {
     super(root);
-    String abilities = String.format(
-            "wisdom:         %d\n" +
-            "strength:       %d\n" +
-            "charisma:       %d\n" +
-            "dexterity:      %d\n" +
-            "constitution:   %d\n" +
-            "intelligence:     %d",
+    String abilities =
+        String.format(
+            "wisdom:         %d\n"
+                + "strength:       %d\n"
+                + "charisma:       %d\n"
+                + "dexterity:      %d\n"
+                + "constitution:   %d\n"
+                + "intelligence:     %d",
             player.getAbilities().getWisdom(),
             player.getAbilities().getStrength(),
             player.getAbilities().getCharisma(),
@@ -46,7 +47,7 @@ public class ShowCurrentPlayerScene extends AbstractSubScene {
 
     continueBtn.setOnMouseClicked(
         e -> {
-          AdventureMenuSubScene adventureMenu = new AdventureMenuSubScene(subScene);
+          AdventureMenuSubScene adventureMenu = new AdventureMenuSubScene(subScene, player);
           subScene.getChildren().add(adventureMenu);
         });
 

@@ -5,8 +5,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public abstract class AbstractSubScene extends SubScene {
-    public AbstractSubScene(Pane root) {
-        super(new AnchorPane(), root.getWidth(), root.getHeight());
-    }
-
+  public AbstractSubScene(Pane root) {
+    super(new AnchorPane(), root.getWidth(), root.getHeight());
+  }
 }

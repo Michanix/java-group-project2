@@ -1,6 +1,5 @@
 package components.subscenes.ingamescenes.firstadventure;
 
-import components.actionmenu.ActionMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 
@@ -10,7 +9,6 @@ public class StartPane extends AbstracPane {
 
   public StartPane(Player player, String textname) {
     super(player, textname);
-    ActionMenu actionMenu = new ActionMenu();
     DefaultButton rightBtn = new DefaultButton("right");
     DefaultButton leftBtn = new DefaultButton("left");
     DefaultButton forwardBtn = new DefaultButton("forward");
@@ -28,7 +26,6 @@ public class StartPane extends AbstracPane {
           getScene().setRoot(new ForwardPane(player, "forward"));
         });
 
-    actionMenu.getChildren().addAll(leftBtn, rightBtn, forwardBtn);
-    setRight(actionMenu);
+    addToActionMenu(leftBtn, rightBtn, forwardBtn);
   }
 }

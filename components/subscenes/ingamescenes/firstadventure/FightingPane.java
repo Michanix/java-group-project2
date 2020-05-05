@@ -7,19 +7,25 @@ import entities.player.DiceType;
 import entities.player.Player;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import utils.DiceAction;
 
-
 // TODO: split logic and everything else...
+// TODO: link css
+// Attention! Spaghetti code below!
 
 public class FightingPane extends AbstracPane {
   private final DefaultButton physAttack = new DefaultButton("Physical attack");
   private final DefaultButton magAttack = new DefaultButton("Magical attack");
   private final NextButton nextBtn = new NextButton();
-  private final TextArea textArea = new TextArea();
+  private final TextArea textArea = new TextArea(); // Where combat actions are displayed
   private final Player player;
   private final Monster monster;
-  private String msg;
+  private final Text playerHP = new Text();
+  private final Text monsterHP = new Text();
+  private String msg; // Message that is being displayed
 
   public FightingPane(Player player, Monster monster, String textname) {
     super(player, textname);
@@ -28,17 +34,33 @@ public class FightingPane extends AbstracPane {
 
     nextBtn.setOnMouseClicked(
         e -> {
-          textArea.appendText("You are analysing your situation...\n");
+          textArea.appendText(
+              String.format("%s strikes first...\n\n", monster.getClass().getSimpleName()));
           setCenter(textArea);
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack);
           addToActionMenu(magAttack);
         });
 
-    textArea.autosize();
+    // styling
+    textArea.setMaxSize(450, 300);
+    textArea.setWrapText(true);
     textArea.setEditable(false);
+    textArea.setStyle(
+        "-fx-font-family: Roboto;"
+            + "-fx-font-size: 14px;"
+            + "-fx-background-color: blue;"
+            + "-fx-control-inner-background: #87ccbe;");
 
+    playerHP.setFont(new Font(24));
+    playerHP.setFill(Color.BLUE);
+
+    monsterHP.setFont(new Font(24));
+    monsterHP.setFill(Color.RED);
+
+    // Adding stuff to the panels
     addToActionMenu(nextBtn);
+    addToBottomMenu(playerHP, monsterHP);
 
     physAttackController(physAttack);
     magAttackController(magAttack);
@@ -48,20 +70,22 @@ public class FightingPane extends AbstracPane {
     physDmgBtn.setOnMouseClicked(
         e -> {
           if (monster.getHp() < 0) {
-            msg = "Victory!\n";
+            victory();
           } else if (player.getHp() < 0) {
-            msg = "You died.\n";
+            defeat();
           } else {
             int dmgDealt = calcPlayerPhysDmg();
             if (dmgDealt <= 0) {
               msg =
                   String.format(
-                      "You couldn't get through %s defense.\n", monster.getClass().getSimpleName());
+                      "You couldn't get through %s defense.\n\n",
+                      monster.getClass().getSimpleName());
             } else {
-              msg = String.format("You dealt %d physical damage\n", dmgDealt);
+              msg = String.format("You dealt %d physical damage\n\n", dmgDealt);
               monster.setHp(dmgDealt);
             }
           }
+          updateMonsterHp();
           textArea.appendText(msg);
         });
 
@@ -75,21 +99,22 @@ public class FightingPane extends AbstracPane {
     magDmgBtn.setOnMouseClicked(
         e -> {
           if (monster.getHp() < 0) {
-            msg = "Victory!\n";
-
+            victory();
           } else if (player.getHp() < 0) {
-            msg = "You died.\n";
+            defeat();
           } else {
             int dmgDealt = calcPlayerMagDmg();
             if (dmgDealt <= 0) {
               msg =
                   String.format(
-                      "You couldn't get through %s defense.\n", monster.getClass().getSimpleName());
+                      "You couldn't get through %s defense.\n\n",
+                      monster.getClass().getSimpleName());
             } else {
-              msg = String.format("You dealt %d magical damage\n", dmgDealt);
+              msg = String.format("You dealt %d magical damage\n\n", dmgDealt);
               monster.setHp(dmgDealt);
             }
           }
+          updateMonsterHp();
           textArea.appendText(msg);
         });
 
@@ -99,6 +124,39 @@ public class FightingPane extends AbstracPane {
         });
   }
 
+  // helper functions
+  private void victory() {
+    msg = "Victory!\n";
+    player.setExp(monster.getExpPer());
+    DefaultButton next2 = new DefaultButton("Next");
+    next2.setOnMouseClicked(
+        e -> {
+          getScene().setRoot(new EndPane(player, "trollSlayed"));
+        });
+    getActionMenu().getChildren().removeAll(physAttack, magAttack);
+    getActionMenu().getChildren().add(next2);
+  }
+
+  private void defeat() {
+    msg = "You died.\n";
+    DefaultButton next2 = new DefaultButton("Next");
+    next2.setOnMouseClicked(
+        e -> {
+          getScene().setRoot(new EndPane(player, "playerDied"));
+        });
+    getActionMenu().getChildren().removeAll(physAttack, magAttack);
+    getActionMenu().getChildren().add(next2);
+  }
+
+  private void updatePlayerHp() {
+    playerHP.setText(String.format("Player HP: %d", player.getHp()));
+  }
+
+  private void updateMonsterHp() {
+    monsterHP.setText(
+        String.format("%s HP: %d", monster.getClass().getSimpleName(), monster.getHp()));
+  }
+
   private void monsterAttack() {
     try {
       Thread.sleep(500);
@@ -106,6 +164,7 @@ public class FightingPane extends AbstracPane {
     } catch (InterruptedException interruptedException) {
       interruptedException.printStackTrace();
     }
+    updatePlayerHp();
     textArea.appendText(msg);
   }
   // Two functions below calculate how much damage
@@ -129,17 +188,19 @@ public class FightingPane extends AbstracPane {
     String msg;
     if (luck > 50) {
       dmg = monster.basicPhysAttack() - player.getPhysDef();
-      msg = String.format("%s dealt %d physical damage\n", monsterName, dmg);
+      msg = String.format("%s dealt %d physical damage\n\n", monsterName, dmg);
     } else {
       dmg = monster.basicMagAttack() - player.getMagicDef();
-      msg = String.format("%s dealt %d magical damage\n", monsterName, dmg);
+      msg = String.format("%s dealt %d magical damage\n\n", monsterName, dmg);
     }
 
     if (dmg < 0) {
-      msg = String.format("%s couldn't get throught your defense\n", monsterName);
+      msg =
+          String.format("%s attacked you, but couldn't get through your defense\n\n", monsterName);
+    } else {
+      player.setHp(dmg);
     }
 
-    player.setHp(dmg);
     return msg;
   }
 }

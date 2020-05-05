@@ -12,12 +12,12 @@ public class EndPane extends AbstracPane {
     NextButton nextBtn = new NextButton();
     ExitButton exitBtn = new ExitButton();
 
-    nextBtn.setOnMouseClicked(e -> {
-      StartGameManager startGameManager = new StartGameManager();
-      startGameManager.startGameMan((Stage) this.getScene().getWindow());
-    });
+    nextBtn.setOnMouseClicked(
+        e -> {
+          StartGameManager startGameManager = new StartGameManager();
+          startGameManager.startGameMan((Stage) this.getScene().getWindow());
+        });
 
-    addToActionMenu(nextBtn);
-    addToActionMenu(exitBtn);
+    addToActionMenu(nextBtn, exitBtn);
   }
 }

@@ -20,7 +20,6 @@ public class ForwardPane extends AbstracPane {
           getScene().setRoot(new HelpVillagerPane(player, "helpVillager"));
         });
 
-    addToActionMenu(ignoreBtn);
-    addToActionMenu(agreeBtn);
+    addToActionMenu(ignoreBtn, agreeBtn);
   }
 }

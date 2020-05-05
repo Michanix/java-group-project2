@@ -20,11 +20,11 @@ public class GoddessEncounterPane extends AbstracPane {
     betBtn.setOnMouseClicked(
         e -> {
           int result = DiceAction.roll2Dices(DiceType.D10);
-          if (result < 60) {
+          if (result < 40) {
             Monster goddess = monsterFactory.createMonster(MonsterType.GODDESS);
             getScene().setRoot(new FightingPane(player, goddess, "goddessAttacks"));
           } else {
-            System.out.println("you won and she let you live");
+            getScene().setRoot(new WonBetPane(player, "wonBet"));
           }
         });
 
@@ -33,7 +33,6 @@ public class GoddessEncounterPane extends AbstracPane {
           getScene().setRoot(new ForwardPane(player, "forward"));
         });
 
-    addToActionMenu(betBtn);
-    addToActionMenu(backBtn);
+    addToActionMenu(betBtn, backBtn);
   }
 }
