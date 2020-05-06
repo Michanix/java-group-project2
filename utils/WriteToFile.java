@@ -15,8 +15,8 @@ Use of Files util is justified when dealing with small files.
  */
 
 public class WriteToFile {
-  private static final Path    DESTINATION_FILE = Path.of("players.txt");
-  private static final Charset ENCODING         = StandardCharsets.UTF_8;
+  private static final Path DESTINATION_FILE = Path.of("players.txt");
+  private static final Charset ENCODING = StandardCharsets.UTF_8;
 
   public static void writePlayerToFile(Player player) {
     List<String> nicknames = ReadFromFile.readNicknames();
@@ -40,12 +40,14 @@ public class WriteToFile {
   private static void findAndUpdate(Player player) {
     try {
       List<String> listOfPlayer = Files.readAllLines(DESTINATION_FILE, ENCODING);
+      System.out.println(player.getId().toString());
       for (String p : listOfPlayer) {
-        if (p.contains(player.getNickname())) {
+        if (p.contains(player.getId().toString())) {
           listOfPlayer.set(listOfPlayer.indexOf(p), player.toString());
+          System.out.println("Player entry has been updated.");
         }
-        Files.write(DESTINATION_FILE, listOfPlayer, ENCODING);
       }
+      Files.write(DESTINATION_FILE, listOfPlayer, ENCODING);
     } catch (IOException ex) {
       ex.printStackTrace();
     }
