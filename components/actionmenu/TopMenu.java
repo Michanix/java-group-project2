@@ -1,9 +1,8 @@
 package components.actionmenu;
 
 import entities.player.Player;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import utils.WriteToFile;
 
 public class TopMenu extends MenuBar {
   public TopMenu(Player player) {
@@ -12,29 +11,44 @@ public class TopMenu extends MenuBar {
     Menu abilities = new Menu("Abilities");
     Menu health = new Menu("Health");
     Menu experience = new Menu("Experience");
+    Menu stats = new Menu("Stats");
     Menu damage = new Menu("Damage");
     Menu defense = new Menu("Defense");
+    Menu settings = new Menu("Settings");
 
     MenuItem armorItem = new MenuItem(player.getArmorType().toString());
     MenuItem weaponItem = new MenuItem(player.getWeaponType().toString());
     MenuItem abilitiesItems = new MenuItem(formatAbilities(player));
     MenuItem hpItem = new MenuItem(String.valueOf(player.getHp()));
     MenuItem expItem = new MenuItem(String.valueOf(player.getExp()));
-    MenuItem physDefItem = new MenuItem(String.format("Physical defense: %d",player.getPhysDef()));
-    MenuItem magDefItem = new MenuItem(String.format("Magical defense: %d",player.getMagicDef()));
-    MenuItem dmgItem = new MenuItem(
-            "Damage calculated based\n" +
-            " on D6 and D8 dices.");
+
+    // Stats
+    MenuItem physDefItem = new MenuItem(String.format("Physical: %d", player.getPhysDef()));
+    MenuItem magDefItem = new MenuItem(String.format("Magical: %d", player.getMagicDef()));
+    MenuItem physDmgItem = new MenuItem(String.format("Physical: %d", player.getPhysDmg()));
+    MenuItem magDmgItem = new MenuItem(String.format("Magical: %d", player.getMagicDmg()));
+
+    Button saveBtn = new Button("Save");
+
+    CustomMenuItem savePlayerItem = new CustomMenuItem();
+    savePlayerItem.setContent(saveBtn);
+    savePlayerItem.setOnAction(e -> {
+      WriteToFile.writePlayerToFile(player);
+    });
+
 
     armor.getItems().add(armorItem);
     weapon.getItems().add(weaponItem);
     abilities.getItems().add(abilitiesItems);
     health.getItems().add(hpItem);
     experience.getItems().add(expItem);
+    // Stats
     defense.getItems().addAll(physDefItem, magDefItem);
-    damage.getItems().add(dmgItem);
+    damage.getItems().addAll(physDmgItem, magDmgItem);
+    stats.getItems().addAll(defense, damage);
+    settings.getItems().add(savePlayerItem);
 
-    getMenus().addAll(health, armor, weapon, defense, damage, abilities, experience);
+    getMenus().addAll(health, armor, weapon, stats, abilities, experience, settings);
   }
 
   private String formatAbilities(Player player) {

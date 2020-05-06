@@ -16,6 +16,8 @@ public class SecretPassage extends AbstracPane {
     super(player, textname);
     ArmorType rndArmor = GetRandomType.randomEnum(ArmorType.class);
     player.setArmorType(rndArmor);
+    player.setMagicDef();
+    player.setPhysDef();
     GoBackButton backButton = new GoBackButton();
     Text armor =
         new Text(
@@ -26,7 +28,7 @@ public class SecretPassage extends AbstracPane {
                 rndArmor.toString(), rndArmor.getPhysDef(), rndArmor.getMagDef()));
     armor.setFont(new Font(20));
     armor.setFill(Color.CADETBLUE);
-
+    System.out.println(player.getPhysDef());
     backButton.setOnMouseClicked(
         e -> {
           getScene().setRoot(new StartPane(player, "begining"));

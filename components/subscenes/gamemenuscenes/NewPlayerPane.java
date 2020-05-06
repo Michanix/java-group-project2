@@ -13,15 +13,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import utils.ReadFromFile;
 import utils.WriteToFile;
 
-public class NewPlayerSubscene extends AbstractPreGamePane {
+public class NewPlayerPane extends AbstractPreGamePane {
   // Texts
   private final Text armorDisc = new Text();
   private final Text raceDisc = new Text();
   private final TextFlow displayArmorText = new TextFlow(armorDisc);
   private final TextFlow displayRaceText = new TextFlow(raceDisc);
-  private final Text err = new Text();
+  private final Text msg = new Text();
   // Choices
   private final ChoiceBox<RaceType> raceChoice = new ChoiceBox<>();
   // Textfields
@@ -41,13 +42,17 @@ public class NewPlayerSubscene extends AbstractPreGamePane {
   private final RaceType[] raceTypes = RaceType.values();
   private Player newPlayer;
 
-  public NewPlayerSubscene() {
+  public NewPlayerPane() {
     getChildren().add(createView());
   }
 
   private GridPane createView() {
     GridPane view = new GridPane();
     int width = 130;
+
+    // Default color
+    msg.setFill(Color.RED);
+
 
     raceChoice.getItems().addAll(raceTypes);
     raceChoice.setPrefWidth(width);
@@ -64,32 +69,34 @@ public class NewPlayerSubscene extends AbstractPreGamePane {
     // Creating and saving new Player to a file
     createBtn.setOnMouseClicked(
         e -> {
-          try {
-            newPlayer =
-                Player.createNewPlayer(
-                    nicknameField.getText(), raceChoice.getValue(), ArmorType.CLOTHES);
-            WriteToFile.writePlayerToFile(newPlayer);
-            Text success = new Text("Character has been created!");
-            success.setFill(Color.GREEN);
-            view.add(continueBtn, 2, 10);
-            view.add(success, 2, 3);
-            view.getChildren().remove(createBtn);
-          } catch (IllegalArgumentException | NullPointerException ex) {
-            err.setText(ex.getMessage());
-            err.setFill(Color.RED);
-            view.add(err, 2, 3);
+          if (!(ReadFromFile.playerExist(nicknameField.getText()))) {
+            try {
+              newPlayer =
+                      Player.createNewPlayer(
+                              nicknameField.getText(), raceChoice.getValue(), ArmorType.CLOTHES);
+              WriteToFile.writePlayerToFile(newPlayer);
+              msg.setText("Character has been created!");
+              msg.setFill(Color.GREEN);
+              view.add(continueBtn, 2, 10);
+              view.getChildren().remove(createBtn);
+            } catch (IllegalArgumentException | NullPointerException ex) {
+              msg.setText(ex.getMessage());
+            }
+          } else {
+            msg.setText("Player with such name already exists.");
           }
+          view.add(msg, 2, 3);
         });
 
     createBtn.setOnMouseReleased(
         e -> {
-          view.getChildren().remove(err);
+          view.getChildren().remove(msg);
         });
 
     continueBtn.setOnMouseClicked(
         e -> {
           System.out.println(newPlayer);
-          ShowNewPlayerScene showPlayer = new ShowNewPlayerScene(newPlayer);
+          ShowNewPlayerPane showPlayer = new ShowNewPlayerPane(newPlayer);
           getScene().setRoot(showPlayer);
         });
     // setup

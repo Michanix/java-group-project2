@@ -11,11 +11,13 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdventureMenuPreGamePane extends AbstractPreGamePane {
+public class AdventureMenuPane extends AbstractPreGamePane {
   private final List<Button> advButtonList = new ArrayList<>();
 
-  public AdventureMenuPreGamePane(Player player) {
-    createButton(player);
+  public AdventureMenuPane(Player player) {
+    DefaultButton startLevel = new DefaultButton("1 st adventure");
+
+    createButton(startLevel, player);
     TilePane view = new TilePane();
     view.getChildren().addAll(advButtonList);
     view.setTileAlignment(Pos.CENTER);
@@ -24,13 +26,12 @@ public class AdventureMenuPreGamePane extends AbstractPreGamePane {
     getChildren().add(view);
   }
 
-  private void createButton(Player player) {
-    DefaultButton startLevel = new DefaultButton("1 st adventure");
-    startLevel.setOnMouseClicked(
+  private void createButton(Button startBtn, Player player) {
+    startBtn.setOnMouseClicked(
         e -> {
           AdventureManager adventureManager = new AdventureManager(player);
           adventureManager.startAdventure((Stage) this.getScene().getWindow());
         });
-    advButtonList.add(startLevel);
+    advButtonList.add(startBtn);
   }
 }

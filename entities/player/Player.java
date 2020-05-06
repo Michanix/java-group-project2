@@ -17,6 +17,9 @@ public class Player {
   private Abilities   abilities;
   private WeaponType weaponType;
   private ArmorType   armorType;
+  // Maybe create class for that?
+  private int           physDmg;
+  private int          magicDmg;
   private int           physDef;
   private int          magicDef;
 
@@ -31,6 +34,8 @@ public class Player {
     this.abilities    = Abilities.initAbilities();
     this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
            setArmorType(armorType);
+                      setPhysDmg();
+                     setMagicDmg();
                       setPhysDef();
                      setMagicDef();
   }
@@ -48,6 +53,8 @@ public class Player {
     this.abilities   =  abilities;
     this.weaponType  = weaponType;
     this.armorType   =  armorType;
+                     setPhysDmg();
+                    setMagicDmg();
                      setPhysDef();
                     setMagicDef();
   }
@@ -102,11 +109,7 @@ public class Player {
         + weaponType
         + ", armorType="
         + armorType
-        + ", physDef="
-        + physDef
-        + ", magicDef="
-        + magicDef
-        + '}';
+        + "," + '}';
   }
   // Getters and setters
   public String getNickname() {
@@ -185,6 +188,22 @@ public class Player {
 
   public void setArmorType(ArmorType armorType) {
     this.armorType = Objects.requireNonNull(armorType, "ArmorType cannot be null.");
+  }
+
+  public int getPhysDmg() {
+    return physDmg;
+  }
+
+  public void setPhysDmg() {
+    this.physDmg += weaponType.getPhysDmg();
+  }
+
+  public int getMagicDmg() {
+    return magicDmg;
+  }
+
+  public void setMagicDmg() {
+    this.magicDmg += weaponType.getMagicDmg();
   }
 
   public int getPhysDef() {

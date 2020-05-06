@@ -8,13 +8,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import utils.GetRandomType;
 
-// TODO: proper Text display
 // TODO: if nothing new found, tell about it, lol
 public class LeftTurnPane extends AbstracPane {
 
   public LeftTurnPane(Player player, String textname) {
     super(player, textname);
     WeaponType rndWeapon = GetRandomType.randomEnum(WeaponType.class);
+    player.setWeaponType(rndWeapon);
+    player.setMagicDmg();
+    player.setPhysDmg();
     Text weapon =
         new Text(
             String.format(
@@ -24,7 +26,6 @@ public class LeftTurnPane extends AbstracPane {
                 rndWeapon.toString(), rndWeapon.getPhysDmg(), rndWeapon.getMagicDmg()));
     weapon.setFont(new Font(20));
     weapon.setFill(Color.CADETBLUE);
-    player.setWeaponType(rndWeapon);
     GoBackButton backButton = new GoBackButton();
 
     backButton.setOnMouseClicked(

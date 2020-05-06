@@ -4,7 +4,6 @@ import components.subscenes.ingamescenes.firstadventure.StartPane;
 import entities.player.Player;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import utils.ReadFromFile;
 
 // TODO: better naming
 
@@ -13,7 +12,10 @@ public class AdventureManager {
 
   public AdventureManager(Player player) {
     StartPane startMenu = new StartPane(player, "begining");
-    Scene mainScene = new Scene(startMenu, 800, 480);
+    int WIDTH = 800;
+    int HEIGHT = 400;
+
+    Scene mainScene = new Scene(startMenu, WIDTH, HEIGHT);
     mainAdventureStage.setScene(mainScene);
   }
 

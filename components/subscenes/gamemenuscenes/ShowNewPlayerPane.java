@@ -9,9 +9,9 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowNewPlayerScene extends AbstractPreGamePane {
+public class ShowNewPlayerPane extends AbstractPreGamePane {
 
-  public ShowNewPlayerScene(Player player) {
+  public ShowNewPlayerPane(Player player) {
     String abilities =
         String.format(
             "wisdom:         %d\n"
@@ -43,7 +43,7 @@ public class ShowNewPlayerScene extends AbstractPreGamePane {
 
     continueBtn.setOnMouseClicked(
         e -> {
-          AdventureMenuPreGamePane adventureMenu = new AdventureMenuPreGamePane(player);
+          AdventureMenuPane adventureMenu = new AdventureMenuPane(player);
           getScene().setRoot(adventureMenu);
         });
 

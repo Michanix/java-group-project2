@@ -149,7 +149,7 @@ public class FightingPane extends AbstracPane {
   }
 
   private void updatePlayerHp() {
-    playerHP.setText(String.format("Player HP: %d", player.getHp()));
+      playerHP.setText(String.format("%s HP: %d", player.getNickname(), player.getHp()));
   }
 
   private void updateMonsterHp() {

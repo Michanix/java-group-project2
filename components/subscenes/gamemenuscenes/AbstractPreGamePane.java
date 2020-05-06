@@ -2,8 +2,8 @@ package components.subscenes.gamemenuscenes;
 
 import javafx.scene.layout.AnchorPane;
 
-public abstract class AbstractSubScene extends AnchorPane {
-  public AbstractSubScene() {
+public abstract class AbstractPreGamePane extends AnchorPane {
+  public AbstractPreGamePane() {
     super();
   }
 }
