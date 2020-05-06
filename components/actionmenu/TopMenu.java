@@ -6,27 +6,27 @@ import utils.WriteToFile;
 
 public class TopMenu extends MenuBar {
   public TopMenu(Player player) {
-    Menu armor = new Menu("Armor");
-    Menu weapon = new Menu("Weapon");
-    Menu abilities = new Menu("Abilities");
-    Menu health = new Menu("Health");
+    Menu armor      = new Menu("Armor");
+    Menu weapon     = new Menu("Weapon");
+    Menu abilities  = new Menu("Abilities");
+    Menu health     = new Menu("Health");
     Menu experience = new Menu("Experience");
-    Menu stats = new Menu("Stats");
-    Menu damage = new Menu("Damage");
-    Menu defense = new Menu("Defense");
-    Menu settings = new Menu("Settings");
+    Menu stats      = new Menu("Stats");
+    Menu damage     = new Menu("Damage");
+    Menu defense    = new Menu("Defense");
+    Menu settings   = new Menu("Settings");
 
-    MenuItem armorItem = new MenuItem(player.getArmorType().toString());
-    MenuItem weaponItem = new MenuItem(player.getWeaponType().toString());
+    MenuItem armorItem      = new MenuItem(player.getArmorType().toString());
+    MenuItem weaponItem     = new MenuItem(player.getWeaponType().toString());
     MenuItem abilitiesItems = new MenuItem(formatAbilities(player));
-    MenuItem hpItem = new MenuItem(String.valueOf(player.getHp()));
-    MenuItem expItem = new MenuItem(String.valueOf(player.getExp()));
+    MenuItem hpItem         = new MenuItem(String.valueOf(player.getHp()));
+    MenuItem expItem        = new MenuItem(String.valueOf(player.getExp()));
 
     // Stats
-    MenuItem physDefItem = new MenuItem(String.format("Physical: %d", player.getPhysDef()));
-    MenuItem magDefItem = new MenuItem(String.format("Magical: %d", player.getMagicDef()));
-    MenuItem physDmgItem = new MenuItem(String.format("Physical: %d", player.getPhysDmg()));
-    MenuItem magDmgItem = new MenuItem(String.format("Magical: %d", player.getMagicDmg()));
+    MenuItem physDefItem  = new MenuItem(String.format("Physical: %d", player.getPhysDef()));
+    MenuItem magDefItem   = new MenuItem(String.format("Magical: %d", player.getMagicDef()));
+    MenuItem physDmgItem  = new MenuItem(String.format("Physical: %d", player.getPhysDmg()));
+    MenuItem magDmgItem   = new MenuItem(String.format("Magical: %d", player.getMagicDmg()));
 
     Button saveBtn = new Button("Save");
 
@@ -46,6 +46,7 @@ public class TopMenu extends MenuBar {
     defense.getItems().addAll(physDefItem, magDefItem);
     damage.getItems().addAll(physDmgItem, magDmgItem);
     stats.getItems().addAll(defense, damage);
+
     settings.getItems().add(savePlayerItem);
 
     getMenus().addAll(health, armor, weapon, stats, abilities, experience, settings);

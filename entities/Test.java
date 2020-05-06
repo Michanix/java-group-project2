@@ -11,8 +11,8 @@ import java.util.List;
 
 public class Test {
   public static void main(String[] args) {
-      Player player = ReadFromFile.loadPlayerFromFile("mihhail");
-      Player player1 = Player.createNewPlayer("misha", RaceType.BARBARIAN, ArmorType.HEAVYARMOR);
-      WriteToFile.writePlayerToFile(player1);
+      Player p1 = Player.createNewPlayer("miha2", RaceType.BARBARIAN, ArmorType.HEAVYARMOR);
+      Player p2 = ReadFromFile.loadPlayerFromFile("miha2");
+      System.out.println(p2);
   }
 }

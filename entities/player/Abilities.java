@@ -57,7 +57,21 @@ public class Abilities {
   // Overrides
   @Override
   public String toString() {
-    return "wisdom="
+    String s = String.format(
+            "wisdom='%d', " +
+            "strength='%d', " +
+            "charisma='%d', " +
+            "dexterity='%d', " +
+            "constitution='%d', " +
+            "intelligence='%d'",
+            wisdom,
+            strength,
+            charisma,
+            dexterity,
+            constitution,
+            intelligence);
+    return s;
+            /*"wisdom="
         + wisdom
         + ",strength="
         + strength
@@ -69,6 +83,8 @@ public class Abilities {
         + constitution
         + ",intelligence="
         + intelligence;
+
+             */
   }
 
   // gets and sets

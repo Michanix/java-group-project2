@@ -18,25 +18,25 @@ import utils.WriteToFile;
 
 public class NewPlayerPane extends AbstractPreGamePane {
   // Texts
-  private final Text armorDisc = new Text();
-  private final Text raceDisc = new Text();
+  private final Text     armorDisc        = new Text();
+  private final Text     raceDisc         = new Text();
   private final TextFlow displayArmorText = new TextFlow(armorDisc);
-  private final TextFlow displayRaceText = new TextFlow(raceDisc);
-  private final Text msg = new Text();
+  private final TextFlow displayRaceText  = new TextFlow(raceDisc);
+  private final Text     msg              = new Text();
   // Choices
   private final ChoiceBox<RaceType> raceChoice = new ChoiceBox<>();
   // Textfields
   private final TextField nicknameField = new TextField();
   // Labels
   private final Label nicknameLabel = new Label("Nickname: ");
-  private final Tooltip nicknameTT = new Tooltip("No longer than 12 characters");
-  private final Label armorLabel = new Label("Choose armor:\nClothes");
-  private final Tooltip armorTT = new Tooltip("New player start in regular clothes");
-  private final Label raceLabel = new Label("Choose race: ");
-  private final Label weaponLabel = new Label("Choose weapon:\n Bare Hands");
-  private final Tooltip weaponTT = new Tooltip("New players start without actual weapon");
+  private final Tooltip nicknameTT  = new Tooltip("No longer than 12 characters");
+  private final Label armorLabel    = new Label("Choose armor:\nClothes");
+  private final Tooltip armorTT     = new Tooltip("New player start in regular clothes");
+  private final Label raceLabel     = new Label("Choose race: ");
+  private final Label weaponLabel   = new Label("Choose weapon:\n Bare Hands");
+  private final Tooltip weaponTT    = new Tooltip("New players start without actual weapon");
   // Buttons
-  private final DefaultButton createBtn = new DefaultButton("Create");
+  private final DefaultButton createBtn   = new DefaultButton("Create");
   private final DefaultButton continueBtn = new DefaultButton("Continue");
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
@@ -50,9 +50,8 @@ public class NewPlayerPane extends AbstractPreGamePane {
     GridPane view = new GridPane();
     int width = 130;
 
-    // Default color
+    // Default color of the message
     msg.setFill(Color.RED);
-
 
     raceChoice.getItems().addAll(raceTypes);
     raceChoice.setPrefWidth(width);
@@ -69,12 +68,12 @@ public class NewPlayerPane extends AbstractPreGamePane {
     // Creating and saving new Player to a file
     createBtn.setOnMouseClicked(
         e -> {
+          // Should List of nicknames be cached?
           if (!(ReadFromFile.playerExist(nicknameField.getText()))) {
             try {
               newPlayer =
                       Player.createNewPlayer(
                               nicknameField.getText(), raceChoice.getValue(), ArmorType.CLOTHES);
-              WriteToFile.writePlayerToFile(newPlayer);
               msg.setText("Character has been created!");
               msg.setFill(Color.GREEN);
               view.add(continueBtn, 2, 10);
@@ -83,7 +82,7 @@ public class NewPlayerPane extends AbstractPreGamePane {
               msg.setText(ex.getMessage());
             }
           } else {
-            msg.setText("Player with such name already exists.");
+            msg.setText("Name already taken.");
           }
           view.add(msg, 2, 3);
         });
@@ -95,7 +94,6 @@ public class NewPlayerPane extends AbstractPreGamePane {
 
     continueBtn.setOnMouseClicked(
         e -> {
-          System.out.println(newPlayer);
           ShowNewPlayerPane showPlayer = new ShowNewPlayerPane(newPlayer);
           getScene().setRoot(showPlayer);
         });

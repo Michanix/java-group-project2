@@ -2,7 +2,7 @@ package entities.player;
 
 public enum WeaponType {
   BAREHANDS("Bare hands", 1, 1),
-  Sword("Sword", 30, 10),
+  SWORD("Sword", 30, 10),
   AXE("Axe", 45, 1),
   BOW("Bow", 30, 30),
   WIZARDSTAFF("Wizard staff", 15, 45);

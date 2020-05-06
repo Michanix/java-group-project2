@@ -6,8 +6,10 @@ package entities.player;
 import utils.DiceAction;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Player {
+  private UUID id = UUID.randomUUID();
   private String       nickname;
   private int               exp; // player current experience
   private int                hp; // Health
@@ -42,8 +44,9 @@ public class Player {
 
   // Constructor to load existing Player from file
   private Player(
-      String nickname, int exp, RaceType raceType,
+      UUID id, String nickname, int exp, RaceType raceType,
       Abilities abilities, WeaponType weaponType, ArmorType armorType) {
+    this.id          =         id;
     this.nickname    =   nickname;
     this.exp         =        exp;
     this.hp          =        100;
@@ -66,9 +69,9 @@ public class Player {
   }
   // TODO: load player based only on nickname
   public static Player loadExistingPlayer(
-      String nickname, int exp, RaceType raceType,
+      UUID id, String nickname, int exp, RaceType raceType,
       Abilities abilities, WeaponType weaponType, ArmorType armorType) {
-    return new Player(nickname, exp, raceType, abilities, weaponType, armorType);
+    return new Player(id, nickname, exp, raceType, abilities, weaponType, armorType);
   }
 
   // attack methods
@@ -92,8 +95,31 @@ public class Player {
   // Overrides
   @Override
   public String toString() {
-    return "Player{"
-        + "name="
+    String s = String.format("Player{" +
+                    "uuid='%s', " +
+                    "name='%s', " +
+                    "experience='%d', " +
+                    "state='%b', " +
+                    "inAdventure='%b', " +
+                    "raceType='%s', " +
+                    "%s, " +
+                    "weaponType='%s', " +
+                    "armorType='%s'" +
+                    "}",
+                    id,
+                    nickname,
+                    exp,
+                    state,
+                    inAdventure,
+                    raceType,
+                    abilities,
+                    weaponType,
+                    armorType);
+    return s;
+            /*"Player{"
+        + "uuid="
+        + id
+        + ", name="
         + nickname
         + ", experience="
         + exp
@@ -110,8 +136,15 @@ public class Player {
         + ", armorType="
         + armorType
         + "," + '}';
+
+             */
   }
   // Getters and setters
+
+  public UUID getId() {
+    return id;
+  }
+
   public String getNickname() {
     return nickname;
   }
