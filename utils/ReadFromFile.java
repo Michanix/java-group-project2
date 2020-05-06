@@ -17,22 +17,30 @@ import java.util.regex.Pattern;
 // TODO: find a better, less confusing way to parse player back from file
 
 public class ReadFromFile {
-  private static final String PATH = "players.txt";
+  private static final String  PATH     = "players.txt";
   private static final Charset ENCODING = StandardCharsets.UTF_8;
 
   // Reading text file to List
   public static List<String> readTextToList(String filename) {
     Path path = Path.of(filename);
     List<String> listOFText = new ArrayList<>();
-    try {
-      listOFText = Files.readAllLines(path, ENCODING);
-    } catch (IOException ex) {
-      ex.printStackTrace();
+    if (Files.exists(path)) {
+      try {
+        listOFText = Files.readAllLines(path, ENCODING);
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+    } else {
+      try {
+        Files.createFile(Path.of("players.txt"));
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
     }
     return listOFText;
   }
 
-  public static List<String> readPlayerNicknames() {
+  public static List<String> readNicknames() {
     List<String> players = readTextToList(PATH);
     List<String> nicknames = new ArrayList<>();
     Pattern pattern = Pattern.compile("(name=)(\\w+)");
@@ -42,11 +50,11 @@ public class ReadFromFile {
         nicknames.add(matcher.group(2));
       }
     }
-    return null;
+    return nicknames;
   }
 
   // Loading player from file based on nickname
-  public static List<String> readPlayerParamsFromFile(String nickname) {
+  public static List<String> readPlayerParamsToList(String nickname) {
     List<String> playerParams = new ArrayList<>();
     Pattern rgx = Pattern.compile("(?>=(\\w*.\\w*))");
     try (BufferedReader input = Files.newBufferedReader(Path.of(PATH), ENCODING)) {
@@ -85,7 +93,7 @@ public class ReadFromFile {
   }
 
   public static Player loadPlayerFromFile(String nickname) {
-    List<String> params = readPlayerParamsFromFile(nickname);
+    List<String> params = readPlayerParamsToList(nickname);
     String race = formatString(params.get(4));
     String weapon = formatString(params.get(11));
     String armor = formatString(params.get(12));
@@ -107,5 +115,10 @@ public class ReadFromFile {
             ArmorType.valueOf(armor));
 
     return player;
+  }
+
+  public static boolean playerExist(String nickname) {
+    List<String> nicknames = ReadFromFile.readNicknames();
+    return nicknames.contains(nickname);
   }
 }
