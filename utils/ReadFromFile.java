@@ -6,6 +6,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,28 +18,31 @@ import java.util.regex.Pattern;
 // TODO: find a better, less confusing way to parse player back from file
 
 public class ReadFromFile {
-  public static List<String> readTextToList(String path) {
+  private static final String PATH = "players.txt";
+  private static final Charset ENCODING = StandardCharsets.UTF_8;
+
+  public static List<String> readTextToList(String filename) {
     // Takes in text file with some data and returns it as ArrayList<>()
     // Assumed that data on separate line
+    Path path = Path.of(filename);
     List<String> listOFText = new ArrayList<>();
-    try (BufferedReader input = new BufferedReader(new FileReader(path))) {
-      String line;
-      while ((line = input.readLine()) != null) {
-        listOFText.add(line);
-      }
-    } catch (FileNotFoundException er) {
-      System.err.println("File not found. " + er);
-    } catch (IOException er) {
-      er.printStackTrace();
+    try {
+      listOFText = Files.readAllLines(path, ENCODING);
+    } catch (IOException ex) {
+      ex.printStackTrace();
     }
     return listOFText;
   }
 
+  public static List<String> readPlayerNicknames() {
+
+    return null;
+  }
+
   // Loading player from file based on nickname
   private static List<String> readPlayerParamsFromFile(String nickname) {
-    String path = "players.txt";
     List<String> playerParams = new ArrayList<>();
-    try (BufferedReader input = new BufferedReader(new FileReader(path))) {
+    try (BufferedReader input = new BufferedReader(new FileReader(PATH))) {
       String line;
       while ((line = input.readLine()) != null) {
         if (line.contains(nickname)) {

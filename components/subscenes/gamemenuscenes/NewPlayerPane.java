@@ -8,16 +8,14 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import utils.WriteToFile;
 
-public class NewPlayerSubscene extends AbstractSubScene {
+public class NewPlayerSubscene extends AbstractPreGamePane {
   // Texts
   private final Text armorDisc = new Text();
   private final Text raceDisc = new Text();
@@ -41,13 +39,10 @@ public class NewPlayerSubscene extends AbstractSubScene {
   private final DefaultButton continueBtn = new DefaultButton("Continue");
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
-  private final AnchorPane subScene;
   private Player newPlayer;
 
-  public NewPlayerSubscene(Pane root) {
-    super(root);
-    subScene = (AnchorPane) this.getRoot();
-    subScene.getChildren().add(createView());
+  public NewPlayerSubscene() {
+    getChildren().add(createView());
   }
 
   private GridPane createView() {
@@ -94,8 +89,8 @@ public class NewPlayerSubscene extends AbstractSubScene {
     continueBtn.setOnMouseClicked(
         e -> {
           System.out.println(newPlayer);
-          ShowNewPlayerScene showPlayer = new ShowNewPlayerScene(subScene, newPlayer);
-          subScene.getChildren().add(showPlayer);
+          ShowNewPlayerScene showPlayer = new ShowNewPlayerScene(newPlayer);
+          getScene().setRoot(showPlayer);
         });
     // setup
     // name

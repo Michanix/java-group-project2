@@ -4,17 +4,14 @@ import components.buttons.DefaultButton;
 import entities.player.Player;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowNewPlayerScene extends AbstractSubScene {
+public class ShowNewPlayerScene extends AbstractPreGamePane {
 
-  public ShowNewPlayerScene(Pane root, Player player) {
-    super(root);
+  public ShowNewPlayerScene(Player player) {
     String abilities =
         String.format(
             "wisdom:         %d\n"
@@ -41,20 +38,19 @@ public class ShowNewPlayerScene extends AbstractSubScene {
     for (TitledPane pane : titledPaneList) {
       pane.setExpanded(true);
     }
-    AnchorPane subScene = (AnchorPane) this.getRoot();
     VBox stats = new VBox();
     DefaultButton continueBtn = new DefaultButton("Continue");
 
     continueBtn.setOnMouseClicked(
         e -> {
-          AdventureMenuSubScene adventureMenu = new AdventureMenuSubScene(subScene, player);
-          subScene.getChildren().add(adventureMenu);
+          AdventureMenuPreGamePane adventureMenu = new AdventureMenuPreGamePane(player);
+          getScene().setRoot(adventureMenu);
         });
 
     stats.getChildren().addAll(titledPaneList);
     stats.getChildren().add(continueBtn);
     stats.setLayoutX(195);
     stats.setLayoutY(40);
-    subScene.getChildren().add(stats);
+    getChildren().add(stats);
   }
 }
