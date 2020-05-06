@@ -118,7 +118,6 @@ public class ReadFromFile {
   }
 
   public static boolean playerExist(String nickname) {
-    List<String> nicknames = ReadFromFile.readNicknames();
-    return nicknames.contains(nickname);
+    return ReadFromFile.readNicknames().contains(nickname);
   }
 }
