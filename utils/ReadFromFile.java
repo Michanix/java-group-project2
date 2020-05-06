@@ -4,7 +4,6 @@ import entities.player.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -21,9 +20,8 @@ public class ReadFromFile {
   private static final String PATH = "players.txt";
   private static final Charset ENCODING = StandardCharsets.UTF_8;
 
+  // Reading text file to List
   public static List<String> readTextToList(String filename) {
-    // Takes in text file with some data and returns it as ArrayList<>()
-    // Assumed that data on separate line
     Path path = Path.of(filename);
     List<String> listOFText = new ArrayList<>();
     try {
@@ -42,7 +40,7 @@ public class ReadFromFile {
   // Loading player from file based on nickname
   private static List<String> readPlayerParamsFromFile(String nickname) {
     List<String> playerParams = new ArrayList<>();
-    try (BufferedReader input = new BufferedReader(new FileReader(PATH))) {
+    try (BufferedReader input = Files.newBufferedReader(Path.of(PATH), ENCODING)) {
       String line;
       while ((line = input.readLine()) != null) {
         if (line.contains(nickname)) {
