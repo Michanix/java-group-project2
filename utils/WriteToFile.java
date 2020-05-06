@@ -8,18 +8,46 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
+import java.util.List;
+
+/*
+Use of Files util is justified when dealing with small files.
+ */
 
 public class WriteToFile {
-  private static final Path DESTINATION_FILE = Path.of("players.txt");
-  private static final Charset ENCODING = StandardCharsets.UTF_8;
+  private static final Path    DESTINATION_FILE = Path.of("players.txt");
+  private static final Charset ENCODING         = StandardCharsets.UTF_8;
 
   public static void writePlayerToFile(Player player) {
-      try {
-        Files.writeString(
-            DESTINATION_FILE, player.toString() + "\n", ENCODING, StandardOpenOption.APPEND);
-        System.out.println("Player " + player.getNickname() + " was saved.");
-      } catch (IOException ex) {
-        ex.printStackTrace();
+    List<String> nicknames = ReadFromFile.readNicknames();
+    if (!(nicknames.contains(player.getNickname()))) {
+      appendPlayerToFile(player);
+    } else {
+      findAndUpdate(player);
+    }
+  }
+
+  private static void appendPlayerToFile(Player player) {
+    try {
+      Files.writeString(
+          DESTINATION_FILE, player.toString() + "\n", ENCODING, StandardOpenOption.APPEND);
+      System.out.println("Player " + player.getNickname() + " was saved.");
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  private static void findAndUpdate(Player player) {
+    try {
+      List<String> listOfPlayer = Files.readAllLines(DESTINATION_FILE, ENCODING);
+      for (String p : listOfPlayer) {
+        if (p.contains(player.getNickname())) {
+          listOfPlayer.set(listOfPlayer.indexOf(p), player.toString());
+        }
+        Files.write(DESTINATION_FILE, listOfPlayer, ENCODING);
       }
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
   }
 }
