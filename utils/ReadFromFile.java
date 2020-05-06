@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,7 +33,7 @@ public class ReadFromFile {
       }
     } else {
       try {
-        Files.createFile(Path.of("players.txt"));
+        Files.createFile(Path.of(PATH));
       } catch (IOException ex) {
         ex.printStackTrace();
       }
@@ -43,11 +44,11 @@ public class ReadFromFile {
   public static List<String> readNicknames() {
     List<String> players = readTextToList(PATH);
     List<String> nicknames = new ArrayList<>();
-    Pattern pattern = Pattern.compile("(name=)(\\w+)");
+    Pattern pattern = Pattern.compile("(name=)('\\w+')");
     for (String player : players) {
       Matcher matcher = pattern.matcher(player);
       if (matcher.find()) {
-        nicknames.add(matcher.group(2));
+        nicknames.add(removeQuotes(matcher.group(2)));
       }
     }
     return nicknames;
@@ -56,7 +57,8 @@ public class ReadFromFile {
   // Loading player from file based on nickname
   public static List<String> readPlayerParamsToList(String nickname) {
     List<String> playerParams = new ArrayList<>();
-    Pattern rgx = Pattern.compile("(?>=(\\w*.\\w*))");
+    // Regex to capture everything between single or double quotes
+    Pattern rgx = Pattern.compile("([\"'])(?:\\\\.|[^\\\\])*?\\1");
     try (BufferedReader input = Files.newBufferedReader(Path.of(PATH), ENCODING)) {
       String line;
       while ((line = input.readLine()) != null) {
@@ -67,7 +69,7 @@ public class ReadFromFile {
           for (String t : tmp) {
             Matcher matcher = rgx.matcher(t);
             if (matcher.find()) {
-              playerParams.add(matcher.group(1));
+              playerParams.add(removeQuotes(matcher.group(0)));
             }
           }
         }
@@ -92,29 +94,30 @@ public class ReadFromFile {
     return !str.contains(" ") ? str.toUpperCase() : splitConcatString(str);
   }
 
+  private static String removeQuotes(String str) {
+    return str.substring(1, str.length() -1);
+  }
+
   public static Player loadPlayerFromFile(String nickname) {
     List<String> params = readPlayerParamsToList(nickname);
-    String race = formatString(params.get(4));
-    String weapon = formatString(params.get(11));
-    String armor = formatString(params.get(12));
+    UUID id = UUID.fromString(params.get(0));
+    String name = params.get(1);
+    int  exp = Integer.parseInt(params.get(2));
+    String race = formatString(params.get(5));
+    String weapon = formatString(params.get(12));
+    String armor = formatString(params.get(13));
     Abilities abilities =
         Abilities.loadExisting(
-            Integer.parseInt(params.get(5)),
             Integer.parseInt(params.get(6)),
             Integer.parseInt(params.get(7)),
             Integer.parseInt(params.get(8)),
             Integer.parseInt(params.get(9)),
-            Integer.parseInt(params.get(10)));
-    Player player =
-        Player.loadExistingPlayer(
-            params.get(0),
-            Integer.parseInt(params.get(1)),
-            RaceType.valueOf(race),
-            abilities,
-            WeaponType.valueOf(weapon),
-            ArmorType.valueOf(armor));
+            Integer.parseInt(params.get(10)),
+            Integer.parseInt(params.get(11)));
 
-    return player;
+    return Player.loadExistingPlayer(
+        id, name, exp, RaceType.valueOf(race),
+        abilities, WeaponType.valueOf(weapon), ArmorType.valueOf(armor));
   }
 
   public static boolean playerExist(String nickname) {
