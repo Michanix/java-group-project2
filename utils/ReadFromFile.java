@@ -33,13 +33,22 @@ public class ReadFromFile {
   }
 
   public static List<String> readPlayerNicknames() {
-
+    List<String> players = readTextToList(PATH);
+    List<String> nicknames = new ArrayList<>();
+    Pattern pattern = Pattern.compile("(name=)(\\w+)");
+    for (String player : players) {
+      Matcher matcher = pattern.matcher(player);
+      if (matcher.find()) {
+        nicknames.add(matcher.group(2));
+      }
+    }
     return null;
   }
 
   // Loading player from file based on nickname
-  private static List<String> readPlayerParamsFromFile(String nickname) {
+  public static List<String> readPlayerParamsFromFile(String nickname) {
     List<String> playerParams = new ArrayList<>();
+    Pattern rgx = Pattern.compile("(?>=(\\w*.\\w*))");
     try (BufferedReader input = Files.newBufferedReader(Path.of(PATH), ENCODING)) {
       String line;
       while ((line = input.readLine()) != null) {
@@ -47,7 +56,6 @@ public class ReadFromFile {
           // Some expensive Regex hacks to parse Player params to List<String>
           // ~2ms to parse a line so its okay
           String[] tmp = line.split(",");
-          Pattern rgx = Pattern.compile("(?>=(\\w*.\\w*))");
           for (String t : tmp) {
             Matcher matcher = rgx.matcher(t);
             if (matcher.find()) {
