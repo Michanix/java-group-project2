@@ -16,7 +16,16 @@ Use of Files util is justified when dealing with small files.
 
 public class WriteToFile {
   private static final Path DESTINATION_FILE = Path.of("players.txt");
-  private static final Charset ENCODING = StandardCharsets.UTF_8;
+  private static final Charset ENCODING      = StandardCharsets.UTF_8;
+
+  public static void check() {
+      try{
+        Files.createFile(DESTINATION_FILE);
+        System.out.println("Database 'players.txt' has been created.");
+      } catch (IOException ex) {
+        System.out.println("Database status: OK");
+    }
+  }
 
   public static void writePlayerToFile(Player player) {
     List<String> nicknames = ReadFromFile.readNicknames();
