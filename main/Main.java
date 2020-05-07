@@ -18,6 +18,11 @@ public class Main extends Application {
   }
 
   public static void main(String[] args) {
+    try {
+      Files.createFile(Path.of("players.txt"));
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
     launch(args);
   }
 }
