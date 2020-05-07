@@ -32,11 +32,7 @@ public class ReadFromFile {
         ex.printStackTrace();
       }
     } else {
-      try {
-        Files.createFile(Path.of(PATH));
-      } catch (IOException ex) {
-        ex.printStackTrace();
-      }
+      System.err.println(filename + " not found");
     }
     return listOFText;
   }
