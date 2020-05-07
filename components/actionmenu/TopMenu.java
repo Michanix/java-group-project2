@@ -42,7 +42,9 @@ public class TopMenu extends MenuBar {
   }
 
   private CustomMenuItem createCustomMenuBtn(String text) {
-    return new CustomMenuItem(new Button(text));
+    Button btn = new Button(text);
+    btn.setStyle("-fx-background-color: transparent;");
+    return new CustomMenuItem(btn);
   }
 
   /*
