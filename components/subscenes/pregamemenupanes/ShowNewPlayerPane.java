@@ -49,8 +49,8 @@ public class ShowNewPlayerPane extends AbstractPreGamePane {
 
     stats.getChildren().addAll(titledPaneList);
     stats.getChildren().add(continueBtn);
-    stats.setLayoutX(195);
-    stats.setLayoutY(40);
+    stats.setLayoutX(295);
+    stats.setLayoutY(30);
     getChildren().add(stats);
   }
 }

@@ -1,7 +1,9 @@
 package components;
 
+import components.buttons.CreditsButton;
 import components.buttons.DefaultButton;
 import components.buttons.ExitButton;
+import components.buttons.HelpButton;
 import components.subscenes.pregamemenupanes.ChoosePlayerPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -14,11 +16,12 @@ public class StartGameManager {
   private final Stage stage;
 
   public StartGameManager() {
-    int WIDTH = 800;
-    int HEIGHT = 480;
-    mainPane = new AnchorPane();
+    int WIDTH   = 800;
+    int HEIGHT  = 480;
+    mainPane    = new AnchorPane();
     Scene scene = new Scene(mainPane, WIDTH, HEIGHT);
-    stage = new Stage();
+    stage       = new Stage();
+
     setStarGameMenu();
     stage.setScene(scene);
   }
@@ -28,11 +31,11 @@ public class StartGameManager {
   }
 
   private void setStarGameMenu() {
-    DefaultButton starBtn = new DefaultButton("Start the game");
-    DefaultButton helpBtn = new DefaultButton("Help");
-    DefaultButton creditsBtn = new DefaultButton("Credits");
-    ExitButton exitBtn = new ExitButton();
-    VBox menu = new VBox();
+    DefaultButton starBtn    = new DefaultButton("Start the game");
+    HelpButton helpBtn       = new HelpButton();
+    CreditsButton creditsBtn = new CreditsButton();
+    ExitButton exitBtn       = new ExitButton();
+    VBox menu                = new VBox();
 
     starBtn.setOnMouseClicked(
         e -> {
@@ -50,9 +53,5 @@ public class StartGameManager {
   public void startGameMan(Stage currentStage) {
     currentStage.hide();
     stage.show();
-  }
-
-  public AnchorPane getMainPane() {
-    return mainPane;
   }
 }
