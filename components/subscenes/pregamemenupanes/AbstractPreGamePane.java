@@ -1,4 +1,4 @@
-package components.subscenes.gamemenuscenes;
+package components.subscenes.pregamemenupanes;
 
 import javafx.scene.layout.AnchorPane;
 

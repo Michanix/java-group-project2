@@ -1,4 +1,4 @@
-package components.subscenes.gamemenuscenes;
+package components.subscenes.pregamemenupanes;
 
 import components.AdventureManager;
 import components.buttons.DefaultButton;

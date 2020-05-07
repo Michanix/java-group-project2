@@ -2,7 +2,7 @@ package components;
 
 import components.buttons.DefaultButton;
 import components.buttons.ExitButton;
-import components.subscenes.gamemenuscenes.ChoosePlayerPane;
+import components.subscenes.pregamemenupanes.ChoosePlayerPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;

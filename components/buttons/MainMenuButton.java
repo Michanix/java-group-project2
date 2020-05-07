@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 public class MainMenuButton extends DefaultButton {
   public MainMenuButton() {
-    super("To main menu");
+    super("Back to menu");
     setOnMouseClicked(
         e -> {
           StartGameManager mainMenu = new StartGameManager();
