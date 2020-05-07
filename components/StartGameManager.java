@@ -3,7 +3,6 @@ package components;
 import components.buttons.DefaultButton;
 import components.buttons.ExitButton;
 import components.subscenes.gamemenuscenes.ChoosePlayerPane;
-import components.subscenes.gamemenuscenes.NewPlayerPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -29,19 +28,19 @@ public class StartGameManager {
   }
 
   private void setStarGameMenu() {
-    DefaultButton starBtn    = new DefaultButton("Start the game");
-    DefaultButton helpBtn    = new DefaultButton("Help");
+    DefaultButton starBtn = new DefaultButton("Start the game");
+    DefaultButton helpBtn = new DefaultButton("Help");
     DefaultButton creditsBtn = new DefaultButton("Credits");
-    ExitButton    exitBtn    = new ExitButton();
-    VBox          menu       = new VBox();
+    ExitButton exitBtn = new ExitButton();
+    VBox menu = new VBox();
 
     starBtn.setOnMouseClicked(
-            e -> {
-              ChoosePlayerPane choiceMenu = new ChoosePlayerPane();
-              mainPane.getScene().setRoot(choiceMenu);
-            });
+        e -> {
+          ChoosePlayerPane choiceMenu = new ChoosePlayerPane();
+          mainPane.getScene().setRoot(choiceMenu);
+        });
 
-    menu.getChildren().addAll(starBtn, helpBtn, creditsBtn,exitBtn);
+    menu.getChildren().addAll(starBtn, helpBtn, creditsBtn, exitBtn);
     menu.setSpacing(10);
     menu.setLayoutX(295);
     menu.setLayoutY(110);
@@ -51,5 +50,9 @@ public class StartGameManager {
   public void startGameMan(Stage currentStage) {
     currentStage.hide();
     stage.show();
+  }
+
+  public AnchorPane getMainPane() {
+    return mainPane;
   }
 }
