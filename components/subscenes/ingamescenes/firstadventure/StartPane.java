@@ -1,5 +1,6 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.actionmenu.TopMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 
@@ -25,7 +26,6 @@ public class StartPane extends AbstracPane {
         e -> {
           getScene().setRoot(new ForwardPane(player, "forward"));
         });
-
     addToActionMenu(leftBtn, rightBtn, forwardBtn);
   }
 }

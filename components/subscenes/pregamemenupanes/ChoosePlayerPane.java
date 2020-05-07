@@ -1,25 +1,31 @@
 package components.subscenes.pregamemenupanes;
 
 import components.buttons.DefaultButton;
+import components.buttons.MainMenuButton;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class ChoosePlayerPane extends AbstractPreGamePane {
 
   public ChoosePlayerPane() {
-    HBox menu = new HBox();
+    HBox firstRow = new HBox();
+    HBox secondRow = new HBox();
     DefaultButton newPlayerBtn = new DefaultButton("Create new player");
     DefaultButton existingPlBtn = new DefaultButton("Pick existing player");
+    MainMenuButton mainMenuButton = new MainMenuButton();
 
+    VBox menu = new VBox(firstRow, secondRow);
     createNewPlayer(newPlayerBtn);
     chooseExistPlayer(existingPlBtn);
 
-    menu.getChildren().addAll(newPlayerBtn, existingPlBtn);
+    firstRow.getChildren().addAll(newPlayerBtn, existingPlBtn);
+    firstRow.setSpacing(10);
+    secondRow.getChildren().add(mainMenuButton);
 
     menu.setLayoutX(195);
-    menu.setLayoutY(110);
-    menu.setSpacing(5);
-
+    menu.setLayoutY(90);
+    menu.setSpacing(10);
     getChildren().add(menu);
   }
 

@@ -1,5 +1,6 @@
 package components.subscenes.pregamemenupanes;
 
+import components.actionmenu.TopMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import java.util.List;
 public class ShowNewPlayerPane extends AbstractPreGamePane {
 
   public ShowNewPlayerPane(Player player) {
+
     String abilities =
         String.format(
             "wisdom:         %d\n"

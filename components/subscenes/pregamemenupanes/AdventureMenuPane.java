@@ -2,6 +2,7 @@ package components.subscenes.pregamemenupanes;
 
 import components.AdventureManager;
 import components.buttons.DefaultButton;
+import components.buttons.MainMenuButton;
 import entities.player.Player;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,10 +17,12 @@ public class AdventureMenuPane extends AbstractPreGamePane {
 
   public AdventureMenuPane(Player player) {
     DefaultButton startLevel = new DefaultButton("1 st adventure");
+    MainMenuButton mainMenuButton = new MainMenuButton();
 
     createButton(startLevel, player);
     TilePane view = new TilePane();
     view.getChildren().addAll(advButtonList);
+    view.getChildren().add(mainMenuButton);
     view.setTileAlignment(Pos.CENTER);
     view.setHgap(5);
     view.setVgap(5);

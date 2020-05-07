@@ -6,7 +6,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public abstract class AbstractTopMenu extends MenuBar {
-  private Menu settings = new Menu("Settings");
+  private final Menu settings = new Menu("Settings");
 
   public AbstractTopMenu() {
     CustomMenuItem backToMenuItem = createCustomMenuBtn("Main menu");

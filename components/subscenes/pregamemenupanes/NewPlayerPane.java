@@ -1,6 +1,7 @@
 package components.subscenes.pregamemenupanes;
 
 import components.buttons.DefaultButton;
+import components.buttons.MainMenuButton;
 import entities.player.ArmorType;
 import entities.player.Player;
 import entities.player.RaceType;
@@ -38,6 +39,7 @@ public class NewPlayerPane extends AbstractPreGamePane {
   // Buttons
   private final DefaultButton createBtn   = new DefaultButton("Create");
   private final DefaultButton continueBtn = new DefaultButton("Continue");
+  private final MainMenuButton mainMenuButton = new MainMenuButton();
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
   private Player newPlayer;
@@ -116,8 +118,9 @@ public class NewPlayerPane extends AbstractPreGamePane {
     weaponLabel.setTooltip(weaponTT);
 
     view.add(createBtn, 2, 9);
+    view.add(mainMenuButton, 2, 10);
     view.setVgap(5);
-    view.setHgap(100);
+    view.setHgap(90);
 
     return view;
   }
