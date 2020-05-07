@@ -12,7 +12,7 @@ public class AdventureManager {
 
   public AdventureManager(Player player) {
     StartPane startMenu = new StartPane(player, "begining");
-    int WIDTH = 800;
+    int WIDTH = 700;
     int HEIGHT = 400;
 
     Scene mainScene = new Scene(startMenu, WIDTH, HEIGHT);

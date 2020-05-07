@@ -5,17 +5,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AbstractWindow extends Stage {
+public abstract class AbstractWindow extends Stage {
+  private final BorderPane pane = new BorderPane();
 
-    public AbstractWindow(String title) {
-        setTitle(title);
+  public AbstractWindow() {
 
-        int WIDTH = 300;
-        int HEIGHT = 200;
-        BorderPane pane = new BorderPane();
+    int WIDTH = 300;
+    int HEIGHT = 300;
 
-        setScene(new Scene(pane, WIDTH, HEIGHT));
-        initOwner(getOwner());
-        initModality(Modality.APPLICATION_MODAL);
-    }
+    setScene(new Scene(pane, WIDTH, HEIGHT));
+    initOwner(getOwner());
+    initModality(Modality.APPLICATION_MODAL);
+  }
+
+  public BorderPane getPane() {
+    return pane;
+  }
 }

@@ -8,7 +8,7 @@ public class HelpButton extends DefaultButton {
 
     setOnMouseClicked(
         e -> {
-          HelpWindow help = new HelpWindow("Help");
+          HelpWindow help = new HelpWindow();
           help.showAndWait();
         });
   }

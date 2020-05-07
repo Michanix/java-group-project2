@@ -1,6 +1,7 @@
 package components.actionmenu;
 
 import components.StartGameManager;
+import components.subscenes.pregamemenupanes.HelpWindow;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -17,7 +18,8 @@ public abstract class AbstractTopMenu extends MenuBar {
         });
 
     helpBtnItem.setOnAction(e -> {
-
+      HelpWindow helpWindow = new HelpWindow();
+      helpWindow.showAndWait();
     });
     addToSettings(backToMenuItem, helpBtnItem);
     getMenus().setAll(settings);
