@@ -1,55 +1,68 @@
 package components.actionmenu;
 
+import components.StartGameManager;
 import entities.player.Player;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import utils.WriteToFile;
 
 public class TopMenu extends MenuBar {
   public TopMenu(Player player) {
-    Menu armor      = new Menu("Armor");
-    Menu weapon     = new Menu("Weapon");
-    Menu abilities  = new Menu("Abilities");
-    Menu health     = new Menu("Health");
-    Menu experience = new Menu("Experience");
+    String physDef = formatStat("Physical", player.getPhysDef());
+    String magDef  = formatStat("Magical", player.getMagicDef());
+    String physDmg = formatStat("Physical", player.getPhysDmg());
+    String magDmg  = formatStat("Magical", player.getMagicDmg());
+
+    Menu armor      = createMenuWithItems("Armor", player.getArmorType().toString());
+    Menu weapon     = createMenuWithItems("Weapon", player.getWeaponType().toString());
+    Menu abilities  = createMenuWithItems("Abilities", formatAbilities(player));
+    Menu health     = createMenuWithItems("Helath", String.valueOf(player.getHp()));
+    Menu experience = createMenuWithItems("Experience", String.valueOf(player.getExp()));
+    Menu damage     = createMenuWithItems("Damage", physDmg, magDmg);
+    Menu defense    = createMenuWithItems("Defense", physDef, magDef);
     Menu stats      = new Menu("Stats");
-    Menu damage     = new Menu("Damage");
-    Menu defense    = new Menu("Defense");
     Menu settings   = new Menu("Settings");
 
-    MenuItem armorItem      = new MenuItem(player.getArmorType().toString());
-    MenuItem weaponItem     = new MenuItem(player.getWeaponType().toString());
-    MenuItem abilitiesItems = new MenuItem(formatAbilities(player));
-    MenuItem hpItem         = new MenuItem(String.valueOf(player.getHp()));
-    MenuItem expItem        = new MenuItem(String.valueOf(player.getExp()));
+    CustomMenuItem savePlayerItem = createCustomMenuBtn("Save");
+    CustomMenuItem backToMenuItem = createCustomMenuBtn("Main menu");
 
-    // Stats
-    MenuItem physDefItem  = new MenuItem(String.format("Physical: %d", player.getPhysDef()));
-    MenuItem magDefItem   = new MenuItem(String.format("Magical: %d", player.getMagicDef()));
-    MenuItem physDmgItem  = new MenuItem(String.format("Physical: %d", player.getPhysDmg()));
-    MenuItem magDmgItem   = new MenuItem(String.format("Magical: %d", player.getMagicDmg()));
-
-    Button saveBtn = new Button("Save");
-
-    CustomMenuItem savePlayerItem = new CustomMenuItem();
-    savePlayerItem.setContent(saveBtn);
+    // Controllers for buttons
     savePlayerItem.setOnAction(e -> {
       WriteToFile.writePlayerToFile(player);
     });
 
+    backToMenuItem.setOnAction(e -> {
+      StartGameManager mainMenu = new StartGameManager();
+      mainMenu.startGameMan((Stage)this.getScene().getWindow());
+    });
 
-    armor.getItems().add(armorItem);
-    weapon.getItems().add(weaponItem);
-    abilities.getItems().add(abilitiesItems);
-    health.getItems().add(hpItem);
-    experience.getItems().add(expItem);
-    // Stats
-    defense.getItems().addAll(physDefItem, magDefItem);
-    damage.getItems().addAll(physDmgItem, magDmgItem);
     stats.getItems().addAll(defense, damage);
-
-    settings.getItems().add(savePlayerItem);
-
+    settings.getItems().addAll(savePlayerItem, backToMenuItem);
     getMenus().addAll(health, armor, weapon, stats, abilities, experience, settings);
+  }
+
+  private CustomMenuItem createCustomMenuBtn(String text) {
+    return new CustomMenuItem(new Button(text));
+  }
+
+  /*
+  Helper function to reduce repetitive code.
+  Helps create Menu and Items inside of it in range from 1 to many.
+   */
+  private Menu createMenuWithItems(String menuName, String...menuItemText) {
+    Menu menu = new Menu(menuName);
+    for(String txt: menuItemText) {
+        menu.getItems().add(new MenuItem(txt));
+    }
+    return menu;
+  }
+
+  /*
+  Function to format physical and magical parameters of a Player
+  to a suitable String format
+   */
+  private String formatStat(String text, int stat) {
+    return String.format("%s: %d", text, stat);
   }
 
   private String formatAbilities(Player player) {
