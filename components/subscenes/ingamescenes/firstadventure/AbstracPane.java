@@ -16,7 +16,7 @@ public abstract class AbstracPane extends BorderPane {
   private final BottomMenu bottomMenu = new BottomMenu();
 
   public AbstracPane(Player player, String textname) {
-    TextAccessLayer textDAO = new TextAccessLayer("src/textfiles/firstadventure/texts");
+    TextAccessLayer textDAO = new TextAccessLayer();
     InGameTopMenu inGameTopMenu = new InGameTopMenu(player);
 
     setCenter(textDAO.getText(textname));
