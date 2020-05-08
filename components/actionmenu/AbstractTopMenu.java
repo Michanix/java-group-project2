@@ -1,7 +1,7 @@
 package components.actionmenu;
 
 import components.StartGameManager;
-import components.subscenes.pregamemenupanes.HelpWindow;
+import components.modals.HelpWindow;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 

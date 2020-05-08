@@ -1,5 +1,6 @@
-package components.subscenes.pregamemenupanes;
+package components.modals;
 
+import components.subscenes.pregamemenupanes.AbstractWindow;
 import javafx.scene.text.Text;
 import utils.ReadFromFile;
 
@@ -13,7 +14,7 @@ public class CreditsWindow extends AbstractWindow {
   }
 
   private Text createCreditsText() {
-    List<String> credits = ReadFromFile.readTextToList("src/credits.txt");
+    List<String> credits = ReadFromFile.readTextToList("credits.txt");
     StringBuilder result = new StringBuilder();
     for (String txt: credits) {
       result.append(txt).append("\n");

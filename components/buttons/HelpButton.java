@@ -1,6 +1,6 @@
 package components.buttons;
 
-import components.subscenes.pregamemenupanes.HelpWindow;
+import components.modals.HelpWindow;
 
 public class HelpButton extends DefaultButton {
   public HelpButton() {

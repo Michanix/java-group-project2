@@ -1,6 +1,6 @@
 package components.buttons;
 
-import components.subscenes.pregamemenupanes.CreditsWindow;
+import components.modals.CreditsWindow;
 
 public class CreditsButton extends DefaultButton {
     public CreditsButton() {
