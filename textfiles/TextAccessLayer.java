@@ -18,7 +18,7 @@ import java.util.Map;
 public class TextAccessLayer {
 
   private final Map<String, Text> levelTexts;
-  private final String pathToTexts = "src/textfiles/firstadventure/texts";
+  private final Path pathToTexts = Path.of("src/textfiles/firstadventure/texts");
 
   public TextAccessLayer() {
     this.levelTexts = getLevelTexts();
@@ -33,7 +33,7 @@ public class TextAccessLayer {
       Some fancy stream chaining to create HashMap of String and Text node
       where String is a name of the file and Text node content is the content of the file.
        */
-      Files.list(Path.of(pathToTexts))
+      Files.list(pathToTexts)
           .forEach(
               file -> {
                 List<String> textsList = ReadFromFile.readTextToList(file.toString());
