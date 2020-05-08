@@ -18,7 +18,7 @@ import java.util.Map;
 public class TextAccessLayer {
 
   private final Map<String, Text> levelTexts;
-  private final Path pathToTexts = Path.of("src/textfiles/firstadventure/texts");
+  private final Path pathToTexts = Path.of("textfiles/firstadventure/texts");
 
   public TextAccessLayer() {
     this.levelTexts = getLevelTexts();
