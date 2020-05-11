@@ -26,11 +26,6 @@ public class Goddess extends Monster {
   }
 
   @Override
-  public void specialAttack() {
-    System.out.println("Goddess special attack");
-  }
-
-  @Override
   public String toString() {
     return super.toString();
   }

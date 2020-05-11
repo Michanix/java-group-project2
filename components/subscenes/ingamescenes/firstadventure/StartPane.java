@@ -1,6 +1,5 @@
 package components.subscenes.ingamescenes.firstadventure;
 
-import components.actionmenu.TopMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 

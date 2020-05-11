@@ -14,6 +14,7 @@ import utils.DiceAction;
 
 // TODO: split logic and everything else...
 // TODO: link css
+// TODO: add limit for magical attacks
 // Attention! Spaghetti code below!
 
 public class FightingPane extends AbstracPane {
@@ -25,7 +26,7 @@ public class FightingPane extends AbstracPane {
   private final Monster monster;
   private final Text playerHP = new Text();
   private final Text monsterHP = new Text();
-  private String msg; // Message that is being displayed
+  // private String msg; // Message that is being displayed
 
   public FightingPane(Player player, Monster monster, String textname) {
     super(player, textname);
@@ -62,71 +63,72 @@ public class FightingPane extends AbstracPane {
     addToActionMenu(nextBtn);
     addToBottomMenu(playerHP, monsterHP);
 
+    monster
+        .hpProperty()
+        .addListener(
+            (observable) -> {
+              if (monster.isDead()) {
+                textArea.setText("Victory!\n");
+                victory();
+              } else {
+                monsterAttack();
+              }
+            });
+    player
+        .hpProperty()
+        .addListener(
+            (observableValue) -> {
+              if (player.isDead()) {
+                textArea.setText("You died.\n");
+                defeat();
+              }
+            });
+
     physAttackController(physAttack);
     magAttackController(magAttack);
   }
 
+  // TODO: Create Enum for basic player attack types?
   public void physAttackController(Button physDmgBtn) {
     physDmgBtn.setOnMouseClicked(
         e -> {
-          if (monster.getHp() < 0) {
-            victory();
-          } else if (player.getHp() < 0) {
-            defeat();
+          int dmgDealt = calcPlayerPhysDmg();
+          String msg;
+          if (dmgDealt <= 0) {
+            msg =
+                String.format(
+                    "You couldn't get through %s defense.\n\n", monster.getClass().getSimpleName());
           } else {
-            int dmgDealt = calcPlayerPhysDmg();
-            if (dmgDealt <= 0) {
-              msg =
-                  String.format(
-                      "You couldn't get through %s defense.\n\n",
-                      monster.getClass().getSimpleName());
-            } else {
-              msg = String.format("You dealt %d physical damage\n\n", dmgDealt);
-              monster.setHp(dmgDealt);
-            }
+            msg = String.format("You dealt %d physical damage\n\n", dmgDealt);
+            monster.setHp(dmgDealt);
           }
           updateMonsterHp();
           textArea.appendText(msg);
-        });
-
-    physDmgBtn.setOnMouseReleased(
-        e -> {
-          monsterAttack();
         });
   }
 
   public void magAttackController(Button magDmgBtn) {
     magDmgBtn.setOnMouseClicked(
         e -> {
-          if (monster.getHp() < 0) {
-            victory();
-          } else if (player.getHp() < 0) {
-            defeat();
+          int dmgDealt = calcPlayerMagDmg();
+          String msg;
+          if (dmgDealt <= 0) {
+            msg =
+                String.format(
+                    "You couldn't get through %s defense.\n\n", monster.getClass().getSimpleName());
           } else {
-            int dmgDealt = calcPlayerMagDmg();
-            if (dmgDealt <= 0) {
-              msg =
-                  String.format(
-                      "You couldn't get through %s defense.\n\n",
-                      monster.getClass().getSimpleName());
-            } else {
-              msg = String.format("You dealt %d magical damage\n\n", dmgDealt);
-              monster.setHp(dmgDealt);
-            }
+            msg = String.format("You dealt %d magical damage\n\n", dmgDealt);
+            monster.setHp(dmgDealt);
           }
           updateMonsterHp();
           textArea.appendText(msg);
         });
-
-    magDmgBtn.setOnMouseReleased(
-        e -> {
-          monsterAttack();
-        });
   }
 
+
+  // TODO: turn into one parametrize function
   // helper functions
   private void victory() {
-    msg = "Victory!\n";
     player.setExp(monster.getExpPer());
     DefaultButton next2 = new DefaultButton("Next");
     next2.setOnMouseClicked(
@@ -138,7 +140,6 @@ public class FightingPane extends AbstracPane {
   }
 
   private void defeat() {
-    msg = "You died.\n";
     DefaultButton next2 = new DefaultButton("Next");
     next2.setOnMouseClicked(
         e -> {
@@ -149,20 +150,21 @@ public class FightingPane extends AbstracPane {
   }
 
   private void updatePlayerHp() {
-      playerHP.setText(String.format("%s HP: %d", player.getNickname(), player.getHp()));
+    int hp = Math.max(player.getHp(), 0); // Little hack to display zero instead of negative hp
+    playerHP.setText(String.format("%s HP: %d", player.getNickname(), hp));
   }
 
   private void updateMonsterHp() {
-    monsterHP.setText(
-        String.format("%s HP: %d", monster.getClass().getSimpleName(), monster.getHp()));
+    int hp = Math.max(monster.getHp(), 0);
+    monsterHP.setText(String.format("%s HP: %d", monster.getClass().getSimpleName(), hp));
   }
 
   private void monsterAttack() {
+    String msg = randMonsterAttack();
     try {
       Thread.sleep(500);
-      msg = randMonsterAttack();
-    } catch (InterruptedException interruptedException) {
-      interruptedException.printStackTrace();
+    } catch (InterruptedException ex) {
+      ex.getSuppressed();
     }
     updatePlayerHp();
     textArea.appendText(msg);
@@ -177,6 +179,7 @@ public class FightingPane extends AbstracPane {
     return player.basicMagAttack() - monster.getMagDef();
   }
 
+  // TODO: move into Monster class
   private String randMonsterAttack() {
     /*
     Based on pure luck monster will hit the player with

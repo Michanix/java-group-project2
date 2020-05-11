@@ -3,6 +3,8 @@ package entities.player;
 // Making use of Static Factory method pattern
 // Will see how it plays out tho...
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import utils.DiceAction;
 
 import java.util.Objects;
@@ -12,9 +14,7 @@ public class Player {
   private UUID id = UUID.randomUUID();
   private String       nickname;
   private int               exp; // player current experience
-  private int                hp; // Health
-  private boolean         state; // Dead or alive?
-  private boolean   inAdventure;
+  private IntegerProperty    hp = new SimpleIntegerProperty(100); // Health
   private RaceType     raceType;
   private Abilities   abilities;
   private WeaponType weaponType;
@@ -29,9 +29,6 @@ public class Player {
   private Player(String nickname, RaceType raceType, ArmorType armorType) {
              setNickname(nickname);
     this.exp          =          0;
-    this.hp           =        100;
-    this.state        =       true;
-    this.inAdventure  =      false;
              setRaceType(raceType);
     this.abilities    = Abilities.initAbilities();
     this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
@@ -49,9 +46,6 @@ public class Player {
     this.id          =         id;
     this.nickname    =   nickname;
     this.exp         =        exp;
-    this.hp          =        100;
-    this.state       =       true;
-    this.inAdventure =      false;
     this.raceType    =   raceType;
     this.abilities   =  abilities;
     this.weaponType  = weaponType;
@@ -92,6 +86,10 @@ public class Player {
     return playerDmg + extraDmg;
   }
 
+  public boolean isDead() {
+    return getExp() < 0;
+  }
+
   // Overrides
   @Override
   public String toString() {
@@ -99,8 +97,6 @@ public class Player {
                     "uuid='%s', " +
                     "name='%s', " +
                     "experience='%d', " +
-                    "state='%b', " +
-                    "inAdventure='%b', " +
                     "raceType='%s', " +
                     "%s, " +
                     "weaponType='%s', " +
@@ -109,38 +105,14 @@ public class Player {
                     id,
                     nickname,
                     exp,
-                    state,
-                    inAdventure,
                     raceType,
                     abilities,
                     weaponType,
                     armorType);
     return s;
-            /*"Player{"
-        + "uuid="
-        + id
-        + ", name="
-        + nickname
-        + ", experience="
-        + exp
-        + ", state="
-        + state
-        + ", inAdventure="
-        + inAdventure
-        + ", raceType="
-        + raceType
-        + ", "
-        + abilities
-        + ", weaponType="
-        + weaponType
-        + ", armorType="
-        + armorType
-        + "," + '}';
-
-             */
   }
-  // Getters and setters
 
+  // Getters and setters
   public UUID getId() {
     return id;
   }
@@ -168,27 +140,15 @@ public class Player {
   }
 
   public int getHp() {
+    return hp.get();
+  }
+
+  public IntegerProperty hpProperty() {
     return hp;
   }
 
   public void setHp(int dmg) {
-    this.hp -= dmg;
-  }
-
-  public boolean isState() {
-    return state;
-  }
-
-  public void setState(boolean state) {
-    this.state = state;
-  }
-
-  public boolean isInAdventure() {
-    return inAdventure;
-  }
-
-  public void setInAdventure(boolean inAdventure) {
-    this.inAdventure = inAdventure;
+    hp.set(getHp() - dmg);
   }
 
   public RaceType getRaceType() {

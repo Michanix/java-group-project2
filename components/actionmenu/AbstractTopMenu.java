@@ -17,10 +17,11 @@ public abstract class AbstractTopMenu extends MenuBar {
           mainMenu.startGameMan((Stage) this.getScene().getWindow());
         });
 
-    helpBtnItem.setOnAction(e -> {
-      HelpWindow helpWindow = new HelpWindow();
-      helpWindow.showAndWait();
-    });
+    helpBtnItem.setOnAction(
+        e -> {
+          HelpWindow helpWindow = new HelpWindow();
+          helpWindow.showAndWait();
+        });
     addToSettings(backToMenuItem, helpBtnItem);
     getMenus().setAll(settings);
   }
@@ -43,11 +44,11 @@ public abstract class AbstractTopMenu extends MenuBar {
     return menu;
   }
 
-  public void addToSettings(MenuItem...menuItem) {
-      settings.getItems().addAll(menuItem);
+  public void addToSettings(MenuItem... menuItem) {
+    settings.getItems().addAll(menuItem);
   }
 
-  public void addMenus(Menu...menus) {
-      getMenus().addAll(menus);
+  public void addMenus(Menu... menus) {
+    getMenus().addAll(menus);
   }
 }

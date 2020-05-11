@@ -9,17 +9,16 @@ import javafx.scene.layout.BorderPane;
 import textfiles.TextAccessLayer;
 
 // TODO: better naming for class
-// TODO: Figure out how to switch between panes without creating new object
 
 public abstract class AbstracPane extends BorderPane {
   private final ActionMenu actionMenu = new ActionMenu();
   private final BottomMenu bottomMenu = new BottomMenu();
 
   public AbstracPane(Player player, String textname) {
-    TextAccessLayer textDAO = new TextAccessLayer();
+    TextAccessLayer accessText = new TextAccessLayer();
     InGameTopMenu inGameTopMenu = new InGameTopMenu(player);
 
-    setCenter(textDAO.getText(textname));
+    setCenter(accessText.getText(textname));
     setRight(actionMenu);
     setBottom(bottomMenu);
     setTop(inGameTopMenu);

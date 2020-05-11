@@ -16,7 +16,7 @@ public class CreditsWindow extends AbstractWindow {
   private Text createCreditsText() {
     List<String> credits = ReadFromFile.readTextToList("credits.txt");
     StringBuilder result = new StringBuilder();
-    for (String txt: credits) {
+    for (String txt : credits) {
       result.append(txt).append("\n");
     }
     return new Text(result.toString());

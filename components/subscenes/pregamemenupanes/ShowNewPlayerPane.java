@@ -1,6 +1,5 @@
 package components.subscenes.pregamemenupanes;
 
-import components.actionmenu.TopMenu;
 import components.buttons.DefaultButton;
 import entities.player.Player;
 import javafx.scene.control.Label;

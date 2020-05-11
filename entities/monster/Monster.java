@@ -1,15 +1,16 @@
 package entities.monster;
 
-// TODO: should it be Enum ? or maybe Interface?
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Monster {
-  private int           hp; // health
+  private IntegerProperty    hp = new SimpleIntegerProperty(); // health
   private final int phyDef; // Defense against physical damage
   private final int magDef; // Same but magical
   private final int expPer; // experience per killed monster
 
   public Monster(int hp, int phyDef, int magDef, int expPer) {
-    this.hp     =     hp;
+    this.hp.set(hp);
     this.phyDef = phyDef;
     this.magDef = magDef;
     this.expPer = expPer;
@@ -22,8 +23,12 @@ public abstract class Monster {
 
   public abstract int basicMagAttack();
 
-  // Special attack
-  public abstract void specialAttack();
+  // TODO: Special attack
+  // public abstract void specialAttack();
+
+  public boolean isDead() {
+    return getHp() < 0;
+  }
 
   @Override
   public String toString() {
@@ -43,11 +48,15 @@ public abstract class Monster {
 
   // getters, setters
   public int getHp() {
+    return hp.get();
+  }
+
+  public IntegerProperty hpProperty() {
     return hp;
   }
 
   public void setHp(int dmg) {
-    this.hp -= dmg;
+    hp.set(getHp() - dmg);
   }
 
   public int getPhyDef() {
