@@ -39,8 +39,6 @@ public class FightController {
             (observable) -> {
               if (monster.isDead()) {
                 outcome(Outcome.VICTORY);
-              } else {
-                monsterAttack();
               }
               updateMonsterHp();
             });
@@ -75,21 +73,26 @@ public class FightController {
           }
           textArea.appendText(msg);
         });
+
+    // Monster respond on any attack
+    // In the future he might attack without waiting...who knows...
+    attackBtn.setOnMouseReleased(
+        e -> {
+          monsterAttack();
+        });
   }
 
   // helper functions
-  // Based on outcome of a fight with monster
+  // Based on outcome of a fight with a monster
   // returns specific button action
   private void outcome(Outcome outcome) {
     NextButton nextBtn = new NextButton();
     switch (outcome) {
       case VICTORY:
-        textArea.setText("Victory!\n");
         player.setExp(monster.getExpPer());
         victory(nextBtn);
         break;
       case DEFEAT:
-        textArea.setText("You died.\n");
         defeat(nextBtn);
         break;
     }
