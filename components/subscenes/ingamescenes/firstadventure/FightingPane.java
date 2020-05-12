@@ -32,6 +32,10 @@ public class FightingPane extends AbstracPane {
           setCenter(textArea);
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack, magAttack);
+          // TODO: code duplication, can extracted to something...
+          playerHP.setText(String.format("%s HP: %d", player.getNickname(), player.getHp()));
+          monsterHP.setText(
+              String.format("%s HP: %d", monster.getClass().getSimpleName(), monster.getHp()));
         });
 
     // styling
@@ -49,7 +53,6 @@ public class FightingPane extends AbstracPane {
 
     monsterHP.setFont(new Font(24));
     monsterHP.setFill(Color.RED);
-
     // Adding stuff to the panels
     addToActionMenu(nextBtn);
     addToBottomMenu(playerHP, monsterHP);
