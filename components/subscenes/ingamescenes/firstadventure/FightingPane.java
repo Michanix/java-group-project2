@@ -13,7 +13,6 @@ import javafx.scene.text.Text;
 // TODO: split logic and everything else...
 // TODO: link css
 // TODO: add limit for magical attacks
-// Attention! Spaghetti code below!
 
 public class FightingPane extends AbstracPane {
   private final DefaultButton physAttack = new DefaultButton("Physical attack");
@@ -32,7 +31,7 @@ public class FightingPane extends AbstracPane {
           setCenter(textArea);
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack, magAttack);
-          // TODO: code duplication, can extracted to something...
+          // TODO: code duplication, can be extracted to something...
           playerHP.setText(String.format("%s HP: %d", player.getNickname(), player.getHp()));
           monsterHP.setText(
               String.format("%s HP: %d", monster.getClass().getSimpleName(), monster.getHp()));
