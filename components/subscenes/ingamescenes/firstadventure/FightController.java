@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import utils.DiceAction;
 
+// Since this Enum only used here
+// I guess, it is justified to keep it in the same file
+// with controller class
 enum Outcome {
   VICTORY,
   DEFEAT,
