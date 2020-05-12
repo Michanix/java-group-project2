@@ -1,6 +1,6 @@
 package components.subscenes.ingamescenes.firstadventure;
 
-import components.buttons.DefaultButton;
+import components.buttons.NextButton;
 import entities.monster.Monster;
 import entities.player.DiceType;
 import entities.player.Player;
@@ -81,7 +81,7 @@ public class FightController {
   // Based on outcome of a fight with monster
   // returns specific button action
   private void outcome(Outcome outcome) {
-    DefaultButton nextBtn = new DefaultButton("Next");
+    NextButton nextBtn = new NextButton();
     switch (outcome) {
       case VICTORY:
         textArea.setText("Victory!\n");
@@ -93,7 +93,7 @@ public class FightController {
         defeat(nextBtn);
         break;
     }
-    // Cleaning up ActionMenu by removing all current buttons
+    // Cleaning up ActionMenu by removing all current buttons in it
     pane.getActionMenu().getChildren().removeIf(btn -> btn instanceof Button);
     pane.getActionMenu().getChildren().add(nextBtn);
   }
@@ -145,7 +145,8 @@ public class FightController {
   private void monsterAttack() {
     String msg = randMonsterAttack();
     try {
-      Thread.sleep(500);
+      // Slight delay to prevent spamming
+      Thread.sleep(300);
     } catch (InterruptedException ex) {
       ex.getSuppressed();
     }
