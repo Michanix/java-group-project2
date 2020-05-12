@@ -1,13 +1,12 @@
 package components.modals;
 
-import components.subscenes.pregamemenupanes.AbstractWindow;
 import javafx.scene.text.Text;
 import utils.ReadFromFile;
 
 import java.util.List;
 
-public class CreditsWindow extends AbstractWindow {
-  public CreditsWindow() {
+public class CreditsModal extends AbstractModal {
+  public CreditsModal() {
     setTitle("Credits");
     Text texts = createCreditsText();
     getPane().setCenter(texts);

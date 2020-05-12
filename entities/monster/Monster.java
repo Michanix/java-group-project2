@@ -51,6 +51,10 @@ public abstract class Monster {
     return hp.get();
   }
 
+  public String getName() {
+    return this.getClass().getSimpleName();
+  }
+
   public IntegerProperty hpProperty() {
     return hp;
   }

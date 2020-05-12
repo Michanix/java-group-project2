@@ -10,17 +10,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-// TODO: split logic and everything else...
 // TODO: link css
 // TODO: add limit for magical attacks
 
 public class FightingPane extends AbstracPane {
   private final DefaultButton physAttack = new DefaultButton("Physical attack");
-  private final DefaultButton magAttack = new DefaultButton("Magical attack");
-  private final NextButton nextBtn = new NextButton();
-  private final TextArea textArea = new TextArea(); // Where combat actions are displayed
-  private final Text playerHP = new Text();
-  private final Text monsterHP = new Text();
+  private final DefaultButton  magAttack = new DefaultButton("Magical attack");
+  private final NextButton       nextBtn = new NextButton();
+  private final TextArea        textArea = new TextArea(); // Where combat actions are displayed
+  private final Text            playerHP = new Text();
+  private final Text           monsterHP = new Text();
 
   public FightingPane(Player player, Monster monster, String textname) {
     super(player, textname);
@@ -32,9 +31,8 @@ public class FightingPane extends AbstracPane {
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack, magAttack);
           // TODO: code duplication, can be extracted to something...
-          playerHP.setText(String.format("%s HP: %d", player.getNickname(), player.getHp()));
-          monsterHP.setText(
-              String.format("%s HP: %d", monster.getClass().getSimpleName(), monster.getHp()));
+          playerHP.setText(fightController.formatHPString(player.getNickname(), player.getHp()));
+          monsterHP.setText(fightController.formatHPString(monster.getName(), monster.getHp()));
         });
 
     // styling
@@ -73,4 +71,5 @@ public class FightingPane extends AbstracPane {
   public Text getMonsterHP() {
     return monsterHP;
   }
+
 }

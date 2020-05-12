@@ -1,13 +1,13 @@
 package components.buttons;
 
-import components.modals.HelpWindow;
+import components.modals.HelpModal;
 
 public class HelpButton extends DefaultButton {
   public HelpButton() {
     super("Help");
     setOnMouseClicked(
         e -> {
-          HelpWindow help = new HelpWindow();
+          HelpModal help = new HelpModal();
           help.showAndWait();
         });
   }

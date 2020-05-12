@@ -19,14 +19,14 @@ enum Outcome {
 
 public class FightController {
   private FightingPane pane;
-  private Player player;
-  private Monster monster;
+  private Player     player;
+  private Monster   monster;
   private TextArea textArea;
 
   public FightController(FightingPane pane, Player player, Monster monster, TextArea textArea) {
-    this.pane = pane;
-    this.player = player;
-    this.monster = monster;
+    this.pane     = pane;
+    this.player   = player;
+    this.monster  = monster;
     this.textArea = textArea;
   }
 
@@ -64,7 +64,7 @@ public class FightController {
           if (dmg <= 0) {
             msg =
                 String.format(
-                    "You couldn't get through %s defense.\n\n", monster.getClass().getSimpleName());
+                    "You couldn't get through %s defense.\n\n", monster.getName());
           } else {
             msg =
                 String.format(
@@ -117,12 +117,17 @@ public class FightController {
 
   private void updatePlayerHp() {
     int hp = Math.max(player.getHp(), 0); // Little hack to display zero instead of negative hp
-    pane.getPlayerHP().setText(String.format("%s HP: %d", player.getNickname(), hp));
+    pane.getPlayerHP().setText(formatHPString(player.getNickname(), player.getHp()));
   }
 
   private void updateMonsterHp() {
     int hp = Math.max(monster.getHp(), 0);
-    pane.getMonsterHP().setText(String.format("%s HP: %d", monster.getClass().getSimpleName(), hp));
+    pane.getMonsterHP().setText(formatHPString(monster.getName(), monster.getHp()));
+  }
+
+  // TODO: better name
+  public String formatHPString(String name, int hp) {
+    return String.format("%s HP: %d", name, hp);
   }
 
   private int getPlayerDmg(PlayerBasicAttackTypes attackType) {
@@ -162,7 +167,7 @@ public class FightController {
     random type of attack.
      */
     int luck = DiceAction.roll2Dices(DiceType.D8);
-    String monsterName = monster.getClass().getSimpleName();
+    String monsterName = monster.getName();
     int dmg;
     String msg;
     if (luck > 50) {

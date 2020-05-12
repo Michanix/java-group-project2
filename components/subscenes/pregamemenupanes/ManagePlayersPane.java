@@ -6,9 +6,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class ChoosePlayerPane extends AbstractPreGamePane {
+public class ManagePlayersPane extends AbstractPreGamePane {
 
-  public ChoosePlayerPane() {
+  public ManagePlayersPane() {
     HBox firstRow = new HBox();
     HBox secondRow = new HBox();
     DefaultButton newPlayerBtn = new DefaultButton("Create new player");

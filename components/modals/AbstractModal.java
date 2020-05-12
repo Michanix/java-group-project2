@@ -1,14 +1,14 @@
-package components.subscenes.pregamemenupanes;
+package components.modals;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public abstract class AbstractWindow extends Stage {
+public abstract class AbstractModal extends Stage {
   private final BorderPane pane = new BorderPane();
 
-  public AbstractWindow() {
+  public AbstractModal() {
 
     int WIDTH = 300;
     int HEIGHT = 300;

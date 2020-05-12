@@ -4,7 +4,7 @@ import components.buttons.CreditsButton;
 import components.buttons.DefaultButton;
 import components.buttons.ExitButton;
 import components.buttons.HelpButton;
-import components.subscenes.pregamemenupanes.ChoosePlayerPane;
+import components.subscenes.pregamemenupanes.ManagePlayersPane;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -39,7 +39,7 @@ public class StartGameManager {
 
     starBtn.setOnMouseClicked(
         e -> {
-          ChoosePlayerPane choiceMenu = new ChoosePlayerPane();
+          ManagePlayersPane choiceMenu = new ManagePlayersPane();
           mainPane.getScene().setRoot(choiceMenu);
         });
 
