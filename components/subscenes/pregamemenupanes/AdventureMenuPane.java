@@ -16,7 +16,7 @@ public class AdventureMenuPane extends AbstractPreGamePane {
   private final List<Button> advButtonList = new ArrayList<>();
 
   public AdventureMenuPane(Player player) {
-    DefaultButton startLevel = new DefaultButton("1 st adventure");
+    DefaultButton startLevel      = new DefaultButton("1 st adventure");
     MainMenuButton mainMenuButton = new MainMenuButton();
 
     createButton(startLevel, player);

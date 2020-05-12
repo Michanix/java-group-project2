@@ -6,6 +6,8 @@ import components.actionmenu.InGameTopMenu;
 import entities.player.Player;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import textfiles.TextAccessLayer;
 
 // TODO: better naming for class
@@ -17,8 +19,9 @@ public abstract class AbstracPane extends BorderPane {
   public AbstracPane(Player player, String textname) {
     TextAccessLayer accessText = new TextAccessLayer();
     InGameTopMenu inGameTopMenu = new InGameTopMenu(player);
-
-    setCenter(accessText.getText(textname));
+    Text txt = accessText.getText(textname);
+    txt.setFont(Font.font(16));
+    setCenter(txt);
     setRight(actionMenu);
     setBottom(bottomMenu);
     setTop(inGameTopMenu);

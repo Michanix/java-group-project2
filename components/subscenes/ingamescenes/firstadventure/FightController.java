@@ -7,6 +7,7 @@ import entities.player.Player;
 import entities.player.PlayerBasicAttackTypes;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 import utils.DiceAction;
 
 // Since this Enum only used here
@@ -40,7 +41,7 @@ public class FightController {
               if (monster.isDead()) {
                 outcome(Outcome.VICTORY);
               }
-              updateMonsterHp();
+              updateHpBar(pane.getMonsterHP(), monster.getName(), monster.getHp());
             });
   }
 
@@ -52,7 +53,7 @@ public class FightController {
               if (player.isDead()) {
                 outcome(Outcome.DEFEAT);
               }
-              updatePlayerHp();
+              updateHpBar(pane.getPlayerHP(), player.getNickname(), player.getHp());
             });
   }
 
@@ -74,7 +75,7 @@ public class FightController {
           textArea.appendText(msg);
         });
 
-    // Monster respond on any attack
+    // Monster respond to any attack
     // In the future he might attack without waiting...who knows...
     attackBtn.setOnMouseReleased(
         e -> {
@@ -115,14 +116,10 @@ public class FightController {
         });
   }
 
-  private void updatePlayerHp() {
-    int hp = Math.max(player.getHp(), 0); // Little hack to display zero instead of negative hp
-    pane.getPlayerHP().setText(formatHPString(player.getNickname(), player.getHp()));
-  }
-
-  private void updateMonsterHp() {
-    int hp = Math.max(monster.getHp(), 0);
-    pane.getMonsterHP().setText(formatHPString(monster.getName(), monster.getHp()));
+  // Function to dynamically update health points
+  // Math.max() prevents to display negative amount of HP
+  private void updateHpBar(Text hpBar, String name, int hp) {
+    hpBar.setText(formatHPString(name, Math.max(hp, 0)));
   }
 
   // TODO: better name

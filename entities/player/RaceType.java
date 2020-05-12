@@ -9,11 +9,6 @@ package entities.player;
 public enum RaceType {
   WOODELF("Wood Elf") {
     @Override
-    public void specialCast() {
-      System.out.println("Elf special magic spell!");
-    }
-
-    @Override
     public String getDescription() {
       return "As a wood elf, you have keen senses and intuition,\n"
           + "and your fleet feet carry you quickly and\n"
@@ -22,11 +17,6 @@ public enum RaceType {
   },
   HIGHELF("High Elf") {
     @Override
-    public void specialCast() {
-      System.out.println("Human special spell!");
-    }
-
-    @Override
     public String getDescription() {
       return "As a high elf, you have a keen mind and\n"
           + "a mastery of at least the basics of magic. ";
@@ -34,22 +24,12 @@ public enum RaceType {
   },
   HUMAN("Human") {
     @Override
-    public void specialCast() {
-      System.out.println("Human special spell!");
-    }
-
-    @Override
     public String getDescription() {
       return "While possessing rather weak magic,\n"
           + "Human race rely upon their physical strength and tactical planning.";
     }
   },
   HILLDWARF("Hill Dwarf") {
-    @Override
-    public void specialCast() {
-      System.out.println("Dwarf special spell!");
-    }
-
     @Override
     public String getDescription() {
       return "As a hill dwarf, you have keen senses, deep intuition,\n"
@@ -61,11 +41,6 @@ public enum RaceType {
     }
   },
   MOUNTAINDWARF("Mountain Dwarf") {
-    @Override
-    public void specialCast() {
-      System.out.println("Mountain Dwarf special spell!");
-    }
-
     @Override
     public String getDescription() {
       return "As a mountain dwarf, you’re strong and hardy,\n"
@@ -80,11 +55,6 @@ public enum RaceType {
   },
   BARBARIAN("Barbarian") {
     @Override
-    public void specialCast() {
-      System.out.println("Orc special spell!");
-    }
-
-    @Override
     public String getDescription() {
       return "Barbarians kept the foundations of their culture from\n"
           + "ancient times to this day nearly unchanged.\n"
@@ -98,7 +68,8 @@ public enum RaceType {
     this.raceType = raceType;
   }
 
-  public abstract void specialCast();
+  // TODO:
+  // public abstract void specialCast();
 
   public abstract String getDescription();
 

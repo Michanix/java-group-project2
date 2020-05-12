@@ -7,8 +7,8 @@ public enum WeaponType {
   BOW("Bow", 30, 30),
   WIZARDSTAFF("Wizard staff", 15, 45);
 
-  private final String weapon;
-  private final int   physDmg; // addition Physical dmg from weapon
+  private final String  weapon;
+  private final int    physDmg;
   private final int   magicDmg;
 
   WeaponType(String weapon, int physDmg, int magicDmg) {

@@ -9,10 +9,10 @@ import javafx.scene.layout.VBox;
 public class ManagePlayersPane extends AbstractPreGamePane {
 
   public ManagePlayersPane() {
-    HBox firstRow = new HBox();
+    HBox firstRow  = new HBox();
     HBox secondRow = new HBox();
-    DefaultButton newPlayerBtn = new DefaultButton("Create new player");
-    DefaultButton existingPlBtn = new DefaultButton("Pick existing player");
+    DefaultButton newPlayerBtn    = new DefaultButton("Create new player");
+    DefaultButton existingPlBtn   = new DefaultButton("Pick existing player");
     MainMenuButton mainMenuButton = new MainMenuButton();
 
     VBox menu = new VBox(firstRow, secondRow);

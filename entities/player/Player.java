@@ -6,7 +6,6 @@ package entities.player;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import utils.DiceAction;
-import utils.ReadFromFile;
 
 import java.util.Objects;
 import java.util.UUID;

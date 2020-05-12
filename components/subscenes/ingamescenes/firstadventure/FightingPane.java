@@ -30,7 +30,6 @@ public class FightingPane extends AbstracPane {
           setCenter(textArea);
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack, magAttack);
-          // TODO: code duplication, can be extracted to something...
           playerHP.setText(fightController.formatHPString(player.getNickname(), player.getHp()));
           monsterHP.setText(fightController.formatHPString(monster.getName(), monster.getHp()));
         });

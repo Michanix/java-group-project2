@@ -1,11 +1,10 @@
 package components.subscenes.ingamescenes.firstadventure;
 
+import components.buttons.DefaultButton;
 import components.buttons.GoBackButton;
+import components.modals.ArteFoundModal;
 import entities.player.Player;
 import entities.player.WeaponType;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import utils.GetRandomType;
 
 // TODO: if nothing new found, tell about it, lol
@@ -13,26 +12,29 @@ public class LeftTurnPane extends AbstracPane {
 
   public LeftTurnPane(Player player, String textname) {
     super(player, textname);
-    WeaponType rndWeapon = GetRandomType.randomEnum(WeaponType.class);
-    player.setWeaponType(rndWeapon);
-    player.setMagicDmg();
-    player.setPhysDmg();
-    Text weapon =
-        new Text(
-            String.format(
-                "You now have %s. \n"
-                    + "Your physical damage increased by %d. \n"
-                    + "Your magical damage increased by %d",
-                rndWeapon.toString(), rndWeapon.getPhysDmg(), rndWeapon.getMagicDmg()));
-    weapon.setFont(new Font(20));
-    weapon.setFill(Color.CADETBLUE);
+    DefaultButton openBtn   = new DefaultButton("Yes, open it");
     GoBackButton backButton = new GoBackButton();
+
+    openBtn.setOnMouseClicked(
+        e -> {
+          WeaponType rndWeapon = GetRandomType.randomEnum(WeaponType.class);
+          ArteFoundModal arteModal =
+              new ArteFoundModal(
+                  "weaponFound",
+                  rndWeapon.toString(),
+                  rndWeapon.getPhysDmg(),
+                  rndWeapon.getMagicDmg());
+          player.setWeaponType(rndWeapon);
+          player.setMagicDmg();
+          player.setPhysDmg();
+          arteModal.showAndWait();
+          getActionMenu().getChildren().remove(openBtn); // Remove openBtn once chest was opened
+        });
 
     backButton.setOnMouseClicked(
         e -> {
           getScene().setRoot(new StartPane(player, "begining"));
         });
-    addToActionMenu(backButton);
-    addToBottomMenu(weapon);
+    addToActionMenu(openBtn, backButton);
   }
 }

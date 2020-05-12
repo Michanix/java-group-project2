@@ -9,13 +9,13 @@ public class StartPane extends AbstracPane {
 
   public StartPane(Player player, String textname) {
     super(player, textname);
-    DefaultButton rightBtn = new DefaultButton("right");
-    DefaultButton leftBtn = new DefaultButton("left");
+    DefaultButton rightBtn   = new DefaultButton("right");
+    DefaultButton leftBtn    = new DefaultButton("left");
     DefaultButton forwardBtn = new DefaultButton("forward");
 
     leftBtn.setOnMouseClicked(
         e -> {
-          getScene().setRoot(new LeftTurnPane(player, "weaponFound"));
+          getScene().setRoot(new LeftTurnPane(player, "woodenChest"));
         });
     rightBtn.setOnMouseClicked(
         e -> {

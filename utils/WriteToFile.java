@@ -19,7 +19,7 @@ public class WriteToFile {
   private static final Charset ENCODING      = StandardCharsets.UTF_8;
 
   public static void check() {
-      try{
+      try {
         Files.createFile(DESTINATION_FILE);
         System.out.println("Database 'players.txt' has been created.");
       } catch (IOException ex) {
@@ -48,14 +48,16 @@ public class WriteToFile {
 
   private static void findAndUpdate(Player player) {
     try {
+      // Getting all players from file int List
       List<String> listOfPlayer = Files.readAllLines(DESTINATION_FILE, ENCODING);
-      System.out.println(player.getId().toString());
       for (String p : listOfPlayer) {
+        // Finding and updating
         if (p.contains(player.getId().toString())) {
           listOfPlayer.set(listOfPlayer.indexOf(p), player.toString());
           System.out.println("Player entry has been updated.");
         }
       }
+      // Writing back List with updated data
       Files.write(DESTINATION_FILE, listOfPlayer, ENCODING);
     } catch (IOException ex) {
       ex.printStackTrace();

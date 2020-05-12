@@ -37,8 +37,8 @@ public class NewPlayerPane extends AbstractPreGamePane {
   private final Label weaponLabel   = new Label("Choose weapon:\n Bare Hands");
   private final Tooltip weaponTT    = new Tooltip("New players start without actual weapon");
   // Buttons
-  private final DefaultButton createBtn   = new DefaultButton("Create");
-  private final DefaultButton continueBtn = new DefaultButton("Continue");
+  private final DefaultButton createBtn       = new DefaultButton("Create");
+  private final DefaultButton continueBtn     = new DefaultButton("Continue");
   private final MainMenuButton mainMenuButton = new MainMenuButton();
   // creating arrays of enum types for later usage
   private final RaceType[] raceTypes = RaceType.values();
