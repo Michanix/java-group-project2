@@ -87,7 +87,7 @@ public class Player {
   }
 
   public boolean isDead() {
-    return getExp() < 0;
+    return getHp() < 0;
   }
 
   // Overrides

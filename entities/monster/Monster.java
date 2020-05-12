@@ -4,7 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public abstract class Monster {
-  private IntegerProperty    hp = new SimpleIntegerProperty(); // health
+  private final IntegerProperty    hp = new SimpleIntegerProperty(); // health
   private final int phyDef; // Defense against physical damage
   private final int magDef; // Same but magical
   private final int expPer; // experience per killed monster
