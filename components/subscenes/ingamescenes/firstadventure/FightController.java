@@ -130,6 +130,8 @@ public class FightController {
   private int getPlayerDmg(PlayerBasicAttackTypes attackType) {
     switch (attackType) {
       case MAGICAL:
+        // Each magical attack costs 30 mana points...for now
+        player.setMp(30);
         return calcPlayerMagDmg();
       case PHYSICAL:
         return calcPlayerPhysDmg();

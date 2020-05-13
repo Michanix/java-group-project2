@@ -14,7 +14,8 @@ public class Player {
   private UUID id = UUID.randomUUID();
   private String       nickname;
   private int               exp; // player current experience
-  private IntegerProperty    hp = new SimpleIntegerProperty(100); // Health
+  private IntegerProperty    hp = new SimpleIntegerProperty(100); // Health points
+  private int                mp = 100; // Mana points
   private RaceType     raceType;
   private Abilities   abilities;
   private WeaponType weaponType;
@@ -150,6 +151,14 @@ public class Player {
 
   public void setHp(int dmg) {
     hp.set(getHp() - dmg);
+  }
+
+  public int getMp() {
+    return mp;
+  }
+
+  public void setMp(int mp) {
+    this.mp -= mp;
   }
 
   public RaceType getRaceType() {

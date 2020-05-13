@@ -19,6 +19,7 @@ public class FightingPane extends AbstracPane {
   private final NextButton       nextBtn = new NextButton();
   private final TextArea        textArea = new TextArea(); // Where combat actions are displayed
   private final Text            playerHP = new Text();
+  private final Text            playerMP = new Text();
   private final Text           monsterHP = new Text();
 
   public FightingPane(Player player, Monster monster, String textname) {
@@ -66,6 +67,8 @@ public class FightingPane extends AbstracPane {
   public Text getPlayerHP() {
     return playerHP;
   }
+
+  public Text getPlayerMP() { return playerMP; }
 
   public Text getMonsterHP() {
     return monsterHP;
