@@ -1,7 +1,5 @@
 package components.modals;
 
-import components.buttons.DefaultButton;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class SaveModel extends AbstractModal {
