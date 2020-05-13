@@ -99,17 +99,17 @@ public class ReadFromFile {
     UUID id = UUID.fromString(params.get(0));
     String name = params.get(1);
     int  exp = Integer.parseInt(params.get(2));
-    String race = formatString(params.get(5));
-    String weapon = formatString(params.get(12));
-    String armor = formatString(params.get(13));
+    String race = formatString(params.get(3));
     Abilities abilities =
-        Abilities.loadExisting(
-            Integer.parseInt(params.get(6)),
-            Integer.parseInt(params.get(7)),
-            Integer.parseInt(params.get(8)),
-            Integer.parseInt(params.get(9)),
-            Integer.parseInt(params.get(10)),
-            Integer.parseInt(params.get(11)));
+            Abilities.loadExisting(
+                    Integer.parseInt(params.get(4)),
+                    Integer.parseInt(params.get(5)),
+                    Integer.parseInt(params.get(6)),
+                    Integer.parseInt(params.get(7)),
+                    Integer.parseInt(params.get(8)),
+                    Integer.parseInt(params.get(9)));
+    String weapon = formatString(params.get(10));
+    String armor = formatString(params.get(11));
 
     return Player.loadExistingPlayer(
         id, name, exp, RaceType.valueOf(race),
