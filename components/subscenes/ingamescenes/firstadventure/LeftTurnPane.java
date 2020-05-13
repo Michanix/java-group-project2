@@ -3,6 +3,7 @@ package components.subscenes.ingamescenes.firstadventure;
 import components.buttons.DefaultButton;
 import components.buttons.GoBackButton;
 import components.modals.ArteFoundModal;
+import components.modals.NothingFoundModel;
 import entities.player.Player;
 import entities.player.WeaponType;
 import utils.GetRandomType;
@@ -18,16 +19,22 @@ public class LeftTurnPane extends AbstracPane {
     openBtn.setOnMouseClicked(
         e -> {
           WeaponType rndWeapon = GetRandomType.randomEnum(WeaponType.class);
-          ArteFoundModal arteModal =
-              new ArteFoundModal(
-                  "weaponFound",
-                  rndWeapon.toString(),
-                  rndWeapon.getPhysDmg(),
-                  rndWeapon.getMagicDmg());
-          player.setWeaponType(rndWeapon);
-          player.setMagicDmg();
-          player.setPhysDmg();
-          arteModal.showAndWait();
+
+          if (!(rndWeapon.equals(WeaponType.BAREHANDS))) {
+              ArteFoundModal arteModal =
+                      new ArteFoundModal(
+                              "weaponFound",
+                              rndWeapon.toString(),
+                              rndWeapon.getPhysDmg(),
+                              rndWeapon.getMagicDmg());
+              player.setWeaponType(rndWeapon);
+              player.setMagicDmg();
+              player.setPhysDmg();
+              arteModal.showAndWait();
+          } else {
+              NothingFoundModel nothingFoundModel = new NothingFoundModel();
+              nothingFoundModel.showAndWait();
+          }
           getActionMenu().getChildren().remove(openBtn); // Remove openBtn once chest was opened
         });
 

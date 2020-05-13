@@ -2,7 +2,6 @@ package components.modals;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import textfiles.TextAccessLayer;
 
@@ -20,7 +19,8 @@ public class ArteFoundModal extends AbstractModal {
                     + "Your magical stats increased by %d",
                 arteName, artePhyParam, arteMagParam));
 
-    arte.setFont(new Font(16));
+    arte.setFont(getFont());
+    txt.setFont(getFont());
     vBox.getChildren().addAll(txt, arte);
     vBox.setAlignment(Pos.CENTER);
     getPane().setCenter(vBox);
