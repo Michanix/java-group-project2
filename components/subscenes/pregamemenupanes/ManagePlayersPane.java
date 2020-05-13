@@ -13,11 +13,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import utils.ReadFromFile;
+import utils.WriteToFile;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ManagePlayersPane extends AbstractPreGamePane {
-
+  private final Text warnMsg = new Text();
+  
   public ManagePlayersPane() {
     List<String> nicknames    = ReadFromFile.readNicknames();
     ListView<String> listView = new ListView<>();
@@ -41,6 +44,8 @@ public class ManagePlayersPane extends AbstractPreGamePane {
     createNewPlayer(createBtn);
     // Controller to handle selected players from list
     loadPlayerController(pickBtn, listView);
+    // Delete player from list
+    deletePlayerController(deleteBtn, listView);
 
     listView.getItems().addAll(nicknames);
     listView.setPrefSize(200, 200);
@@ -54,16 +59,17 @@ public class ManagePlayersPane extends AbstractPreGamePane {
     mainView.setLayoutY(90);
     mainView.setSpacing(5);
 
-    getChildren().add(mainView);
+    warnMsg.setFont(Font.font(16));
+    warnMsg.setFill(Color.RED); // default color
+    warnMsg.setLayoutX(155);
+    warnMsg.setLayoutY(70);
+
+    getChildren().addAll(warnMsg, mainView);
   }
 
   private void check(List<String> nicknames) {
     if (nicknames.isEmpty()) {
-      Text warn = new Text("You don't have player yet. Create new one.");
-      warn.setFill(Color.RED);
-      warn.setLayoutX(155);
-      warn.setLayoutY(70);
-      getChildren().add(warn);
+      warnMsg.setText("You don't have player yet. Create new one.");
     }
   }
 
@@ -81,16 +87,27 @@ public class ManagePlayersPane extends AbstractPreGamePane {
           try {
             Object selectedValue = listView.getSelectionModel().getSelectedItem();
             Player player = ReadFromFile.loadPlayerFromFile(String.valueOf(selectedValue));
+            System.out.println(player.toString());
             ShowNewPlayerPane showPlayer = new ShowNewPlayerPane(player);
             getScene().setRoot(showPlayer);
           } catch (IndexOutOfBoundsException ex) {
-            Text errMsg = new Text("Player not selected!");
-            errMsg.setFill(Color.RED);
-            errMsg.setFont(new Font(16));
-            errMsg.setLayoutX(295);
-            errMsg.setLayoutY(70);
-            getChildren().add(errMsg);
+            warnMsg.setText("Player is not selected.");
           }
         });
+  }
+
+  private void deletePlayerController(Button button, ListView<String> listView) {
+    button.setOnAction(e -> {
+      try {
+        Object selectedValue = Objects.requireNonNull(listView.getSelectionModel().getSelectedItem());
+        WriteToFile.findAndDelete(String.valueOf(selectedValue));
+        warnMsg.setText(selectedValue + " has been deleted.");
+        warnMsg.setFill(Color.GREEN);
+      } catch (IndexOutOfBoundsException ex1) {
+        ex1.printStackTrace();
+      } catch (NullPointerException ex2) {
+        warnMsg.setText("Player is not selected.");
+      }
+    });
   }
 }
