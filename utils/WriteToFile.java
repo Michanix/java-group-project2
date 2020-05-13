@@ -16,14 +16,14 @@ Use of Files util is justified when dealing with small files.
 
 public class WriteToFile {
   private static final Path DESTINATION_FILE = Path.of("players.txt");
-  private static final Charset ENCODING      = StandardCharsets.UTF_8;
+  private static final Charset ENCODING = StandardCharsets.UTF_8;
 
   public static void check() {
-      try {
-        Files.createFile(DESTINATION_FILE);
-        System.out.println("Database 'players.txt' has been created.");
-      } catch (IOException ex) {
-        System.out.println("Database status: OK");
+    try {
+      Files.createFile(DESTINATION_FILE);
+      System.out.println("Database 'players.txt' has been created.");
+    } catch (IOException ex) {
+      System.out.println("Database status: OK");
     }
   }
 
@@ -50,14 +50,26 @@ public class WriteToFile {
     try {
       // Getting all players from file int List
       List<String> listOfPlayer = Files.readAllLines(DESTINATION_FILE, ENCODING);
-      for (String p : listOfPlayer) {
-        // Finding and updating
-        if (p.contains(player.getId().toString())) {
-          listOfPlayer.set(listOfPlayer.indexOf(p), player.toString());
-          System.out.println("Player entry has been updated.");
-        }
-      }
-      // Writing back List with updated data
+      // Updating players by unique id
+      listOfPlayer.forEach(
+          p -> {
+            if (p.contains(player.getId().toString())) {
+              listOfPlayer.set(listOfPlayer.indexOf(p), player.toString());
+              System.out.println("Player entry has been updated.");
+            }
+          });
+      // Writing back updated List
+      Files.write(DESTINATION_FILE, listOfPlayer, ENCODING);
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+  public static void findAndDelete(String nickname) {
+    try {
+      List<String> listOfPlayer = Files.readAllLines(DESTINATION_FILE, ENCODING);
+      listOfPlayer.removeIf(p -> p.contains(nickname));
+      System.out.println(nickname + " has been deleted.");
       Files.write(DESTINATION_FILE, listOfPlayer, ENCODING);
     } catch (IOException ex) {
       ex.printStackTrace();
