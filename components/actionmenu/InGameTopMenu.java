@@ -1,5 +1,6 @@
 package components.actionmenu;
 
+import components.modals.SaveModel;
 import entities.player.Player;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
@@ -28,6 +29,8 @@ public class InGameTopMenu extends AbstractTopMenu {
     savePlayerItem.setOnAction(
         e -> {
           WriteToFile.writePlayerToFile(player);
+          SaveModel saved = new SaveModel();
+          saved.showAndWait();
         });
 
     stats.getItems().addAll(defense, damage);     // Nested menu
