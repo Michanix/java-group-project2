@@ -19,6 +19,10 @@ public abstract class AbstractModal extends Stage {
     int WIDTH = 400;
     int HEIGHT = 300;
 
+    setMaximized(false);
+    setMaxWidth(WIDTH);
+    setMaxHeight(HEIGHT);
+
     setScene(new Scene(pane, WIDTH, HEIGHT));
     initOwner(getOwner());
     initModality(Modality.APPLICATION_MODAL);

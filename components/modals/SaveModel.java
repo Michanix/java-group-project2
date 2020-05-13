@@ -5,8 +5,9 @@ import javafx.scene.text.Text;
 public class SaveModel extends AbstractModal {
   public SaveModel() {
     setTitle("Save");
-    setHeight(200);
-    setWidth(200);
+
+    setMaxWidth(300);
+    setMaxHeight(200);
 
     Text msg = new Text("The player has been saved");
 
