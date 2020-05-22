@@ -30,9 +30,10 @@ public class Player {
     this.exp          =          0;
              setRaceType(raceType);
     this.abilities    = Abilities.initAbilities();
-    this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
+    // new Players have to start without real weapon
+    this.weaponType   = WeaponType.BAREHANDS;
            setArmorType(armorType);
-    this.stats = new PlayerStats(WeaponType.BAREHANDS, armorType);
+    this.stats = new PlayerStats(weaponType, armorType);
   }
 
   // Constructor to load existing Player from file
@@ -48,7 +49,6 @@ public class Player {
     this.armorType   =  armorType;
     this.stats       = new PlayerStats(weaponType, armorType);
   }
-
 
   public static Player createNewPlayer(
       String nickname, RaceType raceType, ArmorType armorType) {

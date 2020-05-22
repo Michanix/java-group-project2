@@ -2,16 +2,18 @@ package components.actionmenu;
 
 import components.modals.SaveModel;
 import entities.player.Player;
+import entities.player.PlayerStats;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
 import utils.WriteToFile;
 
 public class InGameTopMenu extends AbstractTopMenu {
   public InGameTopMenu(Player player) {
-    String physDef  = formatStat("Physical", player.getStats().getPhysDef());
-    String magDef   = formatStat("Magical", player.getStats().getMagicDef());
-    String physDmg  = formatStat("Physical", player.getStats().getPhysDmg());
-    String magDmg   = formatStat("Magical", player.getStats().getMagicDmg());
+    PlayerStats playerStats = player.getStats();
+    String physDef  = formatStat("Physical", playerStats.getPhysDef());
+    String magDef   = formatStat("Magical", playerStats.getMagicDef());
+    String physDmg  = formatStat("Physical", playerStats.getPhysDmg());
+    String magDmg   = formatStat("Magical", playerStats.getMagicDmg());
 
     Menu armor      = createMenuWithItems("Armor", player.getArmorType().toString());
     Menu weapon     = createMenuWithItems("Weapon", player.getWeaponType().toString());
