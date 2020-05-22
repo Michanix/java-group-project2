@@ -15,7 +15,7 @@ public class Player {
   private String       nickname;
   private int               exp; // player current experience
   private IntegerProperty    hp = new SimpleIntegerProperty(100); // Health points
-  private int                mp = 100; // Mana points
+  private IntegerProperty    mp = new SimpleIntegerProperty(100); // Mana points
   private RaceType     raceType;
   private Abilities   abilities;
   private WeaponType weaponType;
@@ -149,16 +149,20 @@ public class Player {
     return hp;
   }
 
-  public void setHp(int dmg) {
+  public void reduceHP(int dmg) {
     hp.set(getHp() - dmg);
   }
 
   public int getMp() {
+    return mp.get();
+  }
+
+  public IntegerProperty mpProperty() {
     return mp;
   }
 
-  public void setMp(int mp) {
-    this.mp -= mp;
+  public void reduceMP(int mp) {
+    this.mp.set(getMp() - mp);
   }
 
   public RaceType getRaceType() {

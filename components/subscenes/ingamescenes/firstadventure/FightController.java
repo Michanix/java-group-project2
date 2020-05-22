@@ -19,15 +19,15 @@ enum Outcome {
 }
 
 public class FightController {
-  private FightingPane pane;
-  private Player     player;
-  private Monster   monster;
-  private TextArea textArea;
+  private final FightingPane pane;
+  private final Player player;
+  private final Monster monster;
+  private final TextArea textArea;
 
   public FightController(FightingPane pane, Player player, Monster monster, TextArea textArea) {
-    this.pane     = pane;
-    this.player   = player;
-    this.monster  = monster;
+    this.pane = pane;
+    this.player = player;
+    this.monster = monster;
     this.textArea = textArea;
   }
 
@@ -55,24 +55,40 @@ public class FightController {
               }
               updateHpBar(pane.getPlayerHP(), player.getNickname(), player.getHp());
             });
+    player
+        .mpProperty()
+        .addListener(
+            (observableValue) -> updateMpBar(pane.getPlayerMP()));
   }
 
-  public void attackController(Button attackBtn, PlayerBasicAttackTypes attackType) {
+  public void magicAttackHandler(Button attackBtn) {
     attackBtn.setOnMouseClicked(
         e -> {
-          int dmg = getPlayerDmg(attackType);
           String msg;
-          if (dmg <= 0) {
-            msg =
-                String.format(
-                    "You couldn't get through %s defense.\n\n", monster.getName());
+          // Each magical attack costs 30 mana points...for now
+          if (player.getMp() < 30) {
+            msg = "Not enough MP for magical attack!\n";
+            attackBtn.setDisable(true);
           } else {
-            msg =
-                String.format(
-                    "You dealt %d %s damage\n\n", dmg, attackType.toString().toLowerCase());
-            monster.setHp(dmg);
+            int dmg = calcPlayerMagDmg();
+            player.reduceMP(30);
+            msg = checkIfDmgiSZero(dmg, PlayerBasicAttackTypes.MAGICAL);
           }
           textArea.appendText(msg);
+        });
+    // Monster respond to any attack
+    // In the future he might attack without waiting...who knows...
+    attackBtn.setOnMouseReleased(
+        e -> {
+          monsterAttack();
+        });
+  }
+
+  public void physicalAttackHandler(Button attackBtn) {
+    attackBtn.setOnMouseClicked(
+        e -> {
+          int dmg = calcPlayerPhysDmg();
+          textArea.appendText(checkIfDmgiSZero(dmg, PlayerBasicAttackTypes.PHYSICAL));
         });
 
     // Monster respond to any attack
@@ -81,6 +97,20 @@ public class FightController {
         e -> {
           monsterAttack();
         });
+  }
+
+  /*
+  Check the damage dealt by player and if zero or less
+  returns respective message
+   */
+  private String checkIfDmgiSZero(int dmg, PlayerBasicAttackTypes attackType) {
+    if (dmg <= 0) {
+      return String.format("You couldn't get through %s defense.\n\n", monster.getName());
+    } else {
+      monster.setHp(dmg);
+      return String.format("You dealt %d %s damage\n\n",
+                           dmg, attackType.toString().toLowerCase());
+    }
   }
 
   // helper functions
@@ -122,22 +152,17 @@ public class FightController {
     hpBar.setText(formatHPString(name, Math.max(hp, 0)));
   }
 
+  private void updateMpBar(Text mpBar) {
+    mpBar.setText(formatMPString());
+  }
+
   // TODO: better name
   public String formatHPString(String name, int hp) {
     return String.format("%s HP: %d", name, hp);
   }
 
-  private int getPlayerDmg(PlayerBasicAttackTypes attackType) {
-    switch (attackType) {
-      case MAGICAL:
-        // Each magical attack costs 30 mana points...for now
-        player.setMp(30);
-        return calcPlayerMagDmg();
-      case PHYSICAL:
-        return calcPlayerPhysDmg();
-      default:
-        return 0;
-    }
+  public String formatMPString() {
+    return String.format("%s MP: %d", player.getNickname(), player.getMp());
   }
 
   private int calcPlayerPhysDmg() {
@@ -181,7 +206,7 @@ public class FightController {
       msg =
           String.format("%s attacked you, but couldn't get through your defense\n\n", monsterName);
     } else {
-      player.setHp(dmg);
+      player.reduceHP(dmg);
     }
     return msg;
   }

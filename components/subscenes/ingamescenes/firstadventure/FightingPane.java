@@ -21,7 +21,7 @@ public class FightingPane extends AbstracPane {
   private final Text            playerHP = new Text();
   private final Text            playerMP = new Text();
   private final Text           monsterHP = new Text();
-
+  private final Font                font = new Font(24);
   public FightingPane(Player player, Monster monster, String textname) {
     super(player, textname);
     FightController fightController = new FightController(this, player, monster, textArea);
@@ -32,6 +32,7 @@ public class FightingPane extends AbstracPane {
           getActionMenu().getChildren().remove(nextBtn);
           addToActionMenu(physAttack, magAttack);
           playerHP.setText(fightController.formatHPString(player.getNickname(), player.getHp()));
+          playerMP.setText(fightController.formatMPString());
           monsterHP.setText(fightController.formatHPString(monster.getName(), monster.getHp()));
         });
 
@@ -45,18 +46,20 @@ public class FightingPane extends AbstracPane {
             + "-fx-background-color: blue;"
             + "-fx-control-inner-background: #87ccbe;");
 
-    playerHP.setFont(new Font(24));
-    playerHP.setFill(Color.BLUE);
+    playerHP.setFont(font);
+    playerMP.setFont(font);
+    playerHP.setFill(Color.RED);
+    playerMP.setFill(Color.BLUE);
 
-    monsterHP.setFont(new Font(24));
-    monsterHP.setFill(Color.RED);
+    monsterHP.setFont(font);
+    monsterHP.setFill(Color.BURLYWOOD);
     // Adding stuff to the panels
     addToActionMenu(nextBtn);
-    addToBottomMenu(playerHP, monsterHP);
+    addToBottomMenu(playerHP, playerMP, monsterHP);
 
     // Controllers
-    fightController.attackController(physAttack, PlayerBasicAttackTypes.PHYSICAL);
-    fightController.attackController(magAttack, PlayerBasicAttackTypes.MAGICAL);
+    fightController.physicalAttackHandler(physAttack);
+    fightController.magicAttackHandler(magAttack);
 
     // Listening to the changes of Player and Monster health bars
     // and updating accordingly
