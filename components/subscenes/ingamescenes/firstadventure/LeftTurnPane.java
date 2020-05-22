@@ -28,8 +28,8 @@ public class LeftTurnPane extends AbstracPane {
                               rndWeapon.getPhysDmg(),
                               rndWeapon.getMagicDmg());
               player.setWeaponType(rndWeapon);
-              player.setMagicDmg();
-              player.setPhysDmg();
+              player.getStats().setMagicDmg(rndWeapon.getMagicDmg());
+              player.getStats().setPhysDmg(rndWeapon.getPhysDmg());
               arteModal.showAndWait();
           } else {
               NothingFoundModel nothingFoundModel = new NothingFoundModel();

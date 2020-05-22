@@ -25,8 +25,8 @@ public class TrapEscapePane extends AbstracPane {
                               rndArmor.getPhysDef(),
                               rndArmor.getMagDef());
               player.setArmorType(rndArmor);
-              player.setMagicDef();
-              player.setPhysDef();
+              player.getStats().setMagicDef(rndArmor.getMagDef());
+              player.getStats().setPhysDef(rndArmor.getPhysDef());
               arteModel.showAndWait();
           } else {
               NothingFoundModel nothingFoundModel = new NothingFoundModel();

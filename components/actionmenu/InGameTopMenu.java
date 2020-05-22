@@ -8,10 +8,10 @@ import utils.WriteToFile;
 
 public class InGameTopMenu extends AbstractTopMenu {
   public InGameTopMenu(Player player) {
-    String physDef  = formatStat("Physical", player.getPhysDef());
-    String magDef   = formatStat("Magical", player.getMagicDef());
-    String physDmg  = formatStat("Physical", player.getPhysDmg());
-    String magDmg   = formatStat("Magical", player.getMagicDmg());
+    String physDef  = formatStat("Physical", player.getStats().getPhysDef());
+    String magDef   = formatStat("Magical", player.getStats().getMagicDef());
+    String physDmg  = formatStat("Physical", player.getStats().getPhysDmg());
+    String magDmg   = formatStat("Magical", player.getStats().getMagicDmg());
 
     Menu armor      = createMenuWithItems("Armor", player.getArmorType().toString());
     Menu weapon     = createMenuWithItems("Weapon", player.getWeaponType().toString());

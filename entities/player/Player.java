@@ -14,17 +14,14 @@ public class Player {
   private UUID id = UUID.randomUUID();
   private String       nickname;
   private int               exp; // player current experience
-  private IntegerProperty    hp = new SimpleIntegerProperty(100); // Health points
-  private IntegerProperty    mp = new SimpleIntegerProperty(100); // Mana points
+  private final IntegerProperty    hp = new SimpleIntegerProperty(100); // Health points
+  private final IntegerProperty    mp = new SimpleIntegerProperty(100); // Mana points
   private RaceType     raceType;
   private Abilities   abilities;
   private WeaponType weaponType;
   private ArmorType   armorType;
-  // Maybe create class for phys/mag stats?
-  private int           physDmg;
-  private int          magicDmg;
-  private int           physDef;
-  private int          magicDef;
+  // Physical and magical offensive and defensive stats
+  private final PlayerStats     stats;
 
   // Constructor for creating New Player
   private Player(
@@ -35,10 +32,7 @@ public class Player {
     this.abilities    = Abilities.initAbilities();
     this.weaponType   = WeaponType.BAREHANDS; // new Players have to start without real weapon
            setArmorType(armorType);
-                      setPhysDmg();
-                     setMagicDmg();
-                      setPhysDef();
-                     setMagicDef();
+    this.stats = new PlayerStats(WeaponType.BAREHANDS, armorType);
   }
 
   // Constructor to load existing Player from file
@@ -52,10 +46,7 @@ public class Player {
     this.abilities   =  abilities;
     this.weaponType  = weaponType;
     this.armorType   =  armorType;
-                     setPhysDmg();
-                    setMagicDmg();
-                     setPhysDef();
-                    setMagicDef();
+    this.stats       = new PlayerStats(weaponType, armorType);
   }
 
 
@@ -197,35 +188,7 @@ public class Player {
     this.armorType = Objects.requireNonNull(armorType, "ArmorType cannot be null.");
   }
 
-  public int getPhysDmg() {
-    return physDmg;
-  }
-
-  public void setPhysDmg() {
-    this.physDmg += weaponType.getPhysDmg();
-  }
-
-  public int getMagicDmg() {
-    return magicDmg;
-  }
-
-  public void setMagicDmg() {
-    this.magicDmg += weaponType.getMagicDmg();
-  }
-
-  public int getPhysDef() {
-    return physDef;
-  }
-
-  public int getMagicDef() {
-    return magicDef;
-  }
-
-  public void setPhysDef() {
-    this.physDef += armorType.getPhysDef();
-  }
-
-  public void setMagicDef() {
-    this.magicDef += armorType.getMagDef();
+  public PlayerStats getStats() {
+    return stats;
   }
 }

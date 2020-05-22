@@ -195,10 +195,10 @@ public class FightController {
     int dmg;
     String msg;
     if (luck > 50) {
-      dmg = monster.basicPhysAttack() - player.getPhysDef();
+      dmg = monster.basicPhysAttack() - player.getStats().getPhysDef();
       msg = String.format("%s dealt %d physical damage\n\n", monsterName, dmg);
     } else {
-      dmg = monster.basicMagAttack() - player.getMagicDef();
+      dmg = monster.basicMagAttack() - player.getStats().getMagicDef();
       msg = String.format("%s dealt %d magical damage\n\n", monsterName, dmg);
     }
 
