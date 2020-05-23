@@ -52,19 +52,7 @@ public class TextAccessLayer {
     return result;
   }
 
-  // source: https://stackoverflow.com/a/35652140
-  private static String separatorsToSystem(String res) {
-    if (res == null) return null;
-    if (File.separatorChar == '\\') {
-      // From Windows to Linux/Mac
-      return res.replace('/', File.separatorChar);
-    } else {
-      // From Linux/Mac to Windows
-      return res.replace('\\', File.separatorChar);
-    }
-  }
-
-  public Text getText(String textName) {
+    public Text getText(String textName) {
     return levelTexts.get(textName);
   }
 }
