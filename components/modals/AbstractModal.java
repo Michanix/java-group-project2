@@ -10,14 +10,18 @@ import utils.ReadFromFile;
 
 import java.util.List;
 
+/*
+Class to create Modal windows.
+ */
+
 public abstract class AbstractModal extends Stage {
   private final BorderPane pane = new BorderPane();
-  private final Font font = Font.font(16);
+  private final Font font       = Font.font(16);
 
   public AbstractModal() {
 
-    int WIDTH = 400;
-    int HEIGHT = 300;
+    int WIDTH   = 400;
+    int HEIGHT  = 300;
 
     setMaximized(false);
     setMaxWidth(WIDTH);
@@ -28,6 +32,8 @@ public abstract class AbstractModal extends Stage {
     initModality(Modality.APPLICATION_MODAL);
   }
 
+  // This functions read text files from 'text database'
+  // and create Text node that is later can be display in Modal window
   public Text createText(String filename) {
     List<String> credits = ReadFromFile.readTextToList(filename);
     StringBuilder result = new StringBuilder();

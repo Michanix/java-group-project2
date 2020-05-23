@@ -23,8 +23,4 @@ public class AdventureManager {
     currentStage.hide();
     mainAdventureStage.show();
   }
-
-  public Stage getStage() {
-    return mainAdventureStage;
-  }
 }

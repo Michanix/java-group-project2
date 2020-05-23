@@ -13,26 +13,26 @@ import java.util.UUID;
 public class Player {
   private UUID id = UUID.randomUUID();
   private String       nickname;
-  private int               exp; // player current experience
+  private int               exp; // current experience
   private final IntegerProperty    hp = new SimpleIntegerProperty(100); // Health points
   private final IntegerProperty    mp = new SimpleIntegerProperty(100); // Mana points
   private RaceType     raceType;
   private Abilities   abilities;
   private WeaponType weaponType;
   private ArmorType   armorType;
-  // Physical and magical offensive and defensive stats
+  // Offensive and defensive stats
   private final PlayerStats     stats;
 
   // Constructor for creating New Player
   private Player(
           String nickname, RaceType raceType, ArmorType armorType) {
              setNickname(nickname);
-    this.exp          =          0;
              setRaceType(raceType);
+           setArmorType(armorType);
+    this.exp          =          0;
     this.abilities    = Abilities.initAbilities();
     // new Players have to start without real weapon
     this.weaponType   = WeaponType.BAREHANDS;
-           setArmorType(armorType);
     this.stats = new PlayerStats(weaponType, armorType);
   }
 
@@ -79,14 +79,12 @@ public class Player {
     return playerDmg + extraDmg;
   }
 
-  public boolean isDead() {
-    return getHp() < 0;
-  }
+  public boolean isDead() { return getHp() < 0; }
 
   // Overrides
   @Override
   public String toString() {
-    String s = String.format("Player{" +
+    return String.format("Player{" +
                     "uuid='%s', " +
                     "name='%s', " +
                     "experience='%d', " +
@@ -95,14 +93,13 @@ public class Player {
                     "weaponType='%s', " +
                     "armorType='%s'" +
                     "}",
-                    id,
-                    nickname,
-                    exp,
-                    raceType,
-                    abilities,
-                    weaponType,
-                    armorType);
-    return s;
+                         id,
+                         nickname,
+                         exp,
+                         raceType,
+                         abilities,
+                         weaponType,
+                         armorType);
   }
 
   // Getters and setters
@@ -168,16 +165,12 @@ public class Player {
     return abilities;
   }
 
-  public void setAbilities(Abilities abilities) {
-    this.abilities = abilities;
-  }
-
   public WeaponType getWeaponType() {
     return weaponType;
   }
 
   public void setWeaponType(WeaponType weaponType) {
-    this.weaponType = weaponType;
+    this.weaponType = Objects.requireNonNull(weaponType, "WeapongType cannot be null.");
   }
 
   public ArmorType getArmorType() {

@@ -1,5 +1,11 @@
 package entities.player;
 
+/*
+Enum to represent different dice types
+like 4 sided, 6 sided and so on.
+Any new types of dice should be added here.
+ */
+
 public enum DiceType {
   D4("D4", 4),
   D6("D6", 6),

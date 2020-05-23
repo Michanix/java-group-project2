@@ -27,5 +27,4 @@ public class Main extends Application {
     WriteToFile.check();
     launch(args);
   }
-
 }

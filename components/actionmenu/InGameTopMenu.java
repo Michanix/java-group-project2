@@ -1,15 +1,21 @@
 package components.actionmenu;
 
 import components.modals.SaveModel;
+import entities.player.Abilities;
 import entities.player.Player;
 import entities.player.PlayerStats;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Menu;
 import utils.WriteToFile;
 
+/*
+Menu that is seen on top while already in game(adventure).
+ */
+
 public class InGameTopMenu extends AbstractTopMenu {
   public InGameTopMenu(Player player) {
-    PlayerStats playerStats = player.getStats();
+    PlayerStats playerStats   = player.getStats();
+    Abilities playerAbilities = player.getAbilities();
     String physDef  = formatStat("Physical", playerStats.getPhysDef());
     String magDef   = formatStat("Magical", playerStats.getMagicDef());
     String physDmg  = formatStat("Physical", playerStats.getPhysDmg());
@@ -17,7 +23,7 @@ public class InGameTopMenu extends AbstractTopMenu {
 
     Menu armor      = createMenuWithItems("Armor", player.getArmorType().toString());
     Menu weapon     = createMenuWithItems("Weapon", player.getWeaponType().toString());
-    Menu abilities  = createMenuWithItems("Abilities", formatAbilities(player));
+    Menu abilities  = createMenuWithItems("Abilities", formatAbilities(playerAbilities));
     Menu health     = createMenuWithItems("Health", String.valueOf(player.getHp()));
     Menu experience = createMenuWithItems("Experience", String.valueOf(player.getExp()));
     // Nested menus
@@ -49,22 +55,19 @@ public class InGameTopMenu extends AbstractTopMenu {
     return String.format("%s: %d", text, stat);
   }
 
-  private String formatAbilities(Player player) {
-    String s =
-        String.format(
-            "wisdom: %s\n"
-                + "strength: %s\n"
-                + "charisma: %s\n"
-                + "dexterity: %s\n"
-                + "constitution: %s\n"
-                + "intelligence: %s",
-            player.getAbilities().getWisdom(),
-            player.getAbilities().getStrength(),
-            player.getAbilities().getCharisma(),
-            player.getAbilities().getDexterity(),
-            player.getAbilities().getConstitution(),
-            player.getAbilities().getIntelligence());
-
-    return s;
+  private String formatAbilities(Abilities abilities) {
+    return String.format(
+        "wisdom: %s\n"
+            + "strength: %s\n"
+            + "charisma: %s\n"
+            + "dexterity: %s\n"
+            + "constitution: %s\n"
+            + "intelligence: %s",
+        abilities.getWisdom(),
+        abilities.getStrength(),
+        abilities.getCharisma(),
+        abilities.getDexterity(),
+        abilities.getConstitution(),
+        abilities.getIntelligence());
   }
 }

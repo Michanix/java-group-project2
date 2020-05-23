@@ -3,6 +3,8 @@ package entities.monster;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+// Self explanatory
+
 public abstract class Monster {
   private final IntegerProperty    hp = new SimpleIntegerProperty(); // health
   private final int phyDef; // Defense against physical damage

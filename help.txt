@@ -1,0 +1,11 @@
+Welcome to the D&D inspired text based rpg game!
+
+Credits   -> to see who developed this game.
+Save      -> to save your player state.
+Main menu -> Will bring you back to main menu.
+
+Game is based on pure luck!
+However, since you have access to the source code
+you can alter the definition of "pure luck"
+
+Enjoy small yet interesting game!

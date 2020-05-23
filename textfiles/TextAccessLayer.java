@@ -18,6 +18,7 @@ import java.util.Map;
 public class TextAccessLayer {
 
   private final Map<String, Text> levelTexts;
+  // platform dependent path to avoid problems like in the first group project, lol
   private final Path pathToTexts = Path.of("textfiles/firstadventure/texts");
 
   public TextAccessLayer() {
@@ -27,7 +28,6 @@ public class TextAccessLayer {
   private Map<String, Text> getLevelTexts() {
     Map<String, Text> result = new HashMap<>();
     StringBuilder str = new StringBuilder();
-    // platform independent path to avoid problems like in the first group project, lol
     try {
       /*
       Some fancy stream chaining to create HashMap of String and Text node
@@ -40,7 +40,8 @@ public class TextAccessLayer {
                 for (String txt : textsList) {
                   str.append(txt).append("\n");
                 }
-                String[] name = file.getFileName().toString().split("\\.");
+                // Obtaining fail name without extension to use it as a key in HashMap
+                String[] name = file.getFileName().toString().split("\\.txt");
                 result.put(name[0], new Text(str.toString()));
                 // Instead of creating new StringBuilder each time
                 str.setLength(0);

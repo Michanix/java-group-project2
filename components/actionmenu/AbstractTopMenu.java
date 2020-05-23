@@ -22,6 +22,7 @@ public abstract class AbstractTopMenu extends MenuBar {
           HelpModal helpWindow = new HelpModal();
           helpWindow.showAndWait();
         });
+
     addToSettings(backToMenuItem, helpBtnItem);
     getMenus().setAll(settings);
   }
@@ -34,7 +35,7 @@ public abstract class AbstractTopMenu extends MenuBar {
 
   /*
   Helper function to reduce repetitive code.
-  Helps create Menu and Items inside of it in range from 1 to many.
+  Helps create Menu and Items inside of it in range from 1 to infinity...
    */
   public Menu createMenuWithItems(String menuName, String... menuItemText) {
     Menu menu = new Menu(menuName);

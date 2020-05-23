@@ -2,6 +2,11 @@ package entities.player;
 
 import java.util.Arrays;
 
+/*
+Class to separate hero abilities.
+For new players generates random value for each ability with generateRndAbilityVal() function.
+ */
+
 public class Abilities {
   private int       wisdom;
   private int     strength;
@@ -44,11 +49,10 @@ public class Abilities {
 
   // "Roll four 6-sided dice and record the total of the highest three dice"
   private int generateRndAbilityVal() {
-    int d20 = DiceType.D20.getSides();
+    int d6 = DiceType.D6.getSides();
     int[] values = new int[4];
     for (int i = 0; i < 4; i++) {
-      int x = (int) (Math.random() * d20 + 1);
-      values[i] = x;
+      values[i] = (int) (Math.random() * d6 + 1);
     }
     Arrays.sort(values);
     return values[1] + values[2] + values[3];
@@ -57,7 +61,7 @@ public class Abilities {
   // Overrides
   @Override
   public String toString() {
-    String s = String.format(
+    return String.format(
             "wisdom='%d', " +
             "strength='%d', " +
             "charisma='%d', " +
@@ -70,21 +74,6 @@ public class Abilities {
             dexterity,
             constitution,
             intelligence);
-    return s;
-            /*"wisdom="
-        + wisdom
-        + ",strength="
-        + strength
-        + ",charisma="
-        + charisma
-        + ",dexterity="
-        + dexterity
-        + ",constitution="
-        + constitution
-        + ",intelligence="
-        + intelligence;
-
-             */
   }
 
   // gets and sets
