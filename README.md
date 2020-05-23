@@ -1,7 +1,7 @@
 <h2>Second group project for Java course in college</h2>
 <p>This is small text-based rpg game inspired by DnD(sort of). It was build with GUI JavaFx library.</p>
-<p>Here is implemented basic I/O operation which let you save the players, some monsters to fight, some artifacts to find
-and maybe even some lessons to learn.</p>
+<p>Here is implemented basic I/O operation which let you save the players, fight some monster, find some artifacts
+and maybe even learn something new.</p>
 <p>When the game first launched it will create 'local database' which in this case a txt file name 'players.txt'.
 Later all information about player is extracted from there.</p>
 
